@@ -118,9 +118,9 @@ public class CodeGenerator {
         sc.setControllerMappingHyphenStyle(true);
         sc.setLogicDeleteFieldName("deleted");                  // 设置逻辑删除
 
-        // 设置自动填充配置
-        TableFill gmt_create = new TableFill("create_time", FieldFill.INSERT);
-        TableFill gmt_modified = new TableFill("update_time", FieldFill.INSERT_UPDATE);
+        // 默认不处理：DEFAULT    --设置自动填充配置
+        TableFill gmt_create = new TableFill("create_time", FieldFill.DEFAULT);
+        TableFill gmt_modified = new TableFill("update_time", FieldFill.DEFAULT);
         ArrayList<TableFill> tableFills = new ArrayList<>();
         tableFills.add(gmt_create);
         tableFills.add(gmt_modified);

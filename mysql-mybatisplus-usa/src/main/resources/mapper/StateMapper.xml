@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benjamin.dao.StateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.benjamin.entities.State">
+        <id column="id" property="id" />
+        <result column="state_name" property="state_name" />
+        <result column="state_capital" property="state_capital" />
+        <result column="governor" property="governor" />
+        <result column="party_id" property="party_id" />
+        <result column="abbreviation" property="abbreviation" />
+        <result column="rank" property="rank" />
+        <result column="start_time" property="start_time" />
+        <result column="end_time" property="end_time" />
+        <result column="status" property="status" />
+        <result column="number_of_reps" property="number_of_reps" />
+        <result column="create_time" property="create_time" />
+        <result column="update_time" property="update_time" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, state_name, state_capital, governor, party_id, abbreviation, rank, start_time, end_time, status, number_of_reps, create_time, update_time
+    </sql>
+
+</mapper>

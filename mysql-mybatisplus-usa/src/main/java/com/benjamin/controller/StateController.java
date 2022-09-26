@@ -1,9 +1,15 @@
 package com.benjamin.controller;
 
 
+import com.benjamin.response.ResponseWithEntities;
+import com.benjamin.service.StateService;
+import com.benjamin.vo.StateVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.stereotype.Controller;
+import java.util.List;
 
 /**
  * <p>
@@ -13,9 +19,22 @@ import org.springframework.stereotype.Controller;
  * @author benjamin
  * @since 2022-09-26
  */
-@Controller
+@RestController
 @RequestMapping("/state")
 public class StateController {
 
+    @Autowired
+    private StateService service;
+
+
+
+    /**
+     * 查询所有州（不分页）
+     * @return
+     */
+    @GetMapping("/all")
+    public ResponseWithEntities<List<StateVo>> queryAllState() {
+        return service.queryAllState();
+    }
 }
 

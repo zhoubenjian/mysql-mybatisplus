@@ -1,31 +1,16 @@
-package com.benjamin.entities;
+package com.benjamin.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
-/**
- * <p>
- * 州
- * </p>
- *
- * @author benjamin
- * @since 2022-09-26
- */
+import java.util.Date;
+
 @Data
-@ApiModel(value="State对象", description="州")
-public class State implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Accessors(chain = true)
+public class StateVo {
 
     @ApiModelProperty(value = "主键")
-    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty(value = "州名")
@@ -43,7 +28,6 @@ public class State implements Serializable {
     @ApiModelProperty(value = "缩写")
     private String abbreviation;
 
-    @TableField("`rank`")   // 关键字转义！！！
     @ApiModelProperty(value = "经济排名")
     private Integer rank;
 
@@ -58,10 +42,4 @@ public class State implements Serializable {
 
     @ApiModelProperty(value = "代表人数")
     private Integer number_of_reps;
-
-    @ApiModelProperty(value = "创建时间")
-    private Date create_time;
-
-    @ApiModelProperty(value = "修改时间")
-    private Date update_time;
 }

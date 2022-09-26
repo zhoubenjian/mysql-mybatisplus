@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mysql-mybatisplus-generator</module>
+        <module>mysql-mybatisplus-common</module>
     </modules>
 
     <parent>
@@ -143,6 +144,14 @@
                 <version>${pagehelper-spring-boot-starter.version}</version>
             </dependency>
             <!-- pagehelper(分页) -->
+
+            <!-- 工具 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <!-- 工具 -->
 
             <!-- Excel -->
             <dependency>

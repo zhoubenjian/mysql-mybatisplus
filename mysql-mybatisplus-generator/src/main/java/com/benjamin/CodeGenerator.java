@@ -46,7 +46,7 @@ public class CodeGenerator {
         String projectPath = System.getProperty("user.dir");    // 得到当前项目的路径
         gc.setOpen(false);                                      // 是否生成代码后打开本地目录
         gc.setSwagger2(true);                                   // 实体属性 Swagger2 注解
-        gc.setOutputDir(projectPath + "/centos-mysql-mybatisplus-shiro/src/main/java");//设置代码生成路径
+        gc.setOutputDir(projectPath + "/mysql-mybatisplus-usa/src/main/java");//设置代码生成路径
         gc.setFileOverride(true);                               // 是否覆盖以前文件
         gc.setOpen(false);                                      // 是否打开生成目录
         gc.setAuthor("benjamin");                               // 设置项目作者名称
@@ -69,7 +69,7 @@ public class CodeGenerator {
         // 包配置
         PackageConfig pc = new PackageConfig();
 //        pc.setModuleName("mybatis-mysql-mybatisplus-api");
-        pc.setParent("com.mybatisplus");                        // 设置父包
+        pc.setParent("com.benjamin");                        // 设置父包
         pc.setMapper("dao");
 //        pc.setXml("mapper.xml");
         pc.setEntity("entities");
@@ -98,7 +98,7 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/centos-mysql-mybatisplus-shiro/src/main/resources/mapper/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                return projectPath + "/mysql-mybatisplus-usa/src/main/resources/mapper/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
         cfg.setFileOutConfigList(focList);

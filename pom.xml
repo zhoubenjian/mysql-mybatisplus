@@ -7,6 +7,7 @@
     <modules>
         <module>mysql-mybatisplus-generator</module>
         <module>mysql-mybatisplus-common</module>
+        <module>mysql-mybatisplus-usa</module>
     </modules>
 
     <parent>

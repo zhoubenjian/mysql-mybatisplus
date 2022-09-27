@@ -8,7 +8,6 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
-import com.baomidou.mybatisplus.generator.config.po.TableField;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
@@ -31,48 +30,43 @@ public class CodeGenerator {
                 return ipt;
             }
         }
+
         throw new MybatisPlusException("请输入正确的" + tip + "！");
     }
 
 
 
     public static void main(String[] args) {
-
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        // 获取工程的根目录
-        String projectPath = System.getProperty("user.dir");    // 得到当前项目的路径
-        gc.setOpen(false);                                      // 是否生成代码后打开本地目录
-        gc.setSwagger2(true);                                   // 实体属性 Swagger2 注解
-        gc.setOutputDir(projectPath + "/mysql-mybatisplus-usa/src/main/java");//设置代码生成路径
-        gc.setFileOverride(true);                               // 是否覆盖以前文件
-        gc.setOpen(false);                                      // 是否打开生成目录
-        gc.setAuthor("benjamin");                               // 设置项目作者名称
-        gc.setIdType(IdType.AUTO);                              // 设置主键策略
-        gc.setBaseResultMap(true);                              // 生成基本ResultMap
-        gc.setBaseColumnList(true);                             // 生成基本ColumnList
-        gc.setServiceName("%sService");                         // 去掉服务默认前缀
-        gc.setDateType(DateType.ONLY_DATE);                     // 设置时间类型
+        String projectPath = System.getProperty("user.dir");
+        gc.setOutputDir(projectPath + "/mysql-mybatisplus-usa/src/main/java");      // 设置代码生成路径
+        gc.setFileOverride(true);                   // 是否覆盖以前文件
+        gc.setOpen(false);                          // 是否打开生成目录
+        gc.setAuthor("benjamin");                   // 设置项目作者名称
+        gc.setIdType(IdType.AUTO);                  // 设置主键策略
+        gc.setBaseResultMap(true);                  // 生成基本ResultMap
+        gc.setBaseColumnList(true);                 // 生成基本ColumnList
+        gc.setSwagger2(true);                       // 生成Swagger
+        gc.setServiceName("%sService");             // 去掉服务默认前缀
+        gc.setDateType(DateType.ONLY_DATE);         // 设置时间类型
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/usa?serverTimezone=GMT%2B8&characterEncoding=utf8&useUnicode=true&useSSL=false");
-        // dsc.setSchemaName("public");
-        dsc.setDriverName("com.mysql.cj.jdbc.Driver");          // 这是mysql8.0以上版本的（ysql是5.7版本：com.mysql.jdbc.Driver）
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/usa?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false");
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("xia0yu");
         mpg.setDataSource(dsc);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-//        pc.setModuleName("mybatis-mysql-mybatisplus-api");
-        pc.setParent("com.benjamin");                        // 设置父包
+        pc.setParent("com.benjamin");
         pc.setMapper("dao");
-//        pc.setXml("mapper.xml");
         pc.setEntity("entities");
         pc.setService("service");
         pc.setServiceImpl("service.impl");
@@ -86,7 +80,6 @@ public class CodeGenerator {
                 // to do nothing
             }
         };
-
         // 如果模板引擎是 freemarker
         // String templatePath = "/templates/mapper.xml.ftl";
         // 如果模板引擎是 velocity
@@ -114,28 +107,27 @@ public class CodeGenerator {
         StrategyConfig sc = new StrategyConfig();
         sc.setNaming(NamingStrategy.underline_to_camel);
         sc.setColumnNaming(NamingStrategy.underline_to_camel);
-        sc.setEntityLombokModel(true);                          // 自动lombok
+        sc.setEntityLombokModel(true);              // 自动lombok
         sc.setRestControllerStyle(true);
         sc.setControllerMappingHyphenStyle(true);
-        sc.setLogicDeleteFieldName("deleted");                  // 设置逻辑删除
+        sc.setLogicDeleteFieldName("deleted");      // 设置逻辑删除
 
-        // 默认不处理：DEFAULT    --设置自动填充配置
-        TableFill gmt_create = new TableFill("create_time", FieldFill.DEFAULT);
-        TableFill gmt_modified = new TableFill("update_time", FieldFill.DEFAULT);
-        ArrayList<TableFill> tableFills = new ArrayList<>();
+        // 默认，不填充               设置自动填充配置
+        TableFill gmt_create = new TableFill("create_time", FieldFill.DEFAULT);         // INSERT
+        TableFill gmt_modified = new TableFill("update_time", FieldFill.DEFAULT);       // INSERT_UPDATE
+        ArrayList<TableFill> tableFills=new ArrayList<>();
         tableFills.add(gmt_create);
         tableFills.add(gmt_modified);
         sc.setTableFillList(tableFills);
 
         // 乐观锁
         sc.setVersionFieldName("version");
-        sc.setRestControllerStyle(true);        // 驼峰命名
+        sc.setRestControllerStyle(true);            // 驼峰命名
 
-        // 手动输入
-        sc.setInclude(scanner("表名,多个英文逗号分割").split(","));
 
-        // 自动生成全部
-//        mpg.setStrategy(sc);
+        //  sc.setTablePrefix("tbl_"); 设置表名前缀
+        sc.setInclude(scanner("表名，多个英文逗号分割").split(","));
+        mpg.setStrategy(sc);
 
         // 生成代码
         mpg.execute();

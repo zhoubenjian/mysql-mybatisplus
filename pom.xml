@@ -37,6 +37,7 @@
         <!-- 统一版本号 -->
         <spring-boot-starter.version>2.7.3</spring-boot-starter.version>
         <junit.version>4.13.2</junit.version>
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <swagger-spring-boot-starter.version>1.9.0.RELEASE</swagger-spring-boot-starter.version>
         <mybatis-plus-boot-starter.version>3.4.2</mybatis-plus-boot-starter.version>
         <mybatis-plus-generator.version>3.4.1</mybatis-plus-generator.version>
@@ -77,19 +78,25 @@
             </dependency>
             <!-- 单元测试 -->
 
-            <!-- swagger -->
+            <!-- swagger2 -->
             <dependency>
-                <groupId>com.spring4all</groupId>
-                <artifactId>swagger-spring-boot-starter</artifactId>
-                <version>${swagger-spring-boot-starter.version}</version>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox-swagger2.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox-swagger2.version}</version>
+            </dependency>
+            <!-- swagger2 -->
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-validation</artifactId>
                 <version>${spring-boot-starter.version}</version>
             </dependency>
-            <!-- swagger -->
 
             <!-- mybatis-plus启动器 -->
             <dependency>
@@ -153,13 +160,13 @@
             </dependency>
             <!-- redis -->
 
-            <!-- pagehelper(分页) -->
+            <!-- page helper(分页) -->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper-spring-boot-starter.version}</version>
             </dependency>
-            <!-- pagehelper(分页) -->
+            <!-- page helper(分页) -->
 
             <!-- 工具 -->
             <dependency>

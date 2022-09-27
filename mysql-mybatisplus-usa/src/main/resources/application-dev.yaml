@@ -3,6 +3,10 @@ server:
 
 
 spring:
+  # name
+  application:
+    name: mysql-mybatisplus
+
   # database
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

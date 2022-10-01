@@ -11,8 +11,8 @@
         <result column="party_id" property="partyId" />
         <result column="abbreviation" property="abbreviation" />
         <result column="rank" property="rank" />
-        <result column="start_time" property="startTime" />
-        <result column="end_time" property="endTime" />
+        <result column="start_date" property="startDate" />
+        <result column="end_date" property="endDate" />
         <result column="status" property="status" />
         <result column="number_of_reps" property="numberOfReps" />
         <result column="create_time" property="createTime" />
@@ -21,7 +21,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, state_name, state_capital, governor, party_id, abbreviation, rank, start_time, end_time, status, number_of_reps, create_time, update_time
+        id, state_name, state_capital, governor, party_id, abbreviation, rank, start_date, end_date, status, number_of_reps, create_time, update_time
     </sql>
 
 </mapper>

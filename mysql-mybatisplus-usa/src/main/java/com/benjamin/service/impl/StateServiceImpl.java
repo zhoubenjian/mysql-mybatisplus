@@ -25,7 +25,7 @@ import java.util.List;
  * </p>
  *
  * @author benjamin
- * @since 2022-09-27
+ * @since 2022-10-01
  */
 @Service
 public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements StateService {
@@ -41,26 +41,30 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
 
 
 
-    private static final String ALL_STATE = "allState";
+    private static final String allStateKey = "AllState";
 
 
 
+    /**
+     * 查询所有州
+     * @return
+     */
     @Override
     public ResponseWithEntities<List<StateVo>> queryAllState() {
-        String key = RedisKeyConstant.getAllStateInfo(ALL_STATE);
+        String key = RedisKeyConstant.getAllStateInfo(allStateKey);
         Boolean hasKey = redisTemplate.hasKey(key);
-        ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
+        ValueOperations<String, Object> opsForValue = redisTemplate.opsForValue();
 
         List<State> stateList = new ArrayList<>();
         if (hasKey != null && hasKey) {
-            // redis读取缓存
-            stateList = (List<State>) valueOperations.get(key);
+            // redis读取
+            stateList = (List<State>) opsForValue.get(key);
         } else {
             // 数据库查询
             stateList = stateMapper.selectList(null);
-            // redis存储
-            valueOperations.set(key, stateList);
-            // 设置过期时间
+            // 写入redis
+            opsForValue.set(key, stateList);
+            // 过期时间
             redisTemplate.expireAt(key, DateUtils.addDays(new Date(), 1));
         }
 

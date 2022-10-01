@@ -13,9 +13,13 @@ import java.util.List;
  * </p>
  *
  * @author benjamin
- * @since 2022-09-27
+ * @since 2022-10-01
  */
 public interface StateService extends IService<State> {
 
+    /**
+     * 查询所有州
+     * @return
+     */
     ResponseWithEntities<List<StateVo>> queryAllState();
 }

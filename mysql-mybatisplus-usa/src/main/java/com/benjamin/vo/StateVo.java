@@ -1,6 +1,6 @@
 package com.benjamin.vo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -9,6 +9,7 @@ import java.util.Date;
 
 @Data
 @Accessors(chain = true)
+@ApiModel(value="State对象", description="州")
 public class StateVo {
 
     @ApiModelProperty(value = "主键")
@@ -33,10 +34,10 @@ public class StateVo {
     private Integer rank;
 
     @ApiModelProperty(value = "开始日期")
-    private Date startTime;
+    private Date startDate;
 
     @ApiModelProperty(value = "结束日期")
-    private Date endTime;
+    private Date endDate;
 
     @ApiModelProperty(value = "独立倾向, 0:不独立；1:独立")
     private Integer status;

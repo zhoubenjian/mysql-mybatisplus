@@ -6,13 +6,18 @@ spring:
   # database
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1.46:3306/university?serverTimezone=GMT%2B8&characterEncoding=utf8&useUnicode=true&useSSL=false
+    url: jdbc:mysql://127.0.0.1.46:3306/university?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useUnicode=true&useSSL=false
     username: root
     password: xia0yu
 
+  # date-format
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
   # redis
   redis:
-    database: 0
+    database: 3
     host: 127.0.0.1
     timeout: 6000
     jedis:

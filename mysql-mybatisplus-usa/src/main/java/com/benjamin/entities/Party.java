@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 州
+ * 政党
  * </p>
  *
  * @author benjamin
@@ -22,8 +22,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="State对象", description="州")
-public class State implements Serializable {
+@ApiModel(value="Party对象", description="政党")
+public class Party implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,24 +31,11 @@ public class State implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "州名")
-    private String stateName;
+    @ApiModelProperty(value = "名称")
+    private String partyName;
 
-    @ApiModelProperty(value = "首府")
-    private String stateCapital;
-
-    @ApiModelProperty(value = "州长")
-    private String governor;
-
-    @ApiModelProperty(value = "党派，0：摇摆州")
-    private Long partyId;
-
-    @ApiModelProperty(value = "缩写")
-    private String abbreviation;
-
-    @ApiModelProperty(value = "经济排名")
-    @TableField(value = "`rank`")
-    private Integer rank;
+    @ApiModelProperty(value = "创始人（,隔开）")
+    private String founder;
 
     @ApiModelProperty(value = "开始日期")
     private Date startDate;
@@ -56,11 +43,11 @@ public class State implements Serializable {
     @ApiModelProperty(value = "结束日期")
     private Date endDate;
 
-    @ApiModelProperty(value = "独立倾向, 0:不独立；1:独立")
-    private Integer status;
+    @ApiModelProperty(value = "父级")
+    private Integer parentId;
 
-    @ApiModelProperty(value = "代表人数")
-    private Integer numberOfReps;
+    @ApiModelProperty(value = "至今存在, 0:不存在；1:存在")
+    private Integer status;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.DEFAULT)

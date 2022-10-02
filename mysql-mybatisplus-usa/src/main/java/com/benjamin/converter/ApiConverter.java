@@ -25,6 +25,6 @@ public interface ApiConverter {
      * @param party
      * @return
      */
-    PartyVo PartyToPartyVo(Party party);
-    List<PartyVo> PartyListToPartyVoList(List<Party> list);
+    PartyVo partyToPartyVo(Party party);
+    List<PartyVo> partyListToPartyVoList(List<Party> list);
 }

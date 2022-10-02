@@ -20,4 +20,14 @@
         id, party_name, founder, start_date, end_date, parent_id, status, create_time, update_time
     </sql>
 
+
+
+    <!-- 现存政党 -->
+    <select id="queryExistParty" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM party p
+        WHERE p.end_date IS NULL
+        AND p.status = 1
+    </select>
 </mapper>

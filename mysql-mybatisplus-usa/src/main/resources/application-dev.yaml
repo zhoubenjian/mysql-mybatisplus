@@ -12,7 +12,7 @@ spring:
 
   # date-format
   jackson:
-    date-format: yyyy-MM-dd
+    date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
 
   # redis

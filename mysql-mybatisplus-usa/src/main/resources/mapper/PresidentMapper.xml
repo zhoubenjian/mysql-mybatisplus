@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benjamin.dao.PresidentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.benjamin.entities.President">
+        <id column="id" property="id" />
+        <result column="president_name" property="presidentName" />
+        <result column="gender" property="gender" />
+        <result column="birthday" property="birthday" />
+        <result column="birth_place" property="birthPlace" />
+        <result column="deathday" property="deathday" />
+        <result column="location_of_death" property="locationOfDeath" />
+        <result column="is_alive" property="isAlive" />
+        <result column="term_of_office" property="termOfOffice" />
+        <result column="term_start_date" property="termStartDate" />
+        <result column="term_end_date" property="termEndDate" />
+        <result column="is_skip_term" property="isSkipTerm" />
+        <result column="other_term_start_date" property="otherTermStartDate" />
+        <result column="other_term_end_date" property="otherTermEndDate" />
+        <result column="type" property="type" />
+        <result column="party_id" property="partyId" />
+        <result column="state_id" property="stateId" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, president_name, gender, birthday, birth_place, deathday, location_of_death, is_alive, term_of_office, term_start_date, term_end_date, is_skip_term, other_term_start_date, other_term_end_date, type, party_id, state_id, status, create_time, update_time
+    </sql>
+
+</mapper>

@@ -4,6 +4,8 @@ package com.benjamin.controller;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.PartyService;
 import com.benjamin.vo.PartyVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import java.util.List;
  * @author benjamin
  * @since 2022-10-01
  */
+@Api(tags = "政党 模块")
 @RestController
 @RequestMapping("/party")
 public class PartyController {
@@ -34,6 +37,7 @@ public class PartyController {
      * @return
      */
     @GetMapping("/exist")
+    @ApiOperation(value = "现存政党", notes = "现存政党")
     public ResponseWithEntities<List<PartyVo>> queryExistParty() {
         return partyService.queryExistParty();
     }

@@ -4,6 +4,8 @@ package com.benjamin.controller;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.StateService;
 import com.benjamin.vo.StateVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import java.util.List;
  * @author benjamin
  * @since 2022-10-01
  */
+@Api(tags = "州 模块")
 @RestController
 @RequestMapping("/state")
 public class StateController {
@@ -34,6 +37,7 @@ public class StateController {
      * @return
      */
     @GetMapping("/all")
+    @ApiOperation(value = "所有州", notes = "所有州")
     public ResponseWithEntities<List<StateVo>> queryAllState() {
         return stateService.queryAllState();
     }

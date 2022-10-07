@@ -2,7 +2,9 @@ package com.benjamin.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -54,13 +56,25 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 //                "classpath:/META-INF/resources/webjars/");
 //        super.addResourceHandlers(registry);
 
-
         // 解决静态资源无法访问
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static/");
         // 解决swagger无法访问
-        registry.addResourceHandler("/swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
         // 解决swagger的js文件无法访问
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addRedirectViewController("/null/api-docs",
+                "/api-docs").setKeepQueryParams(true);
+        registry.addRedirectViewController("/null/swagger-resources/configuration/ui",
+                "/swagger-resources/configuration/ui");
+        registry.addRedirectViewController("/null/swagger-resources/configuration/security",
+                "/swagger-resources/configuration/security");
+        registry.addRedirectViewController("/null/swagger-resources", "/swagger-resources");
+    }
 }

@@ -7,11 +7,13 @@ import com.benjamin.vo.PresidentVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -22,6 +24,7 @@ import java.util.List;
  * @author benjamin
  * @since 2022-10-06
  */
+@Api(tags = "总统 模块")
 @RestController
 @RequestMapping("/president")
 public class PresidentController {
@@ -36,6 +39,7 @@ public class PresidentController {
      * @return
      */
     @GetMapping("all")
+    @ApiOperation(value = "所有总统", notes = "所有总统")
     public ResponseWithEntities<List<PresidentVo>> queryAllPresident() {
         return presidentService.queryAllPresident();
     }

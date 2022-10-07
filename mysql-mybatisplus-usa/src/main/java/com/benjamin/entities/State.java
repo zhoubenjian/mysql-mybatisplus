@@ -1,16 +1,17 @@
 package com.benjamin.entities;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.Version;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * <p>
@@ -47,14 +48,14 @@ public class State implements Serializable {
     private String abbreviation;
 
     @ApiModelProperty(value = "经济排名")
-    @TableField(value = "`rank`")
+    @TableField(value = "`rank`")       // 关键字转义
     private Integer rank;
 
     @ApiModelProperty(value = "开始日期")
-    private Date startDate;
+    private LocalDate startDate;
 
     @ApiModelProperty(value = "结束日期")
-    private Date endDate;
+    private LocalDate endDate;
 
     @ApiModelProperty(value = "独立倾向, 0:不独立；1:独立")
     private Integer status;

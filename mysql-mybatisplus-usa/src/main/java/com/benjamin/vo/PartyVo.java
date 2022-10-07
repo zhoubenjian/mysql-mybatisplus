@@ -1,13 +1,11 @@
 package com.benjamin.vo;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Accessors(chain = true)
@@ -21,8 +19,8 @@ public class PartyVo {
     private String founder;
 
     @ApiModelProperty(value = "开始日期")
-    private Date startDate;
+    private LocalDate startDate;
 
     @ApiModelProperty(value = "结束日期")
-    private Date endDate;
+    private LocalDate endDate;
 }

@@ -1,6 +1,8 @@
 package com.benjamin.entities;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+
+import java.time.LocalDate;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -38,10 +40,10 @@ public class Party implements Serializable {
     private String founder;
 
     @ApiModelProperty(value = "开始日期")
-    private Date startDate;
+    private LocalDate startDate;
 
     @ApiModelProperty(value = "结束日期")
-    private Date endDate;
+    private LocalDate endDate;
 
     @ApiModelProperty(value = "父级")
     private Integer parentId;

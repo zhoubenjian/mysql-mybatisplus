@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Accessors(chain = true)
@@ -34,10 +34,10 @@ public class StateVo {
     private Integer rank;
 
     @ApiModelProperty(value = "开始日期")
-    private Date startDate;
+    private LocalDate startDate;
 
     @ApiModelProperty(value = "结束日期")
-    private Date endDate;
+    private LocalDate endDate;
 
     @ApiModelProperty(value = "独立倾向, 0:不独立；1:独立")
     private Integer status;

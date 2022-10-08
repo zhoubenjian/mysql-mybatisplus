@@ -24,7 +24,7 @@ import java.util.List;
  * @author benjamin
  * @since 2022-10-06
  */
-@Api(tags = "总统 模块")
+@Api(value = "总统接口", tags = {"总统接口"})
 @RestController
 @RequestMapping("/president")
 public class PresidentController {
@@ -39,7 +39,7 @@ public class PresidentController {
      * @return
      */
     @GetMapping("all")
-    @ApiOperation(value = "所有总统", notes = "所有总统")
+    @ApiOperation("所有总统")
     public ResponseWithEntities<List<PresidentVo>> queryAllPresident() {
         return presidentService.queryAllPresident();
     }

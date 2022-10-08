@@ -22,7 +22,7 @@ import java.util.List;
  * @author benjamin
  * @since 2022-10-01
  */
-@Api(tags = "政党 模块")
+@Api(value = "政党接口", tags = {"政党接口"})
 @RestController
 @RequestMapping("/party")
 public class PartyController {
@@ -37,7 +37,7 @@ public class PartyController {
      * @return
      */
     @GetMapping("/exist")
-    @ApiOperation(value = "现存政党", notes = "现存政党")
+    @ApiOperation("现存政党")
     public ResponseWithEntities<List<PartyVo>> queryExistParty() {
         return partyService.queryExistParty();
     }

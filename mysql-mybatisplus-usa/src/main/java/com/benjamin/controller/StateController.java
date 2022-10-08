@@ -22,7 +22,7 @@ import java.util.List;
  * @author benjamin
  * @since 2022-10-01
  */
-@Api(tags = "州 模块")
+@Api(value = "州接口", tags = {"州接口"})
 @RestController
 @RequestMapping("/state")
 public class StateController {
@@ -37,7 +37,7 @@ public class StateController {
      * @return
      */
     @GetMapping("/all")
-    @ApiOperation(value = "所有州", notes = "所有州")
+    @ApiOperation("所有州")
     public ResponseWithEntities<List<StateVo>> queryAllState() {
         return stateService.queryAllState();
     }

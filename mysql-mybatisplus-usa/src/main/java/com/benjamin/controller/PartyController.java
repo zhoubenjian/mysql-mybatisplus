@@ -36,8 +36,8 @@ public class PartyController {
      * 现存政党
      * @return
      */
-    @GetMapping("/exist")
     @ApiOperation("现存政党")
+    @GetMapping("/exist")
     public ResponseWithEntities<List<PartyVo>> queryExistParty() {
         return partyService.queryExistParty();
     }

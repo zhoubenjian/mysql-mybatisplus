@@ -36,8 +36,8 @@ public class StateController {
      * 查询所有州
      * @return
      */
-    @GetMapping("/all")
     @ApiOperation("所有州")
+    @GetMapping("/all")
     public ResponseWithEntities<List<StateVo>> queryAllState() {
         return stateService.queryAllState();
     }

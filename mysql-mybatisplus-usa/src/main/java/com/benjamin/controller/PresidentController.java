@@ -38,8 +38,8 @@ public class PresidentController {
      * 查询所有总统
      * @return
      */
-    @GetMapping("all")
     @ApiOperation("所有总统")
+    @GetMapping("all")
     public ResponseWithEntities<List<PresidentVo>> queryAllPresident() {
         return presidentService.queryAllPresident();
     }

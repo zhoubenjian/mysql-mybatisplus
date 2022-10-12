@@ -5,6 +5,8 @@ public class WebException extends RuntimeException {
     private final String view;
     private final Long status;
 
+
+
     public WebException(String message, Long code, String view) {
         super(message);
         this.code = code;

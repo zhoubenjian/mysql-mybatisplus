@@ -19,6 +19,7 @@ public class Swagger2Config {
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
+                .enable(true)   // 是否开启 (true 开启  false隐藏。生产环境建议隐藏)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.benjamin.controller"))
                 .paths(PathSelectors.any())
@@ -29,7 +30,7 @@ public class Swagger2Config {
         return new ApiInfoBuilder()
                 .title("Benjamin's Swagger2 Api documentation")
                 .description("Just have a little faith.")
-                .termsOfServiceUrl("www.spring.io")
+                .termsOfServiceUrl("http://localhost:9000/swagger-ui.html")
                 .contact(new Contact("Benjamin", "", "bjzhou@outlook.com"))
                 .version("1.0")
                 .build();

@@ -37,6 +37,8 @@
         <!-- 统一版本号 -->
         <spring-boot-starter.version>2.7.3</spring-boot-starter.version>
         <junit.version>4.13.2</junit.version>
+        <java-jwt.version>4.0.0</java-jwt.version>
+        <shiro-core.version>1.9.1</shiro-core.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <swagger-spring-boot-starter.version>1.9.0.RELEASE</swagger-spring-boot-starter.version>
         <mybatis-plus-boot-starter.version>3.4.2</mybatis-plus-boot-starter.version>
@@ -48,8 +50,9 @@
         <jedis.version>4.1.1</jedis.version>
         <pagehelper-spring-boot-starter.version>1.4.1</pagehelper-spring-boot-starter.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
-        <poi-ooxml.version>4.1.2</poi-ooxml.version>
         <hutool-all.version>5.8.5</hutool-all.version>
+        <fastjson.version>2.0.12</fastjson.version>
+        <poi-ooxml.version>4.1.2</poi-ooxml.version>
     </properties>
 
 
@@ -84,6 +87,27 @@
                 <scope>test</scope>
             </dependency>
             <!-- 单元测试 -->
+
+            <!-- jwt -->
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>${java-jwt.version}</version>
+            </dependency>
+
+            <!-- shiro -->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>${shiro-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${shiro-core.version}</version>
+            </dependency>
+            <!-- shiro -->
 
             <!-- swagger2 -->
             <dependency>
@@ -181,6 +205,18 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool-all.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
             <!-- 工具 -->
 
             <!-- Excel -->
@@ -188,12 +224,6 @@
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml</artifactId>
                 <version>${poi-ooxml.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool-all.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

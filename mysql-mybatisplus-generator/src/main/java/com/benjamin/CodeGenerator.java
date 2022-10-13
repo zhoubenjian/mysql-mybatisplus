@@ -43,7 +43,7 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/mysql-mybatisplus-usa/src/main/java");      // 设置代码生成路径
+        gc.setOutputDir(projectPath + "/mysql-mybatisplus-auth/src/main/java");      // 设置代码生成路径
         gc.setFileOverride(true);                   // 是否覆盖以前文件
         gc.setOpen(false);                          // 是否打开生成目录
         gc.setAuthor("benjamin");                   // 设置项目作者名称
@@ -92,7 +92,7 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/mysql-mybatisplus-usa/src/main/resources/mapper/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                return projectPath + "/mysql-mybatisplus-auth/src/main/resources/mapper/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
         cfg.setFileOutConfigList(focList);

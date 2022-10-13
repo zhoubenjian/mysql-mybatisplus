@@ -8,6 +8,7 @@
         <module>mysql-mybatisplus-generator</module>
         <module>mysql-mybatisplus-common</module>
         <module>mysql-mybatisplus-usa</module>
+        <module>mysql-mybatisplus-auth</module>
     </modules>
 
     <parent>

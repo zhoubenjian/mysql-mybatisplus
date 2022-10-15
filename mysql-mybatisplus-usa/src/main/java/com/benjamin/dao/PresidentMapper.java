@@ -2,6 +2,9 @@ package com.benjamin.dao;
 
 import com.benjamin.entities.President;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.benjamin.vo.PresidentVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface PresidentMapper extends BaseMapper<President> {
 
+    /**
+     * 在世总统
+     * @return
+     */
+    List<President> queryAlivePresident();
 }

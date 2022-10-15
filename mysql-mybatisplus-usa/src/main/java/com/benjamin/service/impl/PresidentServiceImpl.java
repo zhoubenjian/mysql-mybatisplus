@@ -1,12 +1,12 @@
 package com.benjamin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.benjamin.constant.RedisKeyConstant;
 import com.benjamin.converter.ApiConverter;
-import com.benjamin.entities.President;
 import com.benjamin.dao.PresidentMapper;
+import com.benjamin.entities.President;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.PresidentService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.benjamin.vo.PresidentVo;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,7 +47,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
 
 
     /**
-     * 查询所有总统
+     * 所有总统
      * @return
      */
     @Override
@@ -71,6 +70,21 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
         }
         // President => PresidentVo
         List<PresidentVo> presidentVoList = apiConverter.PresidentList2PresidentVoList(presidentList);
+        LocalDate now = LocalDate.now();
+        // 计算年龄
+        presidentVoList.stream().forEach(p -> p.setAge(p.getBirthday().until(now).getYears()));
+        return new ResponseWithEntities<List<PresidentVo>>().setData(presidentVoList);
+    }
+
+    /**
+     * 在世总统
+     * @return
+     */
+    @Override
+    public ResponseWithEntities<List<PresidentVo>> queryAlivePresident() {
+        List<President> presidentList = presidentMapper.queryAlivePresident();
+        List<PresidentVo> presidentVoList = apiConverter.PresidentList2PresidentVoList(presidentList);
+        // 获取当前年份
         LocalDate now = LocalDate.now();
         // 计算年龄
         presidentVoList.stream().forEach(p -> p.setAge(p.getBirthday().until(now).getYears()));

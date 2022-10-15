@@ -18,8 +18,14 @@ import java.util.List;
 public interface PresidentService extends IService<President> {
 
     /**
-     * 查询所有总统
+     * 所有总统
      * @return
      */
     ResponseWithEntities<List<PresidentVo>> queryAllPresident();
+
+    /**
+     * 在世总统
+     * @return
+     */
+    ResponseWithEntities<List<PresidentVo>> queryAlivePresident();
 }

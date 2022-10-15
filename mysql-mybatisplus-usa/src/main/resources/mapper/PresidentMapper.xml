@@ -31,4 +31,14 @@
         id, president_name, gender, birthday, birth_place, deathday, location_of_death, is_alive, term_of_office, term_start_date, term_end_date, is_skip_term, other_term_start_date, other_term_end_date, type, party_id, state_id, status, create_time, update_time
     </sql>
 
+
+
+    <!-- 在世总统 -->
+    <select id="queryAlivePresident" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM president p
+        WHERE p.deathday IS NULL
+        AND p.is_alive = 1;
+    </select>
 </mapper>

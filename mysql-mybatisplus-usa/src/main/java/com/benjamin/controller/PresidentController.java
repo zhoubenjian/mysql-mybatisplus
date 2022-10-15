@@ -35,13 +35,23 @@ public class PresidentController {
 
 
     /**
-     * 查询所有总统
+     * 所有总统
      * @return
      */
-    @ApiOperation("所有总统")
     @GetMapping("all")
+    @ApiOperation("所有总统")
     public ResponseWithEntities<List<PresidentVo>> queryAllPresident() {
         return presidentService.queryAllPresident();
+    }
+
+    /**
+     * 在世总统
+     * @return
+     */
+    @GetMapping("/alive")
+    @ApiOperation("在世总统")
+    public ResponseWithEntities<List<PresidentVo>> queryAlivePresident() {
+        return presidentService.queryAlivePresident();
     }
 }
 

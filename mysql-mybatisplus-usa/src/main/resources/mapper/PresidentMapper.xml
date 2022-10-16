@@ -39,6 +39,20 @@
         <include refid="Base_Column_List"/>
         FROM president p
         WHERE p.deathday IS NULL
-        AND p.is_alive = 1;
+        AND p.is_alive = 1
+    </select>
+
+    <select id="queryPresidentByBirthDate" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM president p
+        <where>
+            <if test="startTime != null">
+                p.birthday >= #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND p.birthday &lt;= #{endTime}
+            </if>
+        </where>
     </select>
 </mapper>

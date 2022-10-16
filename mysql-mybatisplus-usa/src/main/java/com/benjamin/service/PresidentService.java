@@ -1,10 +1,11 @@
 package com.benjamin.service;
 
-import com.benjamin.entities.President;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.benjamin.entities.President;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.vo.PresidentVo;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -28,4 +29,10 @@ public interface PresidentService extends IService<President> {
      * @return
      */
     ResponseWithEntities<List<PresidentVo>> queryAlivePresident();
+
+    /**
+     *
+     * @return
+     */
+    ResponseWithEntities<List<PresidentVo>>  queryPresidentByBirthDate(String startTime, String endTime);
 }

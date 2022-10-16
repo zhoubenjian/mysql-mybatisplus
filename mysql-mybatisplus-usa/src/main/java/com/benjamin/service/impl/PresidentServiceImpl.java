@@ -90,4 +90,21 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
         presidentVoList.stream().forEach(p -> p.setAge(p.getBirthday().until(now).getYears()));
         return new ResponseWithEntities<List<PresidentVo>>().setData(presidentVoList);
     }
+
+    /**
+     *
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    @Override
+    public ResponseWithEntities<List<PresidentVo>>  queryPresidentByBirthDate(String startTime, String endTime) {
+        List<President> presidentList = presidentMapper.queryPresidentByBirthDate(startTime, endTime);
+        List<PresidentVo> presidentVoList = apiConverter.PresidentList2PresidentVoList(presidentList);
+        // 获取当前年份
+        LocalDate now = LocalDate.now();
+        // 计算年龄
+        presidentVoList.stream().forEach(p -> p.setAge(p.getBirthday().until(now).getYears()));
+        return new ResponseWithEntities<List<PresidentVo>>().setData(presidentVoList);
+    }
 }

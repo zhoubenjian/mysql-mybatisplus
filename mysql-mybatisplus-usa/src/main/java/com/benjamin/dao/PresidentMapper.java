@@ -1,9 +1,10 @@
 package com.benjamin.dao;
 
-import com.benjamin.entities.President;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.benjamin.vo.PresidentVo;
+import com.benjamin.entities.President;
+import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -21,4 +22,7 @@ public interface PresidentMapper extends BaseMapper<President> {
      * @return
      */
     List<President> queryAlivePresident();
+
+    List<President> queryPresidentByBirthDate(@Param("startTime") String startTime,
+                                              @Param("endTime") String endTime);
 }

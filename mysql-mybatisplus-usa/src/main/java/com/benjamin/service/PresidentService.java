@@ -5,7 +5,6 @@ import com.benjamin.entities.President;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.vo.PresidentVo;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**

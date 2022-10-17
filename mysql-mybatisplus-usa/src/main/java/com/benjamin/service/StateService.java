@@ -2,6 +2,8 @@ package com.benjamin.service;
 
 import com.benjamin.entities.State;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.benjamin.request.BasePageRequest;
+import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.vo.StateVo;
 
@@ -22,4 +24,11 @@ public interface StateService extends IService<State> {
      * @return
      */
     ResponseWithEntities<List<StateVo>> queryAllState();
+
+    /**
+     * 分页查询州
+     * @param basePageRequest
+     * @return
+     */
+    ResponseWithCollection<StateVo> queryStateByPage(BasePageRequest basePageRequest);
 }

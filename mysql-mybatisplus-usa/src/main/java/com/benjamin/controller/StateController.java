@@ -1,5 +1,7 @@
 package com.benjamin.controller;
 
+import com.benjamin.request.BasePageRequest;
+import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.StateService;
 import com.benjamin.vo.StateVo;
@@ -39,6 +41,17 @@ public class StateController {
     @GetMapping("/all")
     public ResponseWithEntities<List<StateVo>> queryAllState() {
         return stateService.queryAllState();
+    }
+
+    /**
+     * 分页查询州
+     * @param basePageRequest
+     * @return
+     */
+    @GetMapping("")
+    @ApiOperation("分页查询州")
+    public ResponseWithCollection<StateVo> queryStateByPage(BasePageRequest basePageRequest) {
+        return stateService.queryStateByPage(basePageRequest);
     }
 }
 

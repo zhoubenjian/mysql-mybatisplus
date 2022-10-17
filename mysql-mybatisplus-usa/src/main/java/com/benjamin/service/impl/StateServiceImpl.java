@@ -4,10 +4,14 @@ import com.benjamin.constant.RedisKeyConstant;
 import com.benjamin.converter.ApiConverter;
 import com.benjamin.entities.State;
 import com.benjamin.dao.StateMapper;
+import com.benjamin.request.BasePageRequest;
+import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.StateService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.benjamin.vo.StateVo;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -70,5 +74,18 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
 
         List<StateVo> stateVoList = apiConverter.stateListToStateVoList(stateList);
         return new ResponseWithEntities<List<StateVo>>().setData(stateVoList);
+    }
+
+    /**
+     * 分页查询州
+     * @param basePageRequest
+     * @return
+     */
+    @Override
+    public ResponseWithCollection<StateVo> queryStateByPage(BasePageRequest basePageRequest) {
+        Page<State> page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
+        List<State> stateList = stateMapper.selectList(null);
+        List<StateVo> stateVoList = apiConverter.stateListToStateVoList(stateList);
+        return ResponseWithCollection.buildResponse(basePageRequest, stateVoList, page.getTotal());
     }
 }

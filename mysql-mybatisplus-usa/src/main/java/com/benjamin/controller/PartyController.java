@@ -7,10 +7,9 @@ import com.benjamin.vo.PartyVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -40,6 +39,19 @@ public class PartyController {
     @GetMapping("/exist")
     public ResponseWithEntities<List<PartyVo>> queryExistParty() {
         return partyService.queryExistParty();
+    }
+
+
+    /**
+     * 表单提交（多文件提交只能使用Postman测试）
+     * @param file
+     * @param files
+     * @return
+     */
+    @PostMapping("/create")
+    @ApiOperation("表单提交")
+    public boolean create(MultipartFile file, MultipartFile[] files) {
+        return partyService.create(file, files);
     }
 }
 

@@ -88,4 +88,17 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
         List<StateVo> stateVoList = apiConverter.stateListToStateVoList(stateList);
         return ResponseWithCollection.buildResponse(basePageRequest, stateVoList, page.getTotal());
     }
+
+    /**
+     * 州对应的总统(一对多)
+     * @param basePageRequest
+     * @return
+     */
+    @Override
+    public ResponseWithCollection<StateVo> queryStateWithPresident(BasePageRequest basePageRequest) {
+        Page<State> page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
+        List<State> list = stateMapper.queryStateWithPresident();
+        List<StateVo> stateVoList = apiConverter.stateListToStateVoList(list);
+        return ResponseWithCollection.buildResponse(basePageRequest, stateVoList, page.getTotal());
+    }
 }

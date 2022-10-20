@@ -19,9 +19,64 @@
         <result column="update_time" property="updateTime" />
     </resultMap>
 
+    <!-- 自定义 查询映射结果(一对多) -->
+    <resultMap id="StateWithPresidentResultMap" type="com.benjamin.entities.State" extends="BaseResultMap">
+        <collection property="presidents" ofType="com.benjamin.entities.President" javaType="java.util.ArrayList" columnPrefix="p_">
+            <id column="id" property="id" />
+            <result column="president_name" property="presidentName" />
+            <result column="gender" property="gender" />
+            <result column="birthday" property="birthday" />
+            <result column="birth_place" property="birthPlace" />
+            <result column="deathday" property="deathday" />
+            <result column="location_of_death" property="locationOfDeath" />
+            <result column="is_alive" property="isAlive" />
+            <result column="term_of_office" property="termOfOffice" />
+            <result column="term_start_date" property="termStartDate" />
+            <result column="term_end_date" property="termEndDate" />
+            <result column="is_skip_term" property="isSkipTerm" />
+            <result column="other_term_start_date" property="otherTermStartDate" />
+            <result column="other_term_end_date" property="otherTermEndDate" />
+            <result column="type" property="type" />
+            <result column="party_id" property="partyId" />
+            <result column="state_id" property="stateId" />
+            <result column="status" property="status" />
+            <result column="create_time" property="createTime" />
+            <result column="update_time" property="updateTime" />
+        </collection>
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, state_name, state_capital, governor, party_id, abbreviation, rank, start_date, end_date, status, number_of_reps, create_time, update_time
     </sql>
 
+    <!-- 自定义 查询结果列 -->
+    <sql id="State_President_Column_List">
+        s.id id, s.state_name state_name, s.state_capital state_capital, s.governor governor, s.party_id party_id,
+        s.abbreviation abbreviation, s.rank `rank`, s.start_date start_date, s.end_date end_date, s.status status,
+        s.number_of_reps number_of_reps, s.create_time create_time, s.update_time update_time,
+        p.id p_id, p.president_name p_president_name, p.gender p_gender, p.birthday p_birthday, p.birth_place p_birth_place,
+        p.deathday p_deathday, p.location_of_death p_location_of_death, p.is_alive p_is_alive, p.term_of_office p_term_of_office,
+        p.term_start_date p_term_start_date, p.term_end_date p_term_end_date, p.is_skip_term p_is_skip_term,
+        p.other_term_start_date p_other_term_start_date, p.other_term_end_date p_other_term_end_date, p.type p_type,
+        p.party_id p_party_id, p.state_id p_state_id, p.status p_status, p.create_time p_create_time, p.update_time p_update_time
+    </sql>
+
+
+
+    <!-- 州对应的总统(一对多) -->
+    <select id="queryStateWithPresident" resultMap="StateWithPresidentResultMap">
+        SELECT
+        <include refid="State_President_Column_List"/>
+        FROM state s
+        LEFT JOIN president p
+        ON s.id = p.state_id
+        ORDER BY s.state_name
+    </select>
+    <select id="queryStateWithPresident_COUNT" resultType="java.lang.Long">
+        SELECT
+        COUNT(1)
+        FROM state s
+        ORDER BY s.state_name
+    </select>
 </mapper>

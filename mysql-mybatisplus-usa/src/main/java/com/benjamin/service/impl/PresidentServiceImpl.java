@@ -5,9 +5,13 @@ import com.benjamin.constant.RedisKeyConstant;
 import com.benjamin.converter.ApiConverter;
 import com.benjamin.dao.PresidentMapper;
 import com.benjamin.entities.President;
+import com.benjamin.request.BasePageRequest;
+import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.PresidentService;
 import com.benjamin.vo.PresidentVo;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -69,7 +73,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
             redisTemplate.expireAt(key, DateUtils.addDays(new Date(), 1));
         }
         // President => PresidentVo
-        List<PresidentVo> presidentVoList = apiConverter.PresidentList2PresidentVoList(presidentList);
+        List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
         LocalDate now = LocalDate.now();
         // 计算年龄
         presidentVoList.stream().forEach(p -> p.setAge(p.getBirthday().until(now).getYears()));
@@ -83,7 +87,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
     @Override
     public ResponseWithEntities<List<PresidentVo>> queryAlivePresident() {
         List<President> presidentList = presidentMapper.queryAlivePresident();
-        List<PresidentVo> presidentVoList = apiConverter.PresidentList2PresidentVoList(presidentList);
+        List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
         // 获取当前年份
         LocalDate now = LocalDate.now();
         // 计算年龄
@@ -92,7 +96,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
     }
 
     /**
-     *
+     * 出生日期查询
      * @param startTime
      * @param endTime
      * @return
@@ -100,11 +104,24 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
     @Override
     public ResponseWithEntities<List<PresidentVo>>  queryPresidentByBirthDate(String startTime, String endTime) {
         List<President> presidentList = presidentMapper.queryPresidentByBirthDate(startTime, endTime);
-        List<PresidentVo> presidentVoList = apiConverter.PresidentList2PresidentVoList(presidentList);
+        List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
         // 获取当前年份
         LocalDate now = LocalDate.now();
         // 计算年龄
         presidentVoList.stream().forEach(p -> p.setAge(p.getBirthday().until(now).getYears()));
         return new ResponseWithEntities<List<PresidentVo>>().setData(presidentVoList);
+    }
+
+    /**
+     * 总统对应的州(一对一)
+     * @param basePageRequest
+     * @return
+     */
+    @Override
+    public ResponseWithCollection<PresidentVo> queryPresidentWithState(BasePageRequest basePageRequest) {
+        Page<PresidentVo> page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
+        List<President> presidentList = presidentMapper.queryPresidentWithState();
+        List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
+        return ResponseWithCollection.buildResponse(basePageRequest, presidentVoList, page.getTotal());
     }
 }

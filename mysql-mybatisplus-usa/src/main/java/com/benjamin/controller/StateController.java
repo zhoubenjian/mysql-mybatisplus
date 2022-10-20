@@ -53,5 +53,16 @@ public class StateController {
     public ResponseWithCollection<StateVo> queryStateByPage(BasePageRequest basePageRequest) {
         return stateService.queryStateByPage(basePageRequest);
     }
+
+    /**
+     * 州对应的总统
+     * @param basePageRequest
+     * @return
+     */
+    @GetMapping("withpresident")
+    @ApiOperation("州对应的总统")
+    public ResponseWithCollection<StateVo> queryStateWithPresident(BasePageRequest basePageRequest) {
+        return stateService.queryStateWithPresident(basePageRequest);
+    }
 }
 

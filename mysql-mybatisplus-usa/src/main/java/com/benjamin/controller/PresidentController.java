@@ -1,6 +1,8 @@
 package com.benjamin.controller;
 
 
+import com.benjamin.request.BasePageRequest;
+import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.PresidentService;
 import com.benjamin.vo.PresidentVo;
@@ -63,6 +65,17 @@ public class PresidentController {
     public ResponseWithEntities<List<PresidentVo>> queryPresidentByBirthDate(@RequestParam(value = "startTime", required = false) String startTime,
                                                                              @RequestParam(value = "endTime", required = false) String endTime) {
         return presidentService.queryPresidentByBirthDate(startTime, endTime);
+    }
+
+    /**
+     * 总统对应的州(一对一)
+     * @param basePageRequest
+     * @return
+     */
+    @GetMapping("/withstate")
+    @ApiOperation("总统对应的州")
+    public ResponseWithCollection<PresidentVo> queryPresidentWithState(BasePageRequest basePageRequest) {
+        return presidentService.queryPresidentWithState(basePageRequest);
     }
 }
 

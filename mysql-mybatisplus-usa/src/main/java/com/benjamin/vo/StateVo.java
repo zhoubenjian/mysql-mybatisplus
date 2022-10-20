@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Accessors(chain = true)
@@ -44,4 +45,9 @@ public class StateVo {
 
     @ApiModelProperty(value = "代表人数")
     private Integer numberOfReps;
+
+
+
+    @ApiModelProperty(value = "总统")
+    private List<PresidentVo> presidentVos;
 }

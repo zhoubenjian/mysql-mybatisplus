@@ -41,7 +41,6 @@ public class PartyController {
         return partyService.queryExistParty();
     }
 
-
     /**
      * 表单提交（多文件提交只能使用Postman测试）
      * @param file

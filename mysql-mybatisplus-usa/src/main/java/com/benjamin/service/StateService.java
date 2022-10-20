@@ -31,4 +31,11 @@ public interface StateService extends IService<State> {
      * @return
      */
     ResponseWithCollection<StateVo> queryStateByPage(BasePageRequest basePageRequest);
+
+    /**
+     * 州对应的总统(一对多)
+     * @param basePageRequest
+     * @return
+     */
+    ResponseWithCollection<StateVo> queryStateWithPresident(BasePageRequest basePageRequest);
 }

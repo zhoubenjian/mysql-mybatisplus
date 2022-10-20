@@ -25,10 +25,39 @@
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
     </resultMap>
+    <!-- 自定义 查询映射结果 -->
+    <resultMap id="PresidentStateResultMap" type="com.benjamin.entities.President" extends="BaseResultMap">
+        <association property="state" javaType="com.benjamin.entities.State" columnPrefix="s_">
+            <id column="id" property="id" />
+            <result column="state_name" property="stateName" />
+            <result column="state_capital" property="stateCapital" />
+            <result column="governor" property="governor" />
+            <result column="party_id" property="partyId" />
+            <result column="abbreviation" property="abbreviation" />
+            <result column="rank" property="rank" />
+            <result column="start_date" property="startDate" />
+            <result column="end_date" property="endDate" />
+            <result column="status" property="status" />
+            <result column="number_of_reps" property="numberOfReps" />
+            <result column="create_time" property="createTime" />
+            <result column="update_time" property="updateTime" />
+        </association>
+    </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, president_name, gender, birthday, birth_place, deathday, location_of_death, is_alive, term_of_office, term_start_date, term_end_date, is_skip_term, other_term_start_date, other_term_end_date, type, party_id, state_id, status, create_time, update_time
+    </sql>
+    <!-- 自定义 查询结果列 -->
+    <sql id="Presidnet_State_Column_List">
+        p.id id, p.president_name president_name, p.gender gender, p.birthday birthday, p.birth_place birth_place,
+        p.deathday deathday, p.location_of_death location_of_death, p.is_alive is_alive, p.term_of_office term_of_office,
+        p.term_start_date term_start_date, p.term_end_date term_end_date, p.is_skip_term is_skip_term,
+        p.other_term_start_date other_term_start_date, p.other_term_end_date other_term_end_date, p.type `type`,
+        p.party_id party_id, p.state_id state_id, p.status status, p.create_time create_time, p.update_time update_time,
+        s.id s_id, s.state_name s_state_name, s.state_capital s_state_capital, s.governor s_governor, s.party_id s_party_id,
+        s.abbreviation s_abbreviation, s.rank s_rank, s.start_date s_start_date, s.end_date s_end_date, s.status s_status,
+        s.number_of_reps s_number_of_reps, s.create_time s_create_time, s.update_time s_update_time
     </sql>
 
 
@@ -42,17 +71,34 @@
         AND p.is_alive = 1
     </select>
 
+    <!-- 出生日期查询 -->
     <select id="queryPresidentByBirthDate" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
         FROM president p
         <where>
             <if test="startTime != null">
-                p.birthday >= #{startTime}
+                p.birthday >= #{startTime, jdbcType=DATE}
             </if>
             <if test="endTime != null">
-                AND p.birthday &lt;= #{endTime}
+                AND p.birthday &lt;= #{endTime, jdbcType=DATE}
             </if>
         </where>
+    </select>
+
+    <!-- 总统对应的州(一对一) -->
+    <select id="queryPresidentWithState" resultMap="PresidentStateResultMap">
+        SELECT
+        <include refid="Presidnet_State_Column_List"/>
+        FROM president p
+        LEFT JOIN state s
+        ON p.state_id = s.id
+        ORDER BY p.id
+    </select>
+    <select id="queryPresidentWithState_COUNT" resultType="java.lang.Long">
+        SELECT
+        COUNT(1)
+        FROM president p
+        ORDER BY p.id
     </select>
 </mapper>

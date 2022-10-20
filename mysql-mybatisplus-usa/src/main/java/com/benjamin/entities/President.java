@@ -92,4 +92,7 @@ public class President implements Serializable {
     private Date updateTime;
 
 
+
+    @ApiModelProperty(value = "州")
+    private State state;
 }

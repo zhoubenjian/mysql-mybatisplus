@@ -22,6 +22,18 @@ public interface PresidentMapper extends BaseMapper<President> {
      */
     List<President> queryAlivePresident();
 
+    /**
+     * 出生日期查询
+     * @param startTime
+     * @param endTime
+     * @return
+     */
     List<President> queryPresidentByBirthDate(@Param("startTime") String startTime,
                                               @Param("endTime") String endTime);
+
+    /**
+     * 总统对应的州(一对一)
+     * @return
+     */
+    List<President> queryPresidentWithState();
 }

@@ -9,6 +9,9 @@
         <module>mysql-mybatisplus-common</module>
         <module>mysql-mybatisplus-usa</module>
         <module>mysql-mybatisplus-auth</module>
+        <module>mysql-mybatisplus-cloud-order</module>
+        <module>mysql-mybatisplus-cloud-user</module>
+        <module>mysql-mybatisplus-cloud-eureka</module>
     </modules>
 
     <parent>
@@ -38,6 +41,7 @@
         <!-- 统一版本号 -->
         <spring-boot-starter.version>2.7.3</spring-boot-starter.version>
         <junit.version>4.13.2</junit.version>
+        <spring-cloud-starter-netflix-eureka.version>3.1.4</spring-cloud-starter-netflix-eureka.version>
         <java-jwt.version>4.0.0</java-jwt.version>
         <shiro-core.version>1.9.1</shiro-core.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
@@ -88,6 +92,32 @@
                 <scope>test</scope>
             </dependency>
             <!-- 单元测试 -->
+
+            <!-- spring-cloud -->
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-server -->
+            <!-- eureka server -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+                <version>${spring-cloud-starter-netflix-eureka.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-client -->
+            <!-- eureka client -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+                <version>${spring-cloud-starter-netflix-eureka.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
+            <!-- openfeign -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${spring-cloud-starter-netflix-eureka.version}</version>
+            </dependency>
+            <!-- spring-cloud -->
 
             <!-- jwt -->
             <dependency>

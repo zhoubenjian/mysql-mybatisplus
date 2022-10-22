@@ -1,0 +1,13 @@
+server:
+  port: 9004
+
+
+spring:
+  application:
+    name: eurekaserver
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9004/eureka   # 服务地址

@@ -1,5 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.benjamin.date.WebMvcConfig,\
+com.benjamin.web.WebMvcConfig,\
 com.benjamin.redis.RedisConfig,\
 com.benjamin.swagger.Swagger2Config
 

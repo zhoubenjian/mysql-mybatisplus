@@ -1,0 +1,17 @@
+server:
+  port: 9005
+
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+
+alibaba:
+  cloud:
+    access-key: xxx         # 不可以提交!!!
+    secret-key: xxx         # 不可以提交!!!
+    oss:
+      endpoint: xxx         # 不可以提交!!!
+

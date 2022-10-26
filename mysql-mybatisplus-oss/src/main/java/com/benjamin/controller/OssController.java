@@ -4,8 +4,6 @@ import com.benjamin.response.BaseResponse;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.OssService;
 import com.benjamin.vo.FileMetadataVo;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,8 +32,8 @@ public class OssController {
      * @param fileName
      * @return
      */
-    @PostMapping("/delete")
-    public BaseResponse deleteFileFromOSS(@RequestParam("fileName") String fileName) {
+    @PostMapping("/delete/{fileName}")
+    public BaseResponse deleteFileFromOSS(@PathVariable("fileName") String fileName) {
         return ossService.deleteFileFromOSS(fileName);
     }
 }

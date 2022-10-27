@@ -9,6 +9,7 @@ import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.StateService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.benjamin.vo.StatePresidentVo;
 import com.benjamin.vo.StateVo;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -95,10 +96,9 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
      * @return
      */
     @Override
-    public ResponseWithCollection<StateVo> queryStateWithPresident(BasePageRequest basePageRequest) {
+    public ResponseWithCollection<StatePresidentVo> queryStateWithPresident(BasePageRequest basePageRequest) {
         Page<State> page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
-        List<State> list = stateMapper.queryStateWithPresident();
-        List<StateVo> stateVoList = apiConverter.stateListToStateVoList(list);
-        return ResponseWithCollection.buildResponse(basePageRequest, stateVoList, page.getTotal());
+        List<StatePresidentVo> statePresidentVoList = stateMapper.queryStateWithPresident();
+        return ResponseWithCollection.buildResponse(basePageRequest, statePresidentVoList, page.getTotal());
     }
 }

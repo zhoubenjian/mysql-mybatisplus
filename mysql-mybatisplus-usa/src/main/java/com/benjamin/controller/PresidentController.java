@@ -5,6 +5,7 @@ import com.benjamin.request.BasePageRequest;
 import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.PresidentService;
+import com.benjamin.vo.PresidentStateVo;
 import com.benjamin.vo.PresidentVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -74,7 +75,7 @@ public class PresidentController {
      */
     @GetMapping("/withstate")
     @ApiOperation("总统对应的州")
-    public ResponseWithCollection<PresidentVo> queryPresidentWithState(BasePageRequest basePageRequest) {
+    public ResponseWithCollection<PresidentStateVo> queryPresidentWithState(BasePageRequest basePageRequest) {
         return presidentService.queryPresidentWithState(basePageRequest);
     }
 }

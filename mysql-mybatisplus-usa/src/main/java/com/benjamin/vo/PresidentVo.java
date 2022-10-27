@@ -62,9 +62,4 @@ public class PresidentVo {
 
     @ApiModelProperty(value = "年龄")
     private Integer age;
-
-
-
-    @ApiModelProperty(value = "州")
-    private StateVo stateVo;
 }

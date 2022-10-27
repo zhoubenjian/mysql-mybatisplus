@@ -19,7 +19,6 @@ public interface ApiConverter {
      * @param state
      * @return
      */
-    @Mapping(target = "presidentVos", source = "state.presidents")
     StateVo stateToStateVo(State state);
     List<StateVo> stateListToStateVoList(List<State> list);
 
@@ -38,7 +37,6 @@ public interface ApiConverter {
      * @param president
      * @return
      */
-    @Mapping(target = "stateVo", source = "president.state")
     @Mapping(target = "age", ignore = true)
     PresidentVo president2PresidentVo(President president);
     List<PresidentVo> presidentList2PresidentVoList(List<President> list);

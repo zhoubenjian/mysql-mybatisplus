@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.benjamin.request.BasePageRequest;
 import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
+import com.benjamin.vo.StatePresidentVo;
 import com.benjamin.vo.StateVo;
 
 import java.util.List;
@@ -37,5 +38,5 @@ public interface StateService extends IService<State> {
      * @param basePageRequest
      * @return
      */
-    ResponseWithCollection<StateVo> queryStateWithPresident(BasePageRequest basePageRequest);
+    ResponseWithCollection<StatePresidentVo> queryStateWithPresident(BasePageRequest basePageRequest);
 }

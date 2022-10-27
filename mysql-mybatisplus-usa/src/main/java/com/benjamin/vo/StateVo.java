@@ -45,9 +45,4 @@ public class StateVo {
 
     @ApiModelProperty(value = "代表人数")
     private Integer numberOfReps;
-
-
-
-    @ApiModelProperty(value = "总统")
-    private List<PresidentVo> presidentVos;
 }

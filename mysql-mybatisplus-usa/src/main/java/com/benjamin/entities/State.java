@@ -74,7 +74,4 @@ public class State implements Serializable {
     private Date updateTime;
 
 
-
-    @ApiModelProperty(value = "总统")
-    private List<President> presidents;
 }

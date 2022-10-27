@@ -5,6 +5,7 @@ import com.benjamin.entities.President;
 import com.benjamin.request.BasePageRequest;
 import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
+import com.benjamin.vo.PresidentStateVo;
 import com.benjamin.vo.PresidentVo;
 
 import java.util.List;
@@ -42,5 +43,5 @@ public interface PresidentService extends IService<President> {
      * @param basePageRequest
      * @return
      */
-    ResponseWithCollection<PresidentVo> queryPresidentWithState(BasePageRequest basePageRequest);
+    ResponseWithCollection<PresidentStateVo> queryPresidentWithState(BasePageRequest basePageRequest);
 }

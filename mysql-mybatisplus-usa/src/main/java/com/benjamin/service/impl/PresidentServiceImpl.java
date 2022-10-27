@@ -9,6 +9,7 @@ import com.benjamin.request.BasePageRequest;
 import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.PresidentService;
+import com.benjamin.vo.PresidentStateVo;
 import com.benjamin.vo.PresidentVo;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -118,10 +119,9 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
      * @return
      */
     @Override
-    public ResponseWithCollection<PresidentVo> queryPresidentWithState(BasePageRequest basePageRequest) {
-        Page<PresidentVo> page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
-        List<President> presidentList = presidentMapper.queryPresidentWithState();
-        List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
-        return ResponseWithCollection.buildResponse(basePageRequest, presidentVoList, page.getTotal());
+    public ResponseWithCollection<PresidentStateVo> queryPresidentWithState(BasePageRequest basePageRequest) {
+        Page page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
+        List<PresidentStateVo> presidentStateVoList = presidentMapper.queryPresidentWithState();
+        return ResponseWithCollection.buildResponse(basePageRequest, presidentStateVoList, page.getTotal());
     }
 }

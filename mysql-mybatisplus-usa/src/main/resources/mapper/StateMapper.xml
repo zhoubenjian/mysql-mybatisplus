@@ -20,7 +20,7 @@
     </resultMap>
 
     <!-- 自定义 查询映射结果(一对多) -->
-    <resultMap id="StateWithPresidentResultMap" type="com.benjamin.entities.State" extends="BaseResultMap">
+    <resultMap id="StateWithPresidentResultMap" type="com.benjamin.vo.StatePresidentVo" extends="BaseResultMap">
         <collection property="presidents" ofType="com.benjamin.entities.President" javaType="java.util.ArrayList" columnPrefix="p_">
             <id column="id" property="id" />
             <result column="president_name" property="presidentName" />

@@ -54,8 +54,7 @@ public class Order implements Serializable {
     private Date updateTime;
 
     @ApiModelProperty(value = "用户id")
-    @TableField("userId")
-    private Long userid;
+    private Long userId;
 
 
 }

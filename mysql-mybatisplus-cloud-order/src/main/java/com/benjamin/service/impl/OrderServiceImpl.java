@@ -47,7 +47,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         Order order = orderMapper.selectOne(queryWrapper);
 
         // 使用feign远程调用
-        User user = userClient.queryUserByUserId(order.getUserid());
+        User user = userClient.queryUserByUserId(order.getUserId());
 
         OrderVo orderVo = apiConverter.order2OrderVo(order, user);
 

@@ -5,6 +5,7 @@ import com.benjamin.constant.RedisKeyConstant;
 import com.benjamin.converter.ApiConverter;
 import com.benjamin.dao.PresidentMapper;
 import com.benjamin.entities.President;
+import com.benjamin.entities.PresidentState;
 import com.benjamin.request.BasePageRequest;
 import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
@@ -73,6 +74,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
             // 一天后过期
             redisTemplate.expireAt(key, DateUtils.addDays(new Date(), 1));
         }
+
         // President => PresidentVo
         List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
         LocalDate now = LocalDate.now();
@@ -88,8 +90,10 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
     @Override
     public ResponseWithEntities<List<PresidentVo>> queryAlivePresident() {
         List<President> presidentList = presidentMapper.queryAlivePresident();
+
+        // President => PresidentVo
         List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
-        // 获取当前年份
+        // 当前年份
         LocalDate now = LocalDate.now();
         // 计算年龄
         presidentVoList.stream().forEach(p -> p.setAge(p.getBirthday().until(now).getYears()));
@@ -105,8 +109,10 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
     @Override
     public ResponseWithEntities<List<PresidentVo>>  queryPresidentByBirthDate(String startTime, String endTime) {
         List<President> presidentList = presidentMapper.queryPresidentByBirthDate(startTime, endTime);
+
+        // President => PresidentVo
         List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
-        // 获取当前年份
+        // 当前年份
         LocalDate now = LocalDate.now();
         // 计算年龄
         presidentVoList.stream().forEach(p -> p.setAge(p.getBirthday().until(now).getYears()));
@@ -121,7 +127,10 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
     @Override
     public ResponseWithCollection<PresidentStateVo> queryPresidentWithState(BasePageRequest basePageRequest) {
         Page page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
-        List<PresidentStateVo> presidentStateVoList = presidentMapper.queryPresidentWithState();
+        List<PresidentState> presidentStateList = presidentMapper.queryPresidentWithState();
+
+        // PresidentState => PresidentStateVo
+        List<PresidentStateVo> presidentStateVoList = apiConverter.presidentState2PresidentStateVoList(presidentStateList);
         return ResponseWithCollection.buildResponse(basePageRequest, presidentStateVoList, page.getTotal());
     }
 }

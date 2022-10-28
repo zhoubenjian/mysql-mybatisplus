@@ -4,6 +4,7 @@ import com.benjamin.constant.RedisKeyConstant;
 import com.benjamin.converter.ApiConverter;
 import com.benjamin.entities.State;
 import com.benjamin.dao.StateMapper;
+import com.benjamin.entities.StatePresident;
 import com.benjamin.request.BasePageRequest;
 import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
@@ -73,6 +74,7 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
             redisTemplate.expireAt(key, DateUtils.addDays(new Date(), 1));
         }
 
+        // State => StateVo
         List<StateVo> stateVoList = apiConverter.stateListToStateVoList(stateList);
         return new ResponseWithEntities<List<StateVo>>().setData(stateVoList);
     }
@@ -84,8 +86,10 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
      */
     @Override
     public ResponseWithCollection<StateVo> queryStateByPage(BasePageRequest basePageRequest) {
-        Page<State> page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
+        Page page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
         List<State> stateList = stateMapper.selectList(null);
+
+        // State => StateVo
         List<StateVo> stateVoList = apiConverter.stateListToStateVoList(stateList);
         return ResponseWithCollection.buildResponse(basePageRequest, stateVoList, page.getTotal());
     }
@@ -97,8 +101,11 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
      */
     @Override
     public ResponseWithCollection<StatePresidentVo> queryStateWithPresident(BasePageRequest basePageRequest) {
-        Page<State> page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
-        List<StatePresidentVo> statePresidentVoList = stateMapper.queryStateWithPresident();
+        Page page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
+        List<StatePresident> statePresidentList = stateMapper.queryStateWithPresident();
+
+        // StatePresident => StatePresidentVo
+        List<StatePresidentVo> statePresidentVoList = apiConverter.statePresidentList2StatePresidentVoList(statePresidentList);
         return ResponseWithCollection.buildResponse(basePageRequest, statePresidentVoList, page.getTotal());
     }
 }

@@ -56,7 +56,7 @@ public class StateController {
     }
 
     /**
-     * 州对应的总统
+     * 州对应的总统(一对多)
      * @param basePageRequest
      * @return
      */

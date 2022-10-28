@@ -19,8 +19,8 @@
         <result column="update_time" property="updateTime" />
     </resultMap>
 
-    <!-- 自定义 查询映射结果(一对多) -->
-    <resultMap id="StateWithPresidentResultMap" type="com.benjamin.vo.StatePresidentVo" extends="BaseResultMap">
+    <!-- 州对应的总统(一对多) 查询映射结果 -->
+    <resultMap id="StateWithPresidentResultMap" type="com.benjamin.entities.StatePresident" extends="BaseResultMap">
         <collection property="presidents" ofType="com.benjamin.entities.President" javaType="java.util.ArrayList" columnPrefix="p_">
             <id column="id" property="id" />
             <result column="president_name" property="presidentName" />
@@ -50,7 +50,7 @@
         id, state_name, state_capital, governor, party_id, abbreviation, rank, start_date, end_date, status, number_of_reps, create_time, update_time
     </sql>
 
-    <!-- 自定义 查询结果列 -->
+    <!-- 州对应的总统(一对多) 查询结果列 -->
     <sql id="State_President_Column_List">
         s.id id, s.state_name state_name, s.state_capital state_capital, s.governor governor, s.party_id party_id,
         s.abbreviation abbreviation, s.rank `rank`, s.start_date start_date, s.end_date end_date, s.status status,

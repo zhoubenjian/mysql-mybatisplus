@@ -25,7 +25,8 @@
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
     </resultMap>
-    <!-- 自定义 查询映射结果 -->
+
+    <!-- 总统对应的州(一对一) 查询映射结果 -->
     <resultMap id="PresidentStateResultMap" type="com.benjamin.entities.PresidentState" extends="BaseResultMap">
         <association property="state" javaType="com.benjamin.entities.State" columnPrefix="s_">
             <id column="id" property="id" />
@@ -48,7 +49,8 @@
     <sql id="Base_Column_List">
         id, president_name, gender, birthday, birth_place, deathday, location_of_death, is_alive, term_of_office, term_start_date, term_end_date, is_skip_term, other_term_start_date, other_term_end_date, type, party_id, state_id, status, create_time, update_time
     </sql>
-    <!-- 自定义 查询结果列 -->
+
+    <!-- 总统对应的州(一对一) 查询结果列 -->
     <sql id="Presidnet_State_Column_List">
         p.id id, p.president_name president_name, p.gender gender, p.birthday birthday, p.birth_place birth_place,
         p.deathday deathday, p.location_of_death location_of_death, p.is_alive is_alive, p.term_of_office term_of_office,

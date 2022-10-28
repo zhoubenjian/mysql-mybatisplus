@@ -74,7 +74,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
             // 一天后过期
             redisTemplate.expireAt(key, DateUtils.addDays(new Date(), 1));
         }
-        
+
         // President => PresidentVo
         List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
         LocalDate now = LocalDate.now();
@@ -93,7 +93,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
 
         // President => PresidentVo
         List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
-        // 获取当前年份
+        // 当前年份
         LocalDate now = LocalDate.now();
         // 计算年龄
         presidentVoList.stream().forEach(p -> p.setAge(p.getBirthday().until(now).getYears()));
@@ -112,7 +112,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
 
         // President => PresidentVo
         List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
-        // 获取当前年份
+        // 当前年份
         LocalDate now = LocalDate.now();
         // 计算年龄
         presidentVoList.stream().forEach(p -> p.setAge(p.getBirthday().until(now).getYears()));

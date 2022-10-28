@@ -26,7 +26,7 @@
         <result column="update_time" property="updateTime" />
     </resultMap>
     <!-- 自定义 查询映射结果 -->
-    <resultMap id="PresidentStateResultMap" type="com.benjamin.vo.PresidentStateVo" extends="BaseResultMap">
+    <resultMap id="PresidentStateResultMap" type="com.benjamin.entities.PresidentState" extends="BaseResultMap">
         <association property="state" javaType="com.benjamin.entities.State" columnPrefix="s_">
             <id column="id" property="id" />
             <result column="state_name" property="stateName" />
@@ -57,7 +57,7 @@
         p.party_id party_id, p.state_id state_id, p.status status, p.create_time create_time, p.update_time update_time,
         s.id s_id, s.state_name s_state_name, s.state_capital s_state_capital, s.governor s_governor, s.party_id s_party_id,
         s.abbreviation s_abbreviation, s.rank s_rank, s.start_date s_start_date, s.end_date s_end_date, s.status s_status,
-        s.number_of_reps s_number_of_reps, s.create_time s_create_time, s.update_time s_update_time
+        s.number_of_reps s_number_of_reps
     </sql>
 
 

@@ -1,6 +1,5 @@
 package com.benjamin.controller;
 
-
 import com.benjamin.request.BasePageRequest;
 import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;

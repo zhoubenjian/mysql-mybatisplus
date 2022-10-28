@@ -2,8 +2,10 @@ package com.benjamin.converter;
 
 import com.benjamin.entities.Party;
 import com.benjamin.entities.President;
+import com.benjamin.entities.PresidentState;
 import com.benjamin.entities.State;
 import com.benjamin.vo.PartyVo;
+import com.benjamin.vo.PresidentStateVo;
 import com.benjamin.vo.PresidentVo;
 import com.benjamin.vo.StateVo;
 import org.mapstruct.Mapper;
@@ -23,6 +25,7 @@ public interface ApiConverter {
     List<StateVo> stateListToStateVoList(List<State> list);
 
 
+
     /**
      * Party => PartyVo
      * @param party
@@ -30,6 +33,7 @@ public interface ApiConverter {
      */
     PartyVo partyToPartyVo(Party party);
     List<PartyVo> partyListToPartyVoList(List<Party> list);
+
 
 
     /**
@@ -40,4 +44,13 @@ public interface ApiConverter {
     @Mapping(target = "age", ignore = true)
     PresidentVo president2PresidentVo(President president);
     List<PresidentVo> presidentList2PresidentVoList(List<President> list);
+
+    /**
+     * PresidentState => PresidentStateVo
+     * @param presidentState
+     * @return
+     */
+    @Mapping(target = "stateVo", source = "presidentState.state")
+    PresidentStateVo presidentState2PresidentStateVo(PresidentState presidentState);
+    List<PresidentStateVo> presidentState2PresidentStateVoList(List<PresidentState> list);
 }

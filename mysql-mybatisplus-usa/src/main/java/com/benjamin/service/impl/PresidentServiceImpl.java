@@ -5,6 +5,7 @@ import com.benjamin.constant.RedisKeyConstant;
 import com.benjamin.converter.ApiConverter;
 import com.benjamin.dao.PresidentMapper;
 import com.benjamin.entities.President;
+import com.benjamin.entities.PresidentState;
 import com.benjamin.request.BasePageRequest;
 import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
@@ -121,7 +122,8 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
     @Override
     public ResponseWithCollection<PresidentStateVo> queryPresidentWithState(BasePageRequest basePageRequest) {
         Page page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
-        List<PresidentStateVo> presidentStateVoList = presidentMapper.queryPresidentWithState();
+        List<PresidentState> presidentStateList = presidentMapper.queryPresidentWithState();
+        List<PresidentStateVo> presidentStateVoList = apiConverter.presidentState2PresidentStateVoList(presidentStateList);
         return ResponseWithCollection.buildResponse(basePageRequest, presidentStateVoList, page.getTotal());
     }
 }

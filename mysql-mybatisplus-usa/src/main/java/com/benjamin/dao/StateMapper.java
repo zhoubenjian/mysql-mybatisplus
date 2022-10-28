@@ -2,10 +2,8 @@ package com.benjamin.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.benjamin.entities.State;
-import com.benjamin.vo.StatePresidentVo;
-import org.apache.ibatis.annotations.Param;
+import com.benjamin.entities.StatePresident;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -22,5 +20,5 @@ public interface StateMapper extends BaseMapper<State> {
      * 州对应的总统(一对多)
      * @return
      */
-    List<StatePresidentVo> queryStateWithPresident();
+    List<StatePresident> queryStateWithPresident();
 }

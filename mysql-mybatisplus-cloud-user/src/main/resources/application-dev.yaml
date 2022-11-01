@@ -1,0 +1,42 @@
+server:
+  port: 9003
+
+
+spring:
+  # spring-could service
+  application:
+    name: userservice  # 服务名
+
+  # database
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/cloud_user?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: xia0yu
+
+  # date-format
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+  # mvc(Swagger2)
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+
+
+# mybatis-plus log
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+  # 扫描实体类所在的包，这样在mapper.xml文件中就不用配置实体类全路径，直接写类名就行（xml没有使用）
+  type-aliases-package: com.benjamin.entities
+
+
+# eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9004/eureka

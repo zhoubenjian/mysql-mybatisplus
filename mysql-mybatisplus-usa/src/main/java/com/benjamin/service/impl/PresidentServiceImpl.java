@@ -22,9 +22,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -89,7 +87,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
      */
     @Override
     public ResponseWithEntities<List<PresidentVo>> queryAlivePresident() {
-        List<President> presidentList = presidentMapper.queryAlivePresident();
+        List<President> presidentList = Optional.of(presidentMapper.queryAlivePresident()).orElse(Collections.EMPTY_LIST);
 
         // President => PresidentVo
         List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);

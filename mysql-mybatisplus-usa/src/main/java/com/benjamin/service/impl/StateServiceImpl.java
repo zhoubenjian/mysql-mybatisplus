@@ -21,9 +21,7 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -87,7 +85,8 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
     @Override
     public ResponseWithCollection<StateVo> queryStateByPage(BasePageRequest basePageRequest) {
         Page page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
-        List<State> stateList = stateMapper.selectList(null);
+        // Optional避免空指针异常
+        List<State> stateList = Optional.of(stateMapper.selectList(null)).orElse(Collections.EMPTY_LIST);
 
         // State => StateVo
         List<StateVo> stateVoList = apiConverter.stateListToStateVoList(stateList);

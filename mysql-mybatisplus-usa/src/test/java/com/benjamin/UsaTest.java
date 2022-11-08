@@ -1,9 +1,7 @@
 package com.benjamin;
 
 import com.benjamin.dao.PartyMapper;
-import com.benjamin.dao.StateMapper;
 import com.benjamin.entities.Party;
-import com.benjamin.entities.State;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -6,6 +6,7 @@ import com.benjamin.entities.State;
 import com.benjamin.dao.StateMapper;
 import com.benjamin.entities.StatePresident;
 import com.benjamin.request.BasePageRequest;
+import com.benjamin.request.StateRequest;
 import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.StateService;
@@ -75,6 +76,24 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
         // State => StateVo
         List<StateVo> stateVoList = apiConverter.stateListToStateVoList(stateList);
         return new ResponseWithEntities<List<StateVo>>().setData(stateVoList);
+    }
+
+    /**
+     * 条件查询州
+     * @param stateRequest
+     * @return
+     */
+    @Override
+    public ResponseWithCollection<StateVo> queryStateByCondition(StateRequest stateRequest) {
+        String stateName = stateRequest.getStateName();
+        String stateCapital = stateRequest.getStateCapital();
+        String governor = stateRequest.getGovernor();
+
+        Page page = PageHelper.startPage((int) stateRequest.getPage(), (int) stateRequest.getPageSize());
+        List<State> stateList = stateMapper.queryStateByCondition(stateName, stateCapital, governor);
+        List<StateVo> stateVoList = apiConverter.stateListToStateVoList(stateList);
+
+        return ResponseWithCollection.buildResponse(stateRequest, stateVoList, page.getTotal());
     }
 
     /**

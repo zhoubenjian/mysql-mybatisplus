@@ -84,7 +84,8 @@ public class PartyServiceImpl extends ServiceImpl<PartyMapper, Party> implements
      * @return
      */
     @Override
-    public boolean create(@RequestParam("file") MultipartFile file, @RequestParam("files") MultipartFile[] files) {
+    public boolean create(@RequestParam("file") MultipartFile file,
+                          @RequestParam("files") MultipartFile[] files) {
         if (file == null) {
             log.debug("file不能为空");
             return false;

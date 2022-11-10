@@ -45,9 +45,9 @@
         </collection>
     </resultMap>
 
-    <!-- 通用查询结果列 -->
+    <!-- 通用查询结果列(手动sql，关键字必须转义) -->
     <sql id="Base_Column_List">
-        id, state_name, state_capital, governor, party_id, abbreviation, rank, start_date, end_date, status, number_of_reps, create_time, update_time
+        id, state_name, state_capital, governor, party_id, abbreviation, `rank`, start_date, end_date, status, number_of_reps, create_time, update_time
     </sql>
 
     <!-- 州对应的总统(一对多) 查询结果列 -->
@@ -63,6 +63,25 @@
     </sql>
 
 
+
+    <!-- 条件查询州 -->
+    <select id="queryStateByCondition" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM STATE s
+        <where>
+            <if test="stateName != null">
+                s.state_name LIKE CONCAT('%', #{stateName, jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="stateCapital != null">
+                AND s.state_capital LIKE CONCAT('%', #{stateCapital, jdbcType=VARCHAR} ,'%')
+            </if>
+            <if test="governor != null">
+                AND s.governor LIKE CONCAT('%', #{governor, jdbcType=VARCHAR} ,'%')
+            </if>
+        </where>
+        ORDER BY s.state_name
+    </select>
 
     <!-- 州对应的总统(一对多) -->
     <select id="queryStateWithPresident" resultMap="StateWithPresidentResultMap">

@@ -43,7 +43,7 @@ public class LoginController {
     }
 
     /**
-     * 用户对于权限
+     * 用户对应权限
      * @param userName
      * @return
      */

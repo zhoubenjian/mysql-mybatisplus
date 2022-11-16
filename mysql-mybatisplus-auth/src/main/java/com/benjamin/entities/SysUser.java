@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -21,6 +22,7 @@ import lombok.EqualsAndHashCode;
  * @since 2022-10-13
  */
 @Data
+@Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
 @ApiModel(value="SysUser对象", description="用户表")
 public class SysUser implements Serializable {

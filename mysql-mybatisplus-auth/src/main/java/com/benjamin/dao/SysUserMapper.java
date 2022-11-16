@@ -24,7 +24,7 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
     SysUser querySysUserByUserName(String userName);
 
     /**
-     * 用户对于权限
+     * 用户对应权限
      * @param userName
      * @return
      */

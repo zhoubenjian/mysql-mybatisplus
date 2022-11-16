@@ -29,7 +29,7 @@
         LIMIT 1
     </select>
 
-    <!-- 用户对于权限 -->
+    <!-- 用户对应权限 -->
     <select id="queryPermissionsByUserName" resultType="java.lang.String">
         SELECT sp.permission_name
         FROM sys_user su

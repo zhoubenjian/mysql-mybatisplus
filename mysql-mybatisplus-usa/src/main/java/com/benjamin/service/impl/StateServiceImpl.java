@@ -5,6 +5,8 @@ import com.benjamin.converter.ApiConverter;
 import com.benjamin.entities.State;
 import com.benjamin.dao.StateMapper;
 import com.benjamin.entities.StatePresident;
+import com.benjamin.error.SystemErrors;
+import com.benjamin.exception.WebException;
 import com.benjamin.request.BasePageRequest;
 import com.benjamin.request.StateRequest;
 import com.benjamin.response.ResponseWithCollection;
@@ -85,6 +87,8 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
      */
     @Override
     public ResponseWithCollection<StateVo> queryStateByCondition(StateRequest stateRequest) {
+//        throw new WebException(SystemErrors.USER_FOUND);
+
         String stateName = stateRequest.getStateName();
         String stateCapital = stateRequest.getStateCapital();
         String governor = stateRequest.getGovernor();

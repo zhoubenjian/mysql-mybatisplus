@@ -4,6 +4,7 @@ import com.benjamin.constant.RedisKeyConstant;
 import com.benjamin.converter.ApiConverter;
 import com.benjamin.entities.Party;
 import com.benjamin.dao.PartyMapper;
+import com.benjamin.error.SystemErrors;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.PartyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

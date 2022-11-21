@@ -1,39 +1,37 @@
 package com.benjamin.error;
 
-import com.benjamin.exception.WebException;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.experimental.Accessors;
 
 import javax.servlet.http.HttpServletResponse;
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
+@Accessors(chain = true)
 public enum SystemErrors {
 
-    NEED_LOGIN(2001L, "没有登录", "没有登录"),
+    // 用户已存在
+    USER_FOUND(30001L, HttpServletResponse.SC_FOUND, "用户已存在", "用户已存在"),
 
-    USER_NOT_FOUND(30001L, "用户不存在", "用户不存在"),
+    // 用户不存在
+    USER_NOT_FOUND(30002L, HttpServletResponse.SC_NOT_FOUND, "用户不存在", "用户不存在"),
+
+    // 用户名或密码不正确
+    USER_NAME_PASSWORD_WRONG(30003L, 30003, "用户名或密码不正确", "用户名或密码不正确"),
+
+
+    // 文件不能为空
+    FILE_NOT_NULL(40001L, 40001, "file不能为空", "file不能为空"),
     ;
 
 
 
-    private final long code;
+    private long code;
 
-//    private final long status;
+    private long status;
 
-    private final String message;
+    private String message;
 
-    private final String view;
-
-//    SystemErrors(long code, long status, String message, String view) {
-//        this.code = code;
-//        this.status = status;
-//        this.message = message;
-//        this.view = view;
-//    }
-
-    public WebException getException() {
-        return new WebException(this.message, this.code, this.view);
-    }
+    private String view;
 }

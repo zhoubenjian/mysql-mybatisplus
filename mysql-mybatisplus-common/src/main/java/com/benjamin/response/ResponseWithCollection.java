@@ -9,7 +9,7 @@ import java.util.Collections;
 
 @Data
 @Accessors(chain = true)
-public class ResponseWithCollection<T> {
+public class ResponseWithCollection<T> extends BaseResponse {
     private Long page;
     private Long size;
     private Long count;

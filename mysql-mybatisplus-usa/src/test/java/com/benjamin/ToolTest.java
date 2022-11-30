@@ -1,6 +1,7 @@
 package com.benjamin;
 
 import cn.hutool.crypto.SecureUtil;
+import com.benjamin.util.DateToolUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,5 +29,11 @@ public class ToolTest {
         String China = SecureUtil.sha256("China");
         System.out.println(China);
         System.out.println(China.length());
+    }
+
+    @Test
+    public void time() {
+        String dateStr = DateToolUtil.getDateStr(DateToolUtil.HH_MM_SS);
+        System.out.println(dateStr);
     }
 }

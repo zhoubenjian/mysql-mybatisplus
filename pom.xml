@@ -283,8 +283,8 @@
 
     <repositories>
         <repository>
-            <id>nexus</id>
-            <name>nexus</name>
+            <id>aliyun</id>
+            <name>aliyun</name>
             <url>http://47.103.140.46:8081/repository/maven-public/</url>
             <releases>
                 <enabled>true</enabled>
@@ -295,5 +295,19 @@
                 <updatePolicy>always</updatePolicy>
             </snapshots>
         </repository>
+
+<!--        <repository>-->
+<!--            <id>nexus</id>-->
+<!--            <name>nexus</name>-->
+<!--            <url>http://47.103.140.46:8081/repository/maven-public/</url>-->
+<!--            <releases>-->
+<!--                <enabled>true</enabled>-->
+<!--            </releases>-->
+<!--            <snapshots>-->
+<!--                &lt;!&ndash;永远更新最新快照，不配置的话enabled默认是false&ndash;&gt;-->
+<!--                <enabled>true</enabled>-->
+<!--                <updatePolicy>always</updatePolicy>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
     </repositories>
 </project>

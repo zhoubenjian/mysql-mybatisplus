@@ -23,6 +23,10 @@ public enum SystemErrors {
 
     // 文件不能为空
     FILE_NOT_NULL(40001L, 40001, "file不能为空", "file不能为空"),
+
+
+    // 文件不能为空
+    PRESIDENT_NOT_ALIVE(50001L, 50001, "总统已故", "总统已故"),
     ;
 
 

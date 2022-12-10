@@ -285,7 +285,7 @@
         <repository>
             <id>aliyun</id>
             <name>aliyun</name>
-            <url>http://47.103.140.46:8081/repository/maven-public/</url>
+            <url>https://maven.aliyun.com/repository/public</url>
             <releases>
                 <enabled>true</enabled>
             </releases>

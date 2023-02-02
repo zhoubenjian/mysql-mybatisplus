@@ -56,25 +56,30 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
      */
     @Override
     public ResponseWithEntities<List<PresidentVo>> queryAllPresident() {
+
         String key = RedisKeyConstant.getAllPresidentInfo(allPresidentKey);
         Boolean hasKey = redisTemplate.hasKey(key);
         ValueOperations<String, Object> opsForValue = redisTemplate.opsForValue();
 
-        List<President> presidentList = new ArrayList<>();
+        List<PresidentVo> presidentVoList = new ArrayList<>();
         if (hasKey != null && hasKey) {
+
             // redis读取
-            presidentList = (List<President>) opsForValue.get(key);
+            presidentVoList = (List<PresidentVo>) opsForValue.get(key);
+
         } else {
+
             // 数据库查询
-            presidentList = presidentMapper.selectList(null);
+            List<President> presidentList = presidentMapper.selectList(null);
+            // President => PresidentVo
+            presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
+
             // 写入redis
             opsForValue.set(key, presidentList);
             // 一天后过期
             redisTemplate.expireAt(key, DateUtils.addDays(new Date(), 1));
         }
 
-        // President => PresidentVo
-        List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
         LocalDate now = LocalDate.now();
         // 计算年龄
         presidentVoList.stream().forEach(p -> p.setAge(p.getBirthday().until(now).getYears()));

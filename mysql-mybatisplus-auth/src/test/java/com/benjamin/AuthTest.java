@@ -33,8 +33,8 @@ public class AuthTest {
      */
     @Test
     public void sha() {
-        String password1 = "123456";
-        String salt = "notR1lqlQ1uF1FbyyF95N/+Gjg==";
+        String password1 = "xia0yu1994";
+        String salt = "ekMmHXRcF6T5XLtwGr8";
                 // new SecureRandomNumberGenerator().nextBytes(19).toString();
         int times = 7;
         SimpleHash encodePassword = new SimpleHash("SHA-256", password1, salt, times);

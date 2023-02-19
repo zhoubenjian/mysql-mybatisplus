@@ -130,7 +130,8 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
     @Override
     public ResponseWithCollection<PresidentStateVo> queryPresidentWithState(BasePageRequest basePageRequest) {
         Page page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
-        List<PresidentState> presidentStateList = presidentMapper.queryPresidentWithState();
+        List<PresidentState> presidentStateList = Optional.ofNullable(presidentMapper.queryPresidentWithState())
+                .orElse(Collections.EMPTY_LIST);
 
         // PresidentState => PresidentStateVo
         List<PresidentStateVo> presidentStateVoList = apiConverter.presidentState2PresidentStateVoList(presidentStateList);

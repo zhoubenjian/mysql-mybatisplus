@@ -1,6 +1,5 @@
 package com.benjamin.config;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.benjamin.dao.SysUserMapper;
 import com.benjamin.entities.SysUser;
 import org.apache.shiro.SecurityUtils;

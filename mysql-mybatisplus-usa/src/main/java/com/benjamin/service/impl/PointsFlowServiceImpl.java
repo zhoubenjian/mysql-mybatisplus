@@ -2,7 +2,6 @@ package com.benjamin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.benjamin.constant.SignEnum;
 import com.benjamin.dao.PointsFlowMapper;
 import com.benjamin.dao.PresidentMapper;
 import com.benjamin.dao.SignRecordMapper;

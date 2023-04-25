@@ -36,9 +36,10 @@ public class PresidentController {
 
     /**
      * 所有总统
+     *
      * @return
      */
-    @GetMapping("all")
+    @GetMapping("/all")
     @ApiOperation("所有总统")
     public ResponseWithEntities<List<PresidentVo>> queryAllPresident() {
         return presidentService.queryAllPresident();
@@ -46,6 +47,7 @@ public class PresidentController {
 
     /**
      * 在世总统
+     *
      * @return
      */
     @GetMapping("/alive")
@@ -55,7 +57,19 @@ public class PresidentController {
     }
 
     /**
+     * 川皇（美利坚大统领）（懂王）
+     *
+     * @return
+     */
+    @GetMapping("/dt")
+    @ApiOperation("川皇（美利坚大统领）（懂王）")
+    public ResponseWithEntities<PresidentVo> queryOnePresident() {
+        return presidentService.queryOnePresident();
+    }
+
+    /**
      * 出生日期查询
+     *
      * @param startTime
      * @param endTime
      * @return
@@ -69,6 +83,7 @@ public class PresidentController {
 
     /**
      * 总统对应的州(一对一)
+     *
      * @param basePageRequest
      * @return
      */

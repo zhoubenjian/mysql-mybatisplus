@@ -7,6 +7,9 @@ public abstract class RedisKeyConstant {
     // All State RedisKey
     private static final String ALL_STATE_INFO_KEY = "allStateInfo:{0}";
 
+    // Donald Trump RedisKey
+    private static final String DONALD_TRUMP_INFO_KEY = "donaldTrumpInfo:{0}";
+
     // Exist Party RedisKey
     private static final String EXIST_PARTY_INFO_KEY = "existPartyInfo:{0}";
 
@@ -17,6 +20,7 @@ public abstract class RedisKeyConstant {
 
     /**
      * get all state info
+     *
      * @param key
      * @return
      */
@@ -25,7 +29,18 @@ public abstract class RedisKeyConstant {
     }
 
     /**
+     * get donald trump info
+     *
+     * @param key
+     * @return
+     */
+    public static String getDonaldTrumpInfo(String key) {
+        return MessageFormat.format(DONALD_TRUMP_INFO_KEY, key);
+    }
+
+    /**
      * get exist party info
+     *
      * @param key
      * @return
      */
@@ -35,6 +50,7 @@ public abstract class RedisKeyConstant {
 
     /**
      * get all president info
+     *
      * @param key
      * @return
      */

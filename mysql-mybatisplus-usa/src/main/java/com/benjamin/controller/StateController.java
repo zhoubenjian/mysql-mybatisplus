@@ -39,6 +39,7 @@ public class StateController {
 
     /**
      * 查询所有州
+     *
      * @return
      */
     @ApiOperation("所有州")
@@ -49,6 +50,7 @@ public class StateController {
 
     /**
      * 条件查询州
+     *
      * @param stateRequest
      * @return
      */
@@ -60,6 +62,7 @@ public class StateController {
 
     /**
      * 分页查询州
+     *
      * @param basePageRequest
      * @return
      */
@@ -71,6 +74,7 @@ public class StateController {
 
     /**
      * 州对应的总统(一对多)
+     *
      * @param basePageRequest
      * @return
      */

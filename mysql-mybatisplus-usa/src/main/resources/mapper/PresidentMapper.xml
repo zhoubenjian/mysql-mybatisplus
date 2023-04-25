@@ -64,6 +64,15 @@
 
 
 
+    <!-- Donald Trump -->
+    <select id="queryOnePresident" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM president p
+        WHERE p.president_name = #{name, jdbcType=VARCHAR}
+        LIMIT 1
+    </select>
+
     <!-- 在世总统 -->
     <select id="queryAlivePresident" resultMap="BaseResultMap">
         SELECT

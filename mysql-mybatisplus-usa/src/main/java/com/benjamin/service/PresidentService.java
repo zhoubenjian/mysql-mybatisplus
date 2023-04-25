@@ -22,24 +22,35 @@ public interface PresidentService extends IService<President> {
 
     /**
      * 所有总统
+     *
      * @return
      */
     ResponseWithEntities<List<PresidentVo>> queryAllPresident();
 
     /**
      * 在世总统
+     *
      * @return
      */
     ResponseWithEntities<List<PresidentVo>> queryAlivePresident();
 
     /**
+     * Donald Trump
+     *
+     * @return
+     */
+    ResponseWithEntities<PresidentVo> queryOnePresident();
+
+    /**
      * 出生日期查询
+     *
      * @return
      */
     ResponseWithEntities<List<PresidentVo>> queryPresidentByBirthDate(String startTime, String endTime);
 
     /**
      * 总统对应的州(一对一)
+     *
      * @param basePageRequest
      * @return
      */

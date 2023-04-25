@@ -1,5 +1,6 @@
 package com.benjamin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.benjamin.constant.RedisKeyConstant;
 import com.benjamin.converter.ApiConverter;
 import com.benjamin.entities.State;
@@ -67,8 +68,10 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
             // redis读取
             stateList = (List<State>) opsForValue.get(key);
         } else {
+            QueryWrapper<State> queryWrapper = new QueryWrapper<>();
+            queryWrapper.orderByAsc("`rank`");  // 关键字 `rank` 转义
             // 数据库查询
-            stateList = stateMapper.selectList(null);
+            stateList = stateMapper.selectList(queryWrapper);
             // 写入redis
             opsForValue.set(key, stateList);
             // 过期时间

@@ -1,5 +1,6 @@
 package com.benjamin.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.benjamin.constant.RedisKeyConstant;
 import com.benjamin.converter.ApiConverter;
@@ -48,10 +49,13 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
 
     private static final String allPresidentKey = "allPresident";
 
+    private static final String donaldTrumpKey = "donaldTrump";
+
 
 
     /**
      * 所有总统
+     *
      * @return
      */
     @Override
@@ -70,7 +74,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
         } else {
 
             // 数据库查询
-            List<President> presidentList = presidentMapper.selectList(null);
+            List<President> presidentList = Optional.ofNullable(presidentMapper.selectList(null)).orElse(new ArrayList<>());
             // President => PresidentVo
             presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
 
@@ -87,7 +91,57 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
     }
 
     /**
+     * Donald Trump
+     *
+     * @return
+     */
+    @Override
+    public ResponseWithEntities<PresidentVo> queryOnePresident() {
+
+        String key = RedisKeyConstant.getDonaldTrumpInfo(donaldTrumpKey);
+        Boolean hasKey = redisTemplate.hasKey(key);
+        ValueOperations<String, Object> opsForValue = redisTemplate.opsForValue();
+
+        PresidentVo presidentVo = new PresidentVo();
+        List<PresidentVo> tempList = new ArrayList<>();
+        if (hasKey != null && hasKey) {
+
+            // redis读取
+            tempList = (List<PresidentVo>) opsForValue.get(key);
+            /*** 解决java.util.LinkedHashMap cannot be cast to 的问题，解决方案：就是将list再次转为json串，然后由json串再转为list ***/
+            String tempString = JSON.toJSONString(tempList);
+            tempList = JSON.parseArray(tempString, PresidentVo.class);
+            /*** 解决java.util.LinkedHashMap cannot be cast to 的问题，解决方案：就是将list再次转为json串，然后由json串再转为list ***/
+            presidentVo = tempList.get(0);
+
+        } else {
+
+            // 数据库查询
+            President result = presidentMapper.queryOnePresident("Donald Trump");
+            if (result != null) {
+
+                // President => PresidentVo
+                presidentVo = apiConverter.president2PresidentVo(result);
+                // 计算年龄
+                LocalDate now = LocalDate.now();
+                presidentVo.setAge(presidentVo.getBirthday().until(now).getYears());
+
+                // 添加
+                tempList.add(presidentVo);
+
+                // 写入redis
+                opsForValue.set(key, tempList);
+                // 一小时后过期
+                redisTemplate.expireAt(key, DateUtils.addHours(new Date(), 1));
+            }
+        }
+
+        return new ResponseWithEntities<PresidentVo>().setData(presidentVo);
+    }
+
+    /**
      * 在世总统
+     *
      * @return
      */
     @Override
@@ -105,6 +159,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
 
     /**
      * 出生日期查询
+     *
      * @param startTime
      * @param endTime
      * @return

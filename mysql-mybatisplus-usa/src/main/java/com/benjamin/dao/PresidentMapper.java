@@ -18,13 +18,23 @@ import java.util.List;
 public interface PresidentMapper extends BaseMapper<President> {
 
     /**
+     * Donald Trump
+     *
+     * @param name
+     * @return
+     */
+    President queryOnePresident(@Param("name") String name);
+
+    /**
      * 在世总统
+     *
      * @return
      */
     List<President> queryAlivePresident();
 
     /**
      * 出生日期查询
+     *
      * @param startTime
      * @param endTime
      * @return
@@ -34,6 +44,7 @@ public interface PresidentMapper extends BaseMapper<President> {
 
     /**
      * 总统对应的州(一对一)
+     *
      * @return
      */
     List<PresidentState> queryPresidentWithState();

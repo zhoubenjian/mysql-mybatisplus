@@ -1,6 +1,5 @@
 package com.benjamin;
 
-import cn.hutool.crypto.SecureUtil;
 import com.benjamin.util.DateToolUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -14,25 +13,7 @@ import java.util.Date;
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class ToolTest {
-
-    @Test
-    public void sha1() {
-        String china = SecureUtil.sha1("china");
-        System.out.println(china);
-        String China = SecureUtil.sha1("China");
-        System.out.println(China);
-        System.out.println(China.length());
-    }
-
-    @Test
-    public void sha256() {
-        String china = SecureUtil.sha256("china");
-        System.out.println(china);
-        String China = SecureUtil.sha256("China");
-        System.out.println(China);
-        System.out.println(China.length());
-    }
+public class TimeTest {
 
     @Test
     public void time() throws ParseException {

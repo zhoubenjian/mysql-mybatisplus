@@ -44,7 +44,7 @@
         </dependency>
         <!-- swagger2 -->
 
-        <!--BindResult -->
+        <!-- BindResult -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>

@@ -52,25 +52,34 @@ public class PartyServiceImpl extends ServiceImpl<PartyMapper, Party> implements
 
     /**
      * 现存政党
+     *
      * @return
      */
     @Override
     public ResponseWithEntities<List<PartyVo>> queryExistParty() {
+
         String key = RedisKeyConstant.getExistPartyInfo(existPartyKey);
         Boolean hasKey = redisTemplate.hasKey(key);
         ValueOperations<String, Object> opsForValue = redisTemplate.opsForValue();
 
         List<Party> partyList = new ArrayList<>();
         if (hasKey != null && hasKey) {
+
             // redis读取
             partyList = (List<Party>) opsForValue.get(key);
+
         } else {
+
             // 数据库查询
             partyList = partyMapper.queryExistParty();
-            // 写入redis
-            opsForValue.set(key, partyList);
-            // 过期时间
-            redisTemplate.expireAt(key, DateUtils.addDays(new Date(),1));
+
+            if (partyList.size() > 0) {
+
+                // 写入redis
+                opsForValue.set(key, partyList);
+                // 过期时间
+                redisTemplate.expireAt(key, DateUtils.addDays(new Date(),1));
+            }
         }
 
         // Party => PartyVo
@@ -80,6 +89,7 @@ public class PartyServiceImpl extends ServiceImpl<PartyMapper, Party> implements
 
     /**
      * 表单提交
+     *
      * @param file
      * @param files
      * @return

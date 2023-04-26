@@ -20,12 +20,14 @@ public interface PartyService extends IService<Party> {
 
     /**
      * 现存政党
+     *
      * @return
      */
     ResponseWithEntities<List<PartyVo>> queryExistParty();
 
     /**
      * 表单提交
+     *
      * @param file
      * @param files
      * @return

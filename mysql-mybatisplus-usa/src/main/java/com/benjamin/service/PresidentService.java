@@ -1,5 +1,6 @@
 package com.benjamin.service;
 
+import cn.hutool.http.server.HttpServerResponse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.benjamin.entities.President;
 import com.benjamin.request.BasePageRequest;
@@ -55,4 +56,12 @@ public interface PresidentService extends IService<President> {
      * @return
      */
     ResponseWithCollection<PresidentStateVo> queryPresidentWithState(BasePageRequest basePageRequest);
+
+    /**
+     * 导出总统
+     *
+     * @param key
+     * @return
+     */
+    List<PresidentVo> exportPresidentBySteam(String key);
 }

@@ -1,5 +1,7 @@
 package com.benjamin.controller;
 
+import cn.hutool.http.server.HttpServerResponse;
+import com.benjamin.excel.ExcelUtil;
 import com.benjamin.request.BasePageRequest;
 import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
@@ -9,11 +11,9 @@ import com.benjamin.vo.PresidentVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -91,6 +91,20 @@ public class PresidentController {
     @ApiOperation("总统对应的州")
     public ResponseWithCollection<PresidentStateVo> queryPresidentWithState(BasePageRequest basePageRequest) {
         return presidentService.queryPresidentWithState(basePageRequest);
+    }
+
+    /**
+     * 导出总统（流式）
+     *
+     * @param response
+     * @param key
+     */
+    @PostMapping("/export")
+    @ApiOperation("导出总统（流式）")
+    public void exportPresidentBySteam(HttpServletResponse response, String key) {
+
+        List<PresidentVo> list = presidentService.exportPresidentBySteam(key);
+        ExcelUtil.export(response, "总统", list, PresidentVo.class);
     }
 }
 

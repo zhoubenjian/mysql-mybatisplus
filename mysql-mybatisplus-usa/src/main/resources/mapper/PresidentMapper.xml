@@ -113,4 +113,11 @@
         FROM president p
         ORDER BY p.id
     </select>
+
+    <!-- 流式读取 -->
+    <select id="exportPresidentBySteam" resultMap="BaseResultMap" fetchSize="-2147483648" resultOrdered="true">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM president p
+    </select>
 </mapper>

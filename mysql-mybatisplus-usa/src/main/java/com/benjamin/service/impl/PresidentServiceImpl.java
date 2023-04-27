@@ -1,5 +1,6 @@
 package com.benjamin.service.impl;
 
+import cn.hutool.http.server.HttpServerResponse;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.benjamin.constant.RedisKeyConstant;
@@ -16,6 +17,8 @@ import com.benjamin.vo.PresidentVo;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.ibatis.session.ResultContext;
+import org.apache.ibatis.session.ResultHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -192,5 +195,26 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
         // PresidentState => PresidentStateVo
         List<PresidentStateVo> presidentStateVoList = apiConverter.presidentState2PresidentStateVoList(presidentStateList);
         return ResponseWithCollection.buildResponse(basePageRequest, presidentStateVoList, page.getTotal());
+    }
+
+    /**
+     * 导出总统
+     *
+     * @param key
+     * @return
+     */
+    @Override
+    public List<PresidentVo> exportPresidentBySteam(String key) {
+
+        List<President> presidentList = new ArrayList<>();
+        presidentMapper.exportPresidentBySteam(key, new ResultHandler<President>() {
+            @Override
+            public void handleResult(ResultContext<? extends President> resultContext) {
+
+                presidentList.add(resultContext.getResultObject());
+            }
+        });
+
+        return apiConverter.presidentList2PresidentVoList(presidentList);
     }
 }

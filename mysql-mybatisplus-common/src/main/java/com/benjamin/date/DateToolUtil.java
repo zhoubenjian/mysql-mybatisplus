@@ -1,4 +1,4 @@
-package com.benjamin.util;
+package com.benjamin.date;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

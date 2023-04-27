@@ -15,9 +15,23 @@
         <result column="update_time" property="updateTime" />
     </resultMap>
 
+    <!-- 政党对应总统（一对多）查询映射结果 -->
+    <resultMap id="PartyPresidentMap" type="com.benjamin.model.pp.PartyPresident">
+        <result column="party_name" property="partyName" />
+        <collection property="presidents" ofType="com.benjamin.model.pp.President" javaType="java.util.ArrayList">
+            <id column="id" property="id" />
+            <result column="president_name" property="presidentName" />
+        </collection>
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, party_name, founder, start_date, end_date, parent_id, status, create_time, update_time
+    </sql>
+
+    <!-- 政党对应总统（一对多）查询结果列 -->
+    <sql id="Party_President_Column_List">
+        p1.party_name, p2.id, p2.president_name
     </sql>
 
 
@@ -29,5 +43,15 @@
         FROM party p
         WHERE p.end_date IS NULL
         AND p.status = 1
+    </select>
+
+    <!-- 政党对应总统（一对多） -->
+    <select id="queryPartyWithPresident" resultMap="PartyPresidentMap">
+        SELECT
+        <include refid="Party_President_Column_List"/>
+        FROM party p1
+        LEFT JOIN president p2
+        ON p1.id = p2.party_id
+        ORDER BY p2.id
     </select>
 </mapper>

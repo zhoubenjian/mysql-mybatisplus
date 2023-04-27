@@ -92,6 +92,7 @@
         ON s.id = p.state_id
         ORDER BY s.state_name
     </select>
+    <!-- 州对应的总统(一对多)(总条数) -->
     <select id="queryStateWithPresident_COUNT" resultType="java.lang.Long">
         SELECT
         COUNT(1)

@@ -1,6 +1,6 @@
 package com.benjamin.controller;
 
-
+import com.benjamin.model.pp.PartyPresident;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.PartyService;
 import com.benjamin.vo.PartyVo;
@@ -40,6 +40,17 @@ public class PartyController {
     @GetMapping("/exist")
     public ResponseWithEntities<List<PartyVo>> queryExistParty() {
         return partyService.queryExistParty();
+    }
+
+    /**
+     * 政党对应总统（一对多）
+     *
+     * @return
+     */
+    @ApiOperation("政党对应总统（一对多）")
+    @GetMapping("/withpresidents")
+    public ResponseWithEntities<List<PartyPresident>> queryPartyWithPresident() {
+        return partyService.queryPartyWithPresident();
     }
 
     /**

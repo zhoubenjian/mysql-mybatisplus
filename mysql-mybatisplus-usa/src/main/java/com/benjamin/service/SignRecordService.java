@@ -18,6 +18,7 @@ public interface SignRecordService extends IService<SignRecord> {
 
     /**
      * 签到/签退
+     *
      * @param presidentId
      * @return
      */

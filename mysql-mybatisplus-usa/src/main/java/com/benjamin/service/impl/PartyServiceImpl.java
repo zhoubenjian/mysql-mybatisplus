@@ -4,7 +4,7 @@ import com.benjamin.constant.RedisKeyConstant;
 import com.benjamin.converter.ApiConverter;
 import com.benjamin.entities.Party;
 import com.benjamin.dao.PartyMapper;
-import com.benjamin.error.SystemErrors;
+import com.benjamin.model.pp.PartyPresident;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.PartyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -85,6 +83,20 @@ public class PartyServiceImpl extends ServiceImpl<PartyMapper, Party> implements
         // Party => PartyVo
         List<PartyVo> partyVoList = apiConverter.partyListToPartyVoList(partyList);
         return new ResponseWithEntities<List<PartyVo>>().setData(partyVoList);
+    }
+
+    /**
+     * 政党对应总统（一对多）
+     *
+     * @return
+     */
+    @Override
+    public ResponseWithEntities<List<PartyPresident>> queryPartyWithPresident() {
+
+        List<PartyPresident> partyPresidentList = Optional.ofNullable(partyMapper.queryPartyWithPresident())
+                .orElse(Collections.EMPTY_LIST);
+
+        return new ResponseWithEntities<List<PartyPresident>>().setData(partyPresidentList);
     }
 
     /**

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.benjamin.entities.President;
 import com.benjamin.entities.PresidentState;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.ResultHandler;
 
 import java.util.List;
 
@@ -48,4 +49,12 @@ public interface PresidentMapper extends BaseMapper<President> {
      * @return
      */
     List<PresidentState> queryPresidentWithState();
+
+    /**
+     * 流式读取
+     *
+     * @param key
+     * @param resultHandler
+     */
+    void exportPresidentBySteam(String key, ResultHandler<President> resultHandler);
 }

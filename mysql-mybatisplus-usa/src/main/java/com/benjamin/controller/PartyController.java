@@ -1,6 +1,6 @@
 package com.benjamin.controller;
 
-
+import com.benjamin.model.pp.PartyPresident;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.PartyService;
 import com.benjamin.vo.PartyVo;
@@ -33,6 +33,7 @@ public class PartyController {
 
     /**
      * 现存政党
+     *
      * @return
      */
     @ApiOperation("现存政党")
@@ -42,7 +43,19 @@ public class PartyController {
     }
 
     /**
+     * 政党对应总统（一对多）
+     *
+     * @return
+     */
+    @ApiOperation("政党对应总统（一对多）")
+    @GetMapping("/withpresidents")
+    public ResponseWithEntities<List<PartyPresident>> queryPartyWithPresident() {
+        return partyService.queryPartyWithPresident();
+    }
+
+    /**
      * 表单提交（多文件提交只能使用Postman测试）
+     *
      * @param file
      * @param files
      * @return

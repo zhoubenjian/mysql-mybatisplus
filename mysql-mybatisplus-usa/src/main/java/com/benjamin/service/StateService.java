@@ -25,12 +25,14 @@ public interface StateService extends IService<State> {
 
     /**
      * 查询所有州
+     *
      * @return
      */
     ResponseWithEntities<List<StateVo>> queryAllState();
 
     /**
      * 条件查询州
+     *
      * @param stateRequest
      * @return
      */
@@ -38,6 +40,7 @@ public interface StateService extends IService<State> {
 
     /**
      * 分页查询州
+     *
      * @param basePageRequest
      * @return
      */
@@ -45,6 +48,7 @@ public interface StateService extends IService<State> {
 
     /**
      * 州对应的总统(一对多)
+     *
      * @param basePageRequest
      * @return
      */

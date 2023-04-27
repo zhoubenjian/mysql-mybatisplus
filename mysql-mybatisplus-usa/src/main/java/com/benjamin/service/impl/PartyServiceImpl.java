@@ -4,7 +4,7 @@ import com.benjamin.constant.RedisKeyConstant;
 import com.benjamin.converter.ApiConverter;
 import com.benjamin.entities.Party;
 import com.benjamin.dao.PartyMapper;
-import com.benjamin.error.SystemErrors;
+import com.benjamin.model.pp.PartyPresident;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.PartyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -52,25 +50,34 @@ public class PartyServiceImpl extends ServiceImpl<PartyMapper, Party> implements
 
     /**
      * 现存政党
+     *
      * @return
      */
     @Override
     public ResponseWithEntities<List<PartyVo>> queryExistParty() {
+
         String key = RedisKeyConstant.getExistPartyInfo(existPartyKey);
         Boolean hasKey = redisTemplate.hasKey(key);
         ValueOperations<String, Object> opsForValue = redisTemplate.opsForValue();
 
         List<Party> partyList = new ArrayList<>();
         if (hasKey != null && hasKey) {
+
             // redis读取
             partyList = (List<Party>) opsForValue.get(key);
+
         } else {
+
             // 数据库查询
             partyList = partyMapper.queryExistParty();
-            // 写入redis
-            opsForValue.set(key, partyList);
-            // 过期时间
-            redisTemplate.expireAt(key, DateUtils.addDays(new Date(),1));
+
+            if (partyList.size() > 0) {
+
+                // 写入redis
+                opsForValue.set(key, partyList);
+                // 过期时间
+                redisTemplate.expireAt(key, DateUtils.addDays(new Date(),1));
+            }
         }
 
         // Party => PartyVo
@@ -79,7 +86,22 @@ public class PartyServiceImpl extends ServiceImpl<PartyMapper, Party> implements
     }
 
     /**
+     * 政党对应总统（一对多）
+     *
+     * @return
+     */
+    @Override
+    public ResponseWithEntities<List<PartyPresident>> queryPartyWithPresident() {
+
+        List<PartyPresident> partyPresidentList = Optional.ofNullable(partyMapper.queryPartyWithPresident())
+                .orElse(Collections.EMPTY_LIST);
+
+        return new ResponseWithEntities<List<PartyPresident>>().setData(partyPresidentList);
+    }
+
+    /**
      * 表单提交
+     *
      * @param file
      * @param files
      * @return

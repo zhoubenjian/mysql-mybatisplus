@@ -54,7 +54,8 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
 
 
     /**
-     * 查询所有州
+     * 查询所有州（2022年GDP排名）
+     *
      * @return
      */
     @Override
@@ -65,17 +66,24 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
 
         List<State> stateList = new ArrayList<>();
         if (hasKey != null && hasKey) {
+
             // redis读取
             stateList = (List<State>) opsForValue.get(key);
+
         } else {
+
             QueryWrapper<State> queryWrapper = new QueryWrapper<>();
             queryWrapper.orderByAsc("`rank`");  // 关键字 `rank` 转义
             // 数据库查询
             stateList = stateMapper.selectList(queryWrapper);
-            // 写入redis
-            opsForValue.set(key, stateList);
-            // 过期时间
-            redisTemplate.expireAt(key, DateUtils.addDays(new Date(), 1));
+
+            if (stateList.size() > 0) {
+
+                // 写入redis
+                opsForValue.set(key, stateList);
+                // 过期时间(一天)
+                redisTemplate.expireAt(key, DateUtils.addDays(new Date(), 1));
+            }
         }
 
         // State => StateVo
@@ -85,12 +93,12 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
 
     /**
      * 条件查询州
+     *
      * @param stateRequest
      * @return
      */
     @Override
     public ResponseWithCollection<StateVo> queryStateByCondition(StateRequest stateRequest) {
-//        throw new WebException(SystemErrors.USER_FOUND);
 
         String stateName = stateRequest.getStateName();
         String stateCapital = stateRequest.getStateCapital();
@@ -105,6 +113,7 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
 
     /**
      * 分页查询州
+     *
      * @param basePageRequest
      * @return
      */
@@ -121,13 +130,15 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
 
     /**
      * 州对应的总统(一对多)
+     *
      * @param basePageRequest
      * @return
      */
     @Override
     public ResponseWithCollection<StatePresidentVo> queryStateWithPresident(BasePageRequest basePageRequest) {
         Page page = PageHelper.startPage((int) basePageRequest.getPage(), (int) basePageRequest.getPageSize());
-        List<StatePresident> statePresidentList = stateMapper.queryStateWithPresident();
+        List<StatePresident> statePresidentList = Optional.ofNullable(stateMapper.queryStateWithPresident())
+                .orElse(Collections.EMPTY_LIST);
 
         // StatePresident => StatePresidentVo
         List<StatePresidentVo> statePresidentVoList = apiConverter.statePresidentList2StatePresidentVoList(statePresidentList);

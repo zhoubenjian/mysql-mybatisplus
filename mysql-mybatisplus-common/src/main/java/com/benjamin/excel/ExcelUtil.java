@@ -49,7 +49,6 @@ public class ExcelUtil {
     private static final NumberFormat NUMBER_FORMAT = NumberFormat.getNumberInstance();
 
 
-
     public static <T> List<T> readFile(File file, Class<T> clazz) throws Exception {
         JSONArray array = readFile(file);
         return getBeanList(array, clazz);

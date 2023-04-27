@@ -4,22 +4,34 @@ import java.util.LinkedHashMap;
 
 public class ExcelClassField {
 
-    /** 字段名称 */
+    /**
+     * 字段名称
+     */
     private String fieldName;
 
-    /** 表头名称 */
+    /**
+     * 表头名称
+     */
     private String name;
 
-    /** 映射关系 */
+    /**
+     * 映射关系
+     */
     private LinkedHashMap<String, String> kvMap;
 
-    /** 示例值 */
+    /**
+     * 示例值
+     */
     private Object example;
 
-    /** 排序 */
+    /**
+     * 排序
+     */
     private int sort;
 
-    /** 是否为注解字段：0-否，1-是 */
+    /**
+     * 是否为注解字段：0-否，1-是
+     */
     private int hasAnnotation;
 
     public String getFieldName() {

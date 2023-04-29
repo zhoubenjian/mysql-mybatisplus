@@ -55,7 +55,6 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <jedis.version>4.1.1</jedis.version>
         <pagehelper-spring-boot-starter.version>1.4.1</pagehelper-spring-boot-starter.version>
-        <poi-ooxml.version>5.2.3</poi-ooxml.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <hutool-all.version>5.8.5</hutool-all.version>
         <fastjson.version>2.0.12</fastjson.version>

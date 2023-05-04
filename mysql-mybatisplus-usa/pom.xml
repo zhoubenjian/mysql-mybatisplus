@@ -71,6 +71,12 @@
             <artifactId>mapstruct-processor</artifactId>
         </dependency>
         <!-- MapStruct：model -> dto （必须放在lombok之后） -->
+
+        <dependency>
+            <groupId>com.bj.web</groupId>
+            <artifactId>bj-office-starter</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 

@@ -41,3 +41,12 @@ mybatis-plus:
 
   # 扫描实体类所在的包，这样在mapper.xml文件中就不用配置实体类全路径，直接写类名就行（xml没有使用）
   type-aliases-package: com.benjamin.entities
+
+
+
+# 注册导出Entities
+bj:
+  office:
+    excel:
+      headerScan:
+      - com.benjamin.vo

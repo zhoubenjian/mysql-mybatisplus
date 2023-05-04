@@ -55,11 +55,9 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <jedis.version>4.1.1</jedis.version>
         <pagehelper-spring-boot-starter.version>1.4.1</pagehelper-spring-boot-starter.version>
-        <poi-ooxml.version>5.2.3</poi-ooxml.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <hutool-all.version>5.8.5</hutool-all.version>
         <fastjson.version>2.0.12</fastjson.version>
-        <poi-ooxml.version>4.1.2</poi-ooxml.version>
         <aliyun-sdk-oss.version>3.15.2</aliyun-sdk-oss.version>
         <aliyun-oss-spring-boot-starter.version>1.0.0</aliyun-oss-spring-boot-starter.version>
     </properties>
@@ -235,14 +233,6 @@
             </dependency>
             <!-- page helper(分页) -->
 
-            <!-- Excel -->
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-ooxml</artifactId>
-                <version>${poi-ooxml.version}</version>
-            </dependency>
-            <!-- Excel -->
-
             <!-- 工具 -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -262,13 +252,6 @@
                 <version>${fastjson.version}</version>
             </dependency>
             <!-- 工具 -->
-
-            <!-- Excel -->
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-ooxml</artifactId>
-                <version>${poi-ooxml.version}</version>
-            </dependency>
 
             <!-- aliyun -->
             <!-- https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss -->
@@ -304,19 +287,5 @@
                 <updatePolicy>always</updatePolicy>
             </snapshots>
         </repository>
-
-<!--        <repository>-->
-<!--            <id>nexus</id>-->
-<!--            <name>nexus</name>-->
-<!--            <url>http://47.103.140.46:8081/repository/maven-public/</url>-->
-<!--            <releases>-->
-<!--                <enabled>true</enabled>-->
-<!--            </releases>-->
-<!--            <snapshots>-->
-<!--                &lt;!&ndash;永远更新最新快照，不配置的话enabled默认是false&ndash;&gt;-->
-<!--                <enabled>true</enabled>-->
-<!--                <updatePolicy>always</updatePolicy>-->
-<!--            </snapshots>-->
-<!--        </repository>-->
     </repositories>
 </project>

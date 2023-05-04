@@ -8,6 +8,9 @@ import com.benjamin.converter.ApiConverter;
 import com.benjamin.dao.PresidentMapper;
 import com.benjamin.entities.President;
 import com.benjamin.entities.PresidentState;
+import com.benjamin.office.excel.ExcelHeaderRegistry;
+import com.benjamin.office.excel.ExcelOutputFactory;
+import com.benjamin.office.excel.ExcelOutputService;
 import com.benjamin.request.BasePageRequest;
 import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
@@ -25,6 +28,7 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -41,6 +45,12 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
 
     @Autowired
     private PresidentMapper presidentMapper;
+
+    @Autowired
+    private ExcelOutputFactory excelOutputFactory;
+
+    @Autowired
+    private ExcelHeaderRegistry excelHeaderRegistry;
 
     @Autowired
     private ApiConverter apiConverter;
@@ -198,23 +208,36 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
     }
 
     /**
-     * 导出总统
+     * 导出总统（流式）
      *
      * @param key
      * @return
      */
     @Override
-    public List<PresidentVo> exportPresidentBySteam(String key) {
+    public void exportPresidentBySteam(HttpServletResponse response, String key) {
 
-        List<President> presidentList = new ArrayList<>();
-        presidentMapper.exportPresidentBySteam(key, new ResultHandler<President>() {
-            @Override
-            public void handleResult(ResultContext<? extends President> resultContext) {
+        String sheetName = "president.xlsx";
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.addHeader("Content-Disposition", "attachment;filename=" + sheetName);
 
-                presidentList.add(resultContext.getResultObject());
-            }
-        });
+        try {
 
-        return apiConverter.presidentList2PresidentVoList(presidentList);
+            ExcelOutputService service = excelOutputFactory.createOutput(response.getOutputStream());
+            service.createSxSheetOutput(PresidentVo.class, p -> {
+                presidentMapper.exportPresidentBySteam(key, (resultContext) -> {
+
+                    President president = resultContext.getResultObject();
+                    PresidentVo presidentVo = apiConverter.president2PresidentVo(president);
+                    // 导出
+                    p.provide(presidentVo);
+                });
+            });
+
+            // 执行write时，上方回调真正开始执行
+            service.write();
+
+        } catch (Exception e) {
+            log.error("导出错误", e);
+        }
     }
 }

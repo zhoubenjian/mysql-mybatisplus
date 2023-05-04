@@ -9,6 +9,7 @@ import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.vo.PresidentStateVo;
 import com.benjamin.vo.PresidentVo;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -63,5 +64,5 @@ public interface PresidentService extends IService<President> {
      * @param key
      * @return
      */
-    List<PresidentVo> exportPresidentBySteam(String key);
+    void exportPresidentBySteam(HttpServletResponse response, String key);
 }

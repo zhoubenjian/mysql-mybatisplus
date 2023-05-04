@@ -115,7 +115,7 @@
     </select>
 
     <!-- 流式读取 -->
-    <select id="exportPresidentBySteam" resultMap="BaseResultMap" fetchSize="-2147483648" resultOrdered="true">
+    <select id="exportPresidentBySteam" resultMap="BaseResultMap" resultSetType="FORWARD_ONLY" fetchSize="-2147483648">
         SELECT
         <include refid="Base_Column_List"/>
         FROM president p

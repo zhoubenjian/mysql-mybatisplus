@@ -1,7 +1,5 @@
 package com.benjamin.controller;
 
-import cn.hutool.http.server.HttpServerResponse;
-import com.benjamin.excel.ExcelUtil;
 import com.benjamin.request.BasePageRequest;
 import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
@@ -102,9 +100,7 @@ public class PresidentController {
     @PostMapping("/export")
     @ApiOperation("导出总统（流式）")
     public void exportPresidentBySteam(HttpServletResponse response, String key) {
-
-        List<PresidentVo> list = presidentService.exportPresidentBySteam(key);
-        ExcelUtil.export(response, "总统", list, PresidentVo.class);
+        presidentService.exportPresidentBySteam(response, key);
     }
 }
 

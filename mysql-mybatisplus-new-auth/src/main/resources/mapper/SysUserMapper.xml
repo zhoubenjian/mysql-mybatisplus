@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benjamin.dao.SysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.benjamin.entities.SysUser">
+        <id column="id" property="id" />
+        <result column="user_name" property="userName" />
+        <result column="password" property="password" />
+        <result column="salt" property="salt" />
+        <result column="f1" property="f1" />
+        <result column="f2" property="f2" />
+        <result column="f3" property="f3" />
+        <result column="f4" property="f4" />
+        <result column="f5" property="f5" />
+        <result column="f6" property="f6" />
+        <result column="f7" property="f7" />
+        <result column="enable" property="enable" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_name, password, salt, f1, f2, f3, f4, f5, f6, f7, enable, create_time, update_time
+    </sql>
+
+</mapper>

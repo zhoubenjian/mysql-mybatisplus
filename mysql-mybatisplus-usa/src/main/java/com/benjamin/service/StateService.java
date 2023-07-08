@@ -1,15 +1,13 @@
 package com.benjamin.service;
 
-import com.benjamin.entities.State;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.benjamin.entities.State;
 import com.benjamin.request.BasePageRequest;
 import com.benjamin.request.StateRequest;
 import com.benjamin.response.ResponseWithCollection;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.vo.StatePresidentVo;
 import com.benjamin.vo.StateVo;
-import io.swagger.annotations.ApiParam;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 

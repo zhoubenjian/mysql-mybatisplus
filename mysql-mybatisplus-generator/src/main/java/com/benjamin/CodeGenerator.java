@@ -43,7 +43,7 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/mysql-mybatisplus-usa/src/main/java");      // 设置代码生成路径
+        gc.setOutputDir(projectPath + "/mysql-mybatisplus-new-auth/src/main/java");      // 设置代码生成路径
         gc.setFileOverride(true);                   // 是否覆盖以前文件
         gc.setOpen(false);                          // 是否打开生成目录
         gc.setAuthor("benjamin");                   // 设置项目作者名称
@@ -57,7 +57,7 @@ public class CodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/usa?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/auth?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("xia0yu");
@@ -92,7 +92,7 @@ public class CodeGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/mysql-mybatisplus-usa/src/main/resources/mapper/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                return projectPath + "/mysql-mybatisplus-new-auth/src/main/resources/mapper/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
         cfg.setFileOutConfigList(focList);
@@ -113,8 +113,8 @@ public class CodeGenerator {
         sc.setLogicDeleteFieldName("deleted");      // 设置逻辑删除
 
         // 默认，不填充               设置自动填充配置
-        TableFill gmt_create = new TableFill("create_time", FieldFill.DEFAULT);         // INSERT
-        TableFill gmt_modified = new TableFill("update_time", FieldFill.DEFAULT);       // INSERT_UPDATE
+        TableFill gmt_create = new TableFill("create_time", FieldFill.INSERT);         // INSERT
+        TableFill gmt_modified = new TableFill("update_time", FieldFill.UPDATE);       // INSERT_UPDATE
         ArrayList<TableFill> tableFills=new ArrayList<>();
         tableFills.add(gmt_create);
         tableFills.add(gmt_modified);

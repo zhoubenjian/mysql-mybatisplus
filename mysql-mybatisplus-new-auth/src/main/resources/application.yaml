@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev   # dev:开发；prod:生产；test:测试
+    active: dev   # dev:开发；test:测试; prod:生产
 
 
 

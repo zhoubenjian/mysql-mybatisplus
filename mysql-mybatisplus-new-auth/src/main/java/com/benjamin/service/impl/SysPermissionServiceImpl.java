@@ -97,7 +97,6 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
             }
 
             rabbitTemplate.convertAndSend(RabbitMqConfig.EXCHANGE_NAME, RabbitMqConfig.ROUTING_NAME, stringList);
-
             return new ResponseWithEntities<String>().setData("ok");
 
         } catch (Exception e) {

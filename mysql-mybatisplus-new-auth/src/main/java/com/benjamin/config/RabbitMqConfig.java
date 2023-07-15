@@ -4,15 +4,29 @@ import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RabbitMqConfig {
 
-    public static final String QUEUE_NAME = "test";                 // 队列名称
-    public static final String EXCHANGE_NAME = "test_exchange";     // 交换器名称
-    public static final String ROUTING_NAME = "test_exchange_key";  // 路由名称
+    /**
+     * 当前环境
+     */
+    @Value("${spring.profiles.active}")
+    private String env;
+
+
+
+    // 队列名称
+    public static final String QUEUE_NAME = "Queue";
+
+    // 交换器名称
+    public static final String EXCHANGE_NAME = "Queue_exchange";
+
+    // 路由名称
+    public static final String ROUTING_NAME = "Queue_exchange_routing";
 
 
 

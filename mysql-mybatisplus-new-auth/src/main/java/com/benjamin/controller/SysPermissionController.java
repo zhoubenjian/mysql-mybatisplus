@@ -38,5 +38,16 @@ public class SysPermissionController {
     public ResponseWithEntities<List<SysPermissionVo>> allPermissions() {
         return sysPermissionService.allPermissions();
     }
+
+    /**
+     * RabbitMQ队列测试
+     *
+     * @return
+     */
+    @ApiOperation("RabbitMQ队列测试")
+    @GetMapping("/rabbitmq/test")
+    public ResponseWithEntities<String> testRabbitMQ() {
+        return sysPermissionService.testRabbitMQ();
+    }
 }
 

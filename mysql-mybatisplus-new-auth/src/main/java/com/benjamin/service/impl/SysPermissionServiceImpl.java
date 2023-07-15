@@ -1,16 +1,20 @@
 package com.benjamin.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.benjamin.config.RabbitMqConfig;
 import com.benjamin.converter.SysConverter;
 import com.benjamin.dao.SysPermissionMapper;
 import com.benjamin.entities.SysPermission;
-import com.benjamin.response.ResponseWithCollection;
+import com.benjamin.random.Randoms;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.SysPermissionService;
 import com.benjamin.vo.SysPermissionVo;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +32,19 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
     @Autowired
     private SysPermissionMapper sysPermissionMapper;
 
+    @Resource
+    private RabbitTemplate rabbitTemplate;
+
     @Autowired
     private SysConverter sysConverter;
+
+
+
+    /**
+     * 当前环境
+     */
+    @Value("${spring.profiles.active}")
+    private String env;
 
 
 
@@ -64,6 +79,34 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
 
         return new ResponseWithEntities<List<SysPermissionVo>>().setData(firstList);
     }
+
+    /**
+     * RabbitMQ队列测试
+     *
+     * @return
+     */
+    @Override
+    public ResponseWithEntities<String> testRabbitMQ() {
+
+        try {
+
+            List<String> stringList = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                String randomString = Randoms.randomString(10);
+                stringList.add(randomString);
+            }
+
+            rabbitTemplate.convertAndSend(RabbitMqConfig.EXCHANGE_NAME, RabbitMqConfig.ROUTING_NAME, stringList);
+
+            return new ResponseWithEntities<String>().setData("ok");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseWithEntities<String>().setData("error");
+        }
+    }
+
+
 
 
 

@@ -44,6 +44,12 @@
         </dependency>
         <!-- swagger2 -->
 
+        <!-- rabbitmq -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
         <!-- BindResult -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

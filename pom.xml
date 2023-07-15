@@ -47,6 +47,7 @@
         <java-jwt.version>4.0.0</java-jwt.version>
         <shiro-core.version>1.9.1</shiro-core.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+        <spring-boot-starter-amqp.version>3.1.0</spring-boot-starter-amqp.version>
         <swagger-spring-boot-starter.version>1.9.0.RELEASE</swagger-spring-boot-starter.version>
         <mybatis-plus-boot-starter.version>3.4.2</mybatis-plus-boot-starter.version>
         <mybatis-plus-generator.version>3.4.1</mybatis-plus-generator.version>
@@ -156,6 +157,13 @@
                 <version>${springfox-swagger2.version}</version>
             </dependency>
             <!-- swagger2 -->
+
+            <!-- rabbitmq -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-amqp</artifactId>
+                <version>${spring-boot-starter-amqp.version}</version>
+            </dependency>
 
             <!--BindResult -->
             <dependency>

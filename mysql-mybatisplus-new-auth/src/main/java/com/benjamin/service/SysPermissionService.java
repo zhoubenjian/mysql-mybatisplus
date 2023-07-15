@@ -23,4 +23,11 @@ public interface SysPermissionService extends IService<SysPermission> {
      * @return
      */
     ResponseWithEntities<List<SysPermissionVo>> allPermissions();
+
+    /**
+     * RabbitMQ队列测试
+     *
+     * @return
+     */
+    ResponseWithEntities<String> testRabbitMQ();
 }

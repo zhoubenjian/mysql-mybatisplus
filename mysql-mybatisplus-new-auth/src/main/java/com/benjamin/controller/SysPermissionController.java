@@ -1,14 +1,14 @@
 package com.benjamin.controller;
 
+import com.benjamin.request.SysPermissionReq;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.SysPermissionService;
 import com.benjamin.vo.SysPermissionVo;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -38,6 +38,20 @@ public class SysPermissionController {
     public ResponseWithEntities<List<SysPermissionVo>> allPermissions() {
         return sysPermissionService.allPermissions();
     }
+
+    /**
+     * 添加权限
+     *
+     * @param sysPermissionReq
+     * @return
+     */
+    @ApiOperation("所有权限")
+    @PostMapping("/添加权限")
+    public ResponseWithEntities<String> addPermission(@Valid @RequestBody SysPermissionReq sysPermissionReq) {
+        return sysPermissionService.addPermission(sysPermissionReq);
+    }
+
+
 
     /**
      * RabbitMQ队列测试

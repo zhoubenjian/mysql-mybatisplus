@@ -26,8 +26,18 @@
     <!-- 所有权限 -->
     <select id="allPermissions" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         FROM sys_permission sp
         ORDER BY sp.parent_id, sp.sort
+    </select>
+
+    <!-- 同一parentId下，权限名是否已存在 -->
+    <select id="permissionNameExistWithParentId" resultType="java.lang.Integer">
+        SELECT EXISTS(
+            SELECT *
+            FROM sys_permission sp
+            WHERE sp.parent_id = #{parentId,jdbcType=NUMERIC}
+            AND sp.permission_name = #{permissionName,jdbcType=VARCHAR}
+        )
     </select>
 </mapper>

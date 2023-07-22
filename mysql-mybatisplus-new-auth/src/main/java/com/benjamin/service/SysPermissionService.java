@@ -2,6 +2,7 @@ package com.benjamin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.benjamin.entities.SysPermission;
+import com.benjamin.request.SysPermissionReq;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.vo.SysPermissionVo;
 
@@ -23,6 +24,16 @@ public interface SysPermissionService extends IService<SysPermission> {
      * @return
      */
     ResponseWithEntities<List<SysPermissionVo>> allPermissions();
+
+    /**
+     * 添加权限
+     *
+     * @param sysPermissionReq
+     * @return
+     */
+    ResponseWithEntities<String> addPermission(SysPermissionReq sysPermissionReq);
+
+
 
     /**
      * RabbitMQ队列测试

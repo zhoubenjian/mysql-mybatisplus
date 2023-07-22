@@ -1,40 +1,37 @@
-package com.benjamin.vo;
+package com.benjamin.request;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.util.List;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Accessors(chain = true)
-@ApiModel(value="权限返回对象", description="权限返回对象")
-public class SysPermissionVo {
+@ApiModel(value = "权限Req")
+public class SysPermissionReq {
 
-    @ApiModelProperty(value = "主键")
-    private Long id;
-
+    @NotBlank(message = "父级权限id不能为空")
     @ApiModelProperty(value = "父级权限id")
     private Long parentId;
 
+    @NotBlank(message = "权限名不能为空")
     @ApiModelProperty(value = "权限名")
     private String permissionName;
 
+    @NotBlank(message = "权限描述不能为空")
     @ApiModelProperty(value = "权限描述")
     private String permissionDesc;
 
     @ApiModelProperty(value = "权限规则")
     private String permissionUrl;
 
+    @NotNull(message = "权限类型不能为空")
     @ApiModelProperty(value = "权限类型")
     private Integer permissionType;
 
-    @ApiModelProperty(value = "是否可用, 0:不可用；1:可用（默认）")
-    private Integer enable;
-
-
-
-    @ApiModelProperty(value = "子权限")
-    private List<SysPermissionVo> childList;
+    @ApiModelProperty(value = "排序")
+    private Integer sort;
 }

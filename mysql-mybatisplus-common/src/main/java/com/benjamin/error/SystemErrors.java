@@ -34,6 +34,10 @@ public enum SystemErrors {
     /*** mysql-mybatisplus-new-auth ***/
     // 角色已存在
     ROLE_ALREADY_EXIST(30101L, 30101, "角色已存在", "角色已存在"),
+
+
+    // 权限已存在
+    PERMISSION_ALREADY_EXIST(30201L, 30201, "权限已存在", "权限已存在"),
     ;
 
 

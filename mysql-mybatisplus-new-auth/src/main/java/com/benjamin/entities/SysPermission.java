@@ -44,7 +44,7 @@ public class SysPermission implements Serializable {
     private String permissionUrl;
 
     @ApiModelProperty(value = "权限类型")
-    private String permissionType;
+    private Integer permissionType;
 
     @ApiModelProperty(value = "是否可用, 0:不可用；1:可用（默认）")
     private Integer enable;

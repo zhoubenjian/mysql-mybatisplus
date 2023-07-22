@@ -41,4 +41,13 @@ public interface SysRoleService extends IService<SysRole> {
      * @return
      */
     ResponseWithEntities<String> updateSysRoleById(SysRoleVo sysRoleVo);
+
+    /**
+     * 批量删除/恢复 角色（逻辑）
+     *
+     * @param ids       主键
+     * @param enable    是否可用, 0:不可用；1:可用（默认）
+     * @return
+     */
+    ResponseWithEntities<String> resetSysRolesByIds(List<Long> ids, Integer enable);
 }

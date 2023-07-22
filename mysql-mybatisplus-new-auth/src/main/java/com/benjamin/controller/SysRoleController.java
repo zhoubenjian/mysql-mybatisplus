@@ -1,6 +1,5 @@
 package com.benjamin.controller;
 
-
 import com.benjamin.request.SysRoleReq;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.SysRoleService;
@@ -63,6 +62,20 @@ public class SysRoleController {
     @PutMapping("/update")
     public ResponseWithEntities<String> updateSysRoleById(@RequestBody SysRoleVo sysRoleVo) {
         return sysRoleService.updateSysRoleById(sysRoleVo);
+    }
+
+    /**
+     * 批量删除/恢复 角色（逻辑）
+     *
+     * @param ids       主键
+     * @param enable    是否可用, 0:不可用；1:可用（默认）
+     * @return
+     */
+    @ApiOperation("批量删除/恢复 角色（逻辑）")
+    @PutMapping("/reset")
+    public ResponseWithEntities<String> resetSysRolesByIds(@RequestParam("ids") List<Long> ids,
+                                                           @RequestParam("enable") Integer enable) {
+        return sysRoleService.resetSysRolesByIds(ids, enable);
     }
 }
 

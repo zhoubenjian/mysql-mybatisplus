@@ -42,4 +42,13 @@
         )
     </select>
 
+    <!-- 批量删除/恢复 角色（逻辑） -->
+    <update id="resetSysRolesByIds">
+        UPDATE sys_role
+        SET enable = #{enable,jdbcType=NUMERIC}
+        WHERE id IN
+        <foreach collection="ids" item="item" index="index" separator="," open="(" close=")">
+            #{item,jdbcType=NUMERIC}
+        </foreach>
+    </update>
 </mapper>

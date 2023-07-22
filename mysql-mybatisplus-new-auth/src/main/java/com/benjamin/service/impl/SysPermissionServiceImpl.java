@@ -5,7 +5,10 @@ import com.benjamin.config.RabbitMqConfig;
 import com.benjamin.converter.SysConverter;
 import com.benjamin.dao.SysPermissionMapper;
 import com.benjamin.entities.SysPermission;
+import com.benjamin.error.SystemErrors;
+import com.benjamin.exception.WebException;
 import com.benjamin.random.Randoms;
+import com.benjamin.request.SysPermissionReq;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.SysPermissionService;
 import com.benjamin.vo.SysPermissionVo;
@@ -79,6 +82,37 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
 
         return new ResponseWithEntities<List<SysPermissionVo>>().setData(firstList);
     }
+
+    /**
+     * 添加权限
+     *
+     * @param sysPermissionReq
+     * @return
+     */
+    @Override
+    public ResponseWithEntities<String> addPermission(SysPermissionReq sysPermissionReq) {
+
+        Long parentId = sysPermissionReq.getParentId();
+        String permissionName = sysPermissionReq.getPermissionName();
+
+        // 同一parentId下，权限名是否已存在
+        if (sysPermissionMapper.permissionNameExistWithParentId(parentId, permissionName) == 1)
+            throw new WebException(SystemErrors.PERMISSION_ALREADY_EXIST);
+
+        // 加锁，避免重复提交
+        synchronized (this) {
+
+            SysPermission sysPermission = new SysPermission();
+            // SysPermissionReq => SysPermission
+            sysConverter.sysPermissionReq2SysPermission(sysPermission, sysPermissionReq);
+            // 添加
+            sysPermissionMapper.insert(sysPermission);
+
+            return new ResponseWithEntities<String>().setData("权限：" + permissionName + "，添加成功！");
+        }
+    }
+
+
 
     /**
      * RabbitMQ队列测试

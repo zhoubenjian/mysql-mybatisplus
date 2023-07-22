@@ -60,13 +60,15 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     public ResponseWithEntities<String> addSysRole(SysRoleReq sysRoleReq) {
 
         String roleName = sysRoleReq.getRoleName();
-        String roleDesc = sysRoleReq.getRoleDesc();
-        Integer sort = sysRoleReq.getSort();
 
         // 角色名是否已存在
         if (sysRoleMapper.roleNameExist(roleName) == 1)
             throw new WebException(SystemErrors.ROLE_ALREADY_EXIST);
 
+        String roleDesc = sysRoleReq.getRoleDesc();
+        Integer sort = sysRoleReq.getSort();
+
+        // 加锁，避免重复提交
         synchronized (this) {
 
             SysRole sysRole = new SysRole().setRoleName(roleName).setRoleDesc(roleDesc).setSort(sort);
@@ -99,5 +101,26 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         sysRoleMapper.updateById(sysRole);
 
         return new ResponseWithEntities<String>().setData("角色：" + roleName + "，修改成功！");
+    }
+
+    /**
+     * 批量删除/恢复 角色（逻辑）
+     *
+     * @param ids       主键
+     * @param enable    是否可用, 0:不可用；1:可用（默认）
+     * @return
+     */
+    @Override
+    public ResponseWithEntities<String> resetSysRolesByIds(List<Long> ids, Integer enable) {
+
+        int rows = sysRoleMapper.resetSysRolesByIds(ids, enable);
+
+        if (enable == 0) {
+            // 删除
+            return new ResponseWithEntities<String>().setData("角色删除：" + rows + "条！");
+        } else {
+            // 恢复
+            return new ResponseWithEntities<String>().setData("角色恢复：" + rows + "条！");
+        }
     }
 }

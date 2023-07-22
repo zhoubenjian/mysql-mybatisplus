@@ -1,7 +1,8 @@
 package com.benjamin.service;
 
-import com.benjamin.entities.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.benjamin.entities.SysUser;
+import com.benjamin.response.ResponseWithEntities;
 
 /**
  * <p>
@@ -13,4 +14,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SysUserService extends IService<SysUser> {
 
+    /**
+     * 注册
+     *
+     * @return
+     */
+    ResponseWithEntities<String> register();
 }

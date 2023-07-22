@@ -8,13 +8,57 @@
         <result column="role_name" property="roleName" />
         <result column="role_desc" property="roleDesc" />
         <result column="enable" property="enable" />
+        <result column="sort" property="sort" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, role_name, role_desc, enable, create_time, update_time
+        id, role_name, role_desc, enable, sort, create_time, update_time
     </sql>
 
+
+
+    <!-- 角色列表 -->
+    <select id="sysRoleList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_role sr
+        <where>
+            <if test="enable == true">
+                sr.enable = 1
+            </if>
+        </where>
+        ORDER BY sr.enable DESC, sr.sort ASC, sr.id ASC
+    </select>
+
+    <!-- 角色名是否存在 -->
+    <select id="roleNameExist" resultType="java.lang.Integer">
+        SELECT EXISTS (
+            SELECT *
+            FROM sys_role sr
+            WHERE sr.role_name = #{roleName,jdbcType=VARCHAR}
+        )
+    </select>
+
+    <!-- 修改角色 -->
+    <update id="updateSysRoleById" parameterType="com.benjamin.entities.SysRole">
+        UPDATE sys_role
+        <set>
+            <if test="roleName != null">
+                role_name = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleDesc != null">
+                role_desc = #{roleDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="enable != null">
+                enable = #{enable,jdbcType=NUMERIC},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=NUMERIC},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=NUMERIC}
+    </update>
 </mapper>

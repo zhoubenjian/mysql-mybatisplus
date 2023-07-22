@@ -1,9 +1,10 @@
 package com.benjamin.service.impl;
 
-import com.benjamin.entities.SysUser;
-import com.benjamin.dao.SysUserMapper;
-import com.benjamin.service.SysUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.benjamin.dao.SysUserMapper;
+import com.benjamin.entities.SysUser;
+import com.benjamin.response.ResponseWithEntities;
+import com.benjamin.service.SysUserService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +18,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
+    /**
+     * 注册
+     *
+     * @return
+     */
+    @Override
+    public ResponseWithEntities<String> register() {
+        return null;
+    }
 }

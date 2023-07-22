@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 @Accessors(chain = true)
 public enum SystemErrors {
 
+    /*** mysql-mybatisplus-usa ***/
     // 用户已存在
     USER_FOUND(30001L, HttpServletResponse.SC_FOUND, "用户已存在", "用户已存在"),
 
@@ -27,15 +28,21 @@ public enum SystemErrors {
 
     // 总统已故
     PRESIDENT_NOT_ALIVE(50001L, 50001, "总统已故", "总统已故"),
+
+
+
+    /*** mysql-mybatisplus-new-auth ***/
+    // 角色已存在
+    ROLE_ALREADY_EXIST(30101L, 30101, "角色已存在", "角色已存在"),
     ;
 
 
 
-    private long code;
+    private final long code;
 
-    private long status;
+    private final long status;
 
-    private String message;
+    private final String message;
 
-    private String view;
+    private final String view;
 }

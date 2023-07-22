@@ -42,6 +42,7 @@
 
         <!-- 统一版本号 -->
         <spring-boot-starter.version>2.7.3</spring-boot-starter.version>
+        <spring-boot-starter-security.version>3.1.0</spring-boot-starter-security.version>
         <junit.version>4.13.2</junit.version>
         <spring-cloud-starter-netflix-eureka.version>3.1.4</spring-cloud-starter-netflix-eureka.version>
         <java-jwt.version>4.0.0</java-jwt.version>
@@ -72,6 +73,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring-boot-starter.version}</version>
+            </dependency>
+
+            <!-- Spring Security -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring-boot-starter-security.version}</version>
             </dependency>
 
             <!-- autoconfigure -->

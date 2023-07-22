@@ -113,8 +113,8 @@ public class CodeGenerator {
         sc.setLogicDeleteFieldName("deleted");      // 设置逻辑删除
 
         // 默认，不填充               设置自动填充配置
-        TableFill gmt_create = new TableFill("create_time", FieldFill.INSERT);         // INSERT
-        TableFill gmt_modified = new TableFill("update_time", FieldFill.UPDATE);       // INSERT_UPDATE
+        TableFill gmt_create = new TableFill("create_time", FieldFill.INSERT);          // INSERT
+        TableFill gmt_modified = new TableFill("update_time", FieldFill.INSERT_UPDATE); // INSERT_UPDATE
         ArrayList<TableFill> tableFills=new ArrayList<>();
         tableFills.add(gmt_create);
         tableFills.add(gmt_modified);

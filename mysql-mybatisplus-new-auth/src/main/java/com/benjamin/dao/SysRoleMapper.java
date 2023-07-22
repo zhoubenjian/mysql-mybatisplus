@@ -1,7 +1,10 @@
 package com.benjamin.dao;
 
-import com.benjamin.entities.SysRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.benjamin.entities.SysRole;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -9,8 +12,33 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author benjamin
- * @since 2023-07-08
+ * @since 2023-07-22
  */
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 
+    /**
+     * 角色列表
+     *
+     * @param enable    可用（默认：true）
+     * @return
+     */
+    List<SysRole> sysRoleList(@Param("enable") Boolean enable);
+
+    /**
+     * 角色名是否存在
+     *
+     * @param roleName
+     * @return
+     */
+    int roleNameExist(@Param("roleName") String roleName);
+
+    /**
+     * 批量删除/恢复 角色（逻辑）
+     *
+     * @param ids       主键
+     * @param enable    是否可用, 0:不可用；1:可用（默认）
+     * @return
+     */
+    int resetSysRolesByIds(@Param("ids") List<Long> ids,
+                            @Param("enable") Integer enable);
 }

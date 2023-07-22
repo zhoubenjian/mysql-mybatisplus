@@ -21,7 +21,7 @@ import java.util.List;
  * </p>
  *
  * @author benjamin
- * @since 2023-07-08
+ * @since 2023-07-22
  */
 @Service
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
@@ -70,7 +70,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         synchronized (this) {
 
             SysRole sysRole = new SysRole().setRoleName(roleName).setRoleDesc(roleDesc).setSort(sort);
-            // 插入
+            // 添加
             sysRoleMapper.insert(sysRole);
 
             return new ResponseWithEntities<String>().setData("角色：" + roleName + "，添加成功！");
@@ -95,10 +95,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         SysRole sysRole = new SysRole();
         // SysRoleVo => SysRole
         sysConverter.sysRoleVo2SysRole(sysRole, sysRoleVo);
-
         // 修改
-        sysRoleMapper.updateSysRoleById(sysRole.getId(), sysRole.getRoleName(), sysRole.getRoleDesc(),
-                sysRole.getEnable(), sysRole.getSort());
+        sysRoleMapper.updateById(sysRole);
 
         return new ResponseWithEntities<String>().setData("角色：" + roleName + "，修改成功！");
     }

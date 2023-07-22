@@ -12,7 +12,7 @@ import java.util.List;
  * </p>
  *
  * @author benjamin
- * @since 2023-07-08
+ * @since 2023-07-22
  */
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 
@@ -32,19 +32,4 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
      */
     int roleNameExist(@Param("roleName") String roleName);
 
-    /**
-     * 修改角色
-     *
-     * @param id        主键
-     * @param roleName  角色名
-     * @param roleDesc  角色描述
-     * @param enable    是否可用, 0:不可用；1:可用（默认）
-     * @param sort      排序, 0:默认
-     * @return
-     */
-    int updateSysRoleById(@Param("id") Long id,
-                          @Param("roleName") String roleName,
-                          @Param("roleDesc") String roleDesc,
-                          @Param("enable") Integer enable,
-                          @Param("sort") Integer sort);
 }

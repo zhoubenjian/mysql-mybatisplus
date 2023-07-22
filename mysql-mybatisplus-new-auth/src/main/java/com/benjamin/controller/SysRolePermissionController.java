@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author benjamin
- * @since 2023-07-08
+ * @since 2023-07-22
  */
 @RestController
 @RequestMapping("/sys-role-permission")

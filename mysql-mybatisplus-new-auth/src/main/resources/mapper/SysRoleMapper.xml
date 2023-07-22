@@ -36,29 +36,10 @@
     <!-- 角色名是否存在 -->
     <select id="roleNameExist" resultType="java.lang.Integer">
         SELECT EXISTS (
-            SELECT *
-            FROM sys_role sr
-            WHERE sr.role_name = #{roleName,jdbcType=VARCHAR}
+        SELECT *
+        FROM sys_role sr
+        WHERE sr.role_name = #{roleName,jdbcType=VARCHAR}
         )
     </select>
 
-    <!-- 修改角色 -->
-    <update id="updateSysRoleById" parameterType="com.benjamin.entities.SysRole">
-        UPDATE sys_role
-        <set>
-            <if test="roleName != null">
-                role_name = #{roleName,jdbcType=VARCHAR},
-            </if>
-            <if test="roleDesc != null">
-                role_desc = #{roleDesc,jdbcType=VARCHAR},
-            </if>
-            <if test="enable != null">
-                enable = #{enable,jdbcType=NUMERIC},
-            </if>
-            <if test="sort != null">
-                sort = #{sort,jdbcType=NUMERIC},
-            </if>
-        </set>
-        WHERE id = #{id,jdbcType=NUMERIC}
-    </update>
 </mapper>

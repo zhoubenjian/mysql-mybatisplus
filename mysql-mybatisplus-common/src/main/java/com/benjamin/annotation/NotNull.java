@@ -6,7 +6,7 @@ import java.lang.annotation.*;
  * 自定义非空注解（@NotNull）
  */
 @Documented
-@Target({ElementType.FIELD})
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NotNull {
 

@@ -65,12 +65,11 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         if (sysRoleMapper.roleNameExist(roleName) == 1)
             throw new WebException(SystemErrors.ROLE_ALREADY_EXIST);
 
-        String roleDesc = sysRoleReq.getRoleDesc();
-        Integer sort = sysRoleReq.getSort();
-
         // 加锁，避免重复提交
         synchronized (this) {
 
+            String roleDesc = sysRoleReq.getRoleDesc();
+            Integer sort = sysRoleReq.getSort();
             SysRole sysRole = new SysRole().setRoleName(roleName).setRoleDesc(roleDesc).setSort(sort);
             // 添加
             sysRoleMapper.insert(sysRole);

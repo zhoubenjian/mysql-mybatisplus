@@ -44,12 +44,14 @@ public class SysRoleController {
      * 添加角色
      *
      * @param sysRoleReq
+     * @param permissionIds 权限
      * @return
      */
-    @ApiOperation("角色列表")
+    @ApiOperation("添加角色")
     @PostMapping("/add")
-    public ResponseWithEntities<String> addSysRole(@Valid @RequestBody SysRoleReq sysRoleReq) {
-        return sysRoleService.addSysRole(sysRoleReq);
+    public ResponseWithEntities<String> addSysRole(@Valid @RequestBody SysRoleReq sysRoleReq,
+                                                   @RequestParam("permissionIds") List<Long> permissionIds) {
+        return sysRoleService.addSysRole(sysRoleReq, permissionIds);
     }
 
     /**
@@ -58,10 +60,11 @@ public class SysRoleController {
      * @param sysRoleVo
      * @return
      */
-    @ApiOperation("角色列表")
+    @ApiOperation("修改角色")
     @PutMapping("/update")
-    public ResponseWithEntities<String> updateSysRoleById(@RequestBody SysRoleVo sysRoleVo) {
-        return sysRoleService.updateSysRoleById(sysRoleVo);
+    public ResponseWithEntities<String> updateSysRoleById(@RequestBody SysRoleVo sysRoleVo,
+                                                          @RequestParam(name = "permissionIds", required = false) List<Long> permissionIds) {
+        return sysRoleService.updateSysRoleById(sysRoleVo, permissionIds);
     }
 
     /**

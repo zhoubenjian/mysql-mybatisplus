@@ -30,17 +30,19 @@ public interface SysRoleService extends IService<SysRole> {
      * 添加角色
      *
      * @param sysRoleReq
+     * @param permissionIds 权限
      * @return
      */
-    ResponseWithEntities<String> addSysRole(SysRoleReq sysRoleReq);
+    ResponseWithEntities<String> addSysRole(SysRoleReq sysRoleReq, List<Long> permissionIds);
 
     /**
      * 修改角色
      *
      * @param sysRoleVo
+     * @param permissionIds 权限
      * @return
      */
-    ResponseWithEntities<String> updateSysRoleById(SysRoleVo sysRoleVo);
+    ResponseWithEntities<String> updateSysRoleById(SysRoleVo sysRoleVo, List<Long> permissionIds);
 
     /**
      * 批量删除/恢复 角色（逻辑）

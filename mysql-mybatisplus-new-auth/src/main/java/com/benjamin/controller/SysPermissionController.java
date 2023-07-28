@@ -4,6 +4,7 @@ import com.benjamin.request.SysPermissionReq;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.SysPermissionService;
 import com.benjamin.vo.SysPermissionVo;
+import com.benjamin.vo.SysRolePermissionVo;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,13 +41,25 @@ public class SysPermissionController {
     }
 
     /**
+     * 角色对应权限
+     *
+     * @param roleId    角色id
+     * @return
+     */
+    @ApiOperation("角色对应权限")
+    @GetMapping("/{roleId}")
+    public ResponseWithEntities<SysRolePermissionVo> sysRolePermissions(@PathVariable("roleId") Long roleId) {
+        return sysPermissionService.sysRolePermissions(roleId);
+    }
+
+    /**
      * 添加权限
      *
      * @param sysPermissionReq
      * @return
      */
-    @ApiOperation("所有权限")
-    @PostMapping("/添加权限")
+    @ApiOperation("添加权限")
+    @PostMapping("/add")
     public ResponseWithEntities<String> addPermission(@Valid @RequestBody SysPermissionReq sysPermissionReq) {
         return sysPermissionService.addPermission(sysPermissionReq);
     }

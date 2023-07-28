@@ -31,6 +31,20 @@
         ORDER BY sp.parent_id, sp.sort
     </select>
 
+    <!-- 角色对应权限 -->
+    <select id="sysRolePermissions" resultType="com.benjamin.vo.SysPermissionVo">
+        SELECT
+        sp.id, sp.parent_id, sp.permission_name, sp.permission_desc,
+        sp.permission_url, sp.permission_type, sp.sort
+        FROM sys_role_permission srp
+        LEFT JOIN sys_permission sp
+        ON srp.permission_id = sp.id
+        WHERE srp.enable = 1
+        AND srp.role_id = #{roleId,jdbcType=NUMERIC}
+        AND sp.enable = 1
+        ORDER BY sp.parent_id, sp.sort
+    </select>
+
     <!-- 同一parentId下，权限名是否已存在 -->
     <select id="permissionNameExistWithParentId" resultType="java.lang.Integer">
         SELECT EXISTS(

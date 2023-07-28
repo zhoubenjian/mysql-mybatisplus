@@ -1,17 +1,21 @@
 package com.benjamin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.benjamin.converter.SysConverter;
-import com.benjamin.entities.SysRole;
+import com.benjamin.dao.SysPermissionMapper;
 import com.benjamin.dao.SysRoleMapper;
+import com.benjamin.dao.SysRolePermissionMapper;
+import com.benjamin.entities.SysRole;
+import com.benjamin.entities.SysRolePermission;
 import com.benjamin.error.SystemErrors;
 import com.benjamin.exception.WebException;
 import com.benjamin.request.SysRoleReq;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.SysRoleService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.benjamin.vo.SysRoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,6 +32,12 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     @Autowired
     private SysRoleMapper sysRoleMapper;
+
+    @Autowired
+    private SysPermissionMapper sysPermissionMapper;
+
+    @Autowired
+    private SysRolePermissionMapper sysRolePermissionMapper;
 
     @Autowired
     private SysConverter sysConverter;
@@ -54,10 +64,12 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      * 添加角色
      *
      * @param sysRoleReq
+     * @param permissionIds 权限
      * @return
      */
     @Override
-    public ResponseWithEntities<String> addSysRole(SysRoleReq sysRoleReq) {
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseWithEntities<String> addSysRole(SysRoleReq sysRoleReq, List<Long> permissionIds) {
 
         String roleName = sysRoleReq.getRoleName();
 
@@ -71,8 +83,16 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
             String roleDesc = sysRoleReq.getRoleDesc();
             Integer sort = sysRoleReq.getSort();
             SysRole sysRole = new SysRole().setRoleName(roleName).setRoleDesc(roleDesc).setSort(sort);
-            // 添加
+            // 添加角色
             sysRoleMapper.insert(sysRole);
+
+            // 获取权限Id
+            Long roleId = sysRoleMapper.sysRoleByRoleName(roleName);
+            for (Long permissionId : permissionIds) {
+                SysRolePermission sysRolePermission = new SysRolePermission().setRoleId(roleId).setPermissionId(permissionId);
+                // 添加权限
+                sysRolePermissionMapper.insert(sysRolePermission);
+            }
 
             return new ResponseWithEntities<String>().setData("角色：" + roleName + "，添加成功！");
         }
@@ -82,10 +102,12 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      * 修改角色
      *
      * @param sysRoleVo
+     * @param permissionIds 权限
      * @return
      */
     @Override
-    public ResponseWithEntities<String> updateSysRoleById(SysRoleVo sysRoleVo) {
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseWithEntities<String> updateSysRoleById(SysRoleVo sysRoleVo, List<Long> permissionIds) {
 
         String roleName = sysRoleVo.getRoleName();
 
@@ -98,6 +120,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         sysConverter.sysRoleVo2SysRole(sysRole, sysRoleVo);
         // 修改
         sysRoleMapper.updateById(sysRole);
+
+        // TODO: 2023-07-28 更新角色对应权限
 
         return new ResponseWithEntities<String>().setData("角色：" + roleName + "，修改成功！");
     }

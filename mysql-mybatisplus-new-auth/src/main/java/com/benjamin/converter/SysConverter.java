@@ -4,6 +4,7 @@ import com.benjamin.entities.SysPermission;
 import com.benjamin.entities.SysRole;
 import com.benjamin.request.SysPermissionReq;
 import com.benjamin.vo.SysPermissionVo;
+import com.benjamin.vo.SysRolePermissionVo;
 import com.benjamin.vo.SysRoleVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -58,4 +59,15 @@ public interface SysConverter {
     @Mapping(target = "updateTime", ignore = true)
     void sysRoleVo2SysRole(@MappingTarget SysRole sysRole,
                            SysRoleVo sysRoleVo);
+
+    /**
+     * (SysRoleVo + List<SysPermissionVo>) => SysRolePermissionVo
+     *
+     * @param sysRolePermissionVo
+     * @param sysRoleVo
+     * @param sysPermissionVos
+     */
+    void combineSysRolePermissionVo(@MappingTarget SysRolePermissionVo sysRolePermissionVo,
+                                    SysRoleVo sysRoleVo,
+                                    List<SysPermissionVo> sysPermissionVos);
 }

@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.benjamin.config.RabbitMqConfig;
 import com.benjamin.converter.SysConverter;
 import com.benjamin.dao.SysPermissionMapper;
+import com.benjamin.dao.SysRoleMapper;
 import com.benjamin.entities.SysPermission;
+import com.benjamin.entities.SysRole;
 import com.benjamin.error.SystemErrors;
 import com.benjamin.exception.WebException;
 import com.benjamin.random.Randoms;
@@ -12,6 +14,8 @@ import com.benjamin.request.SysPermissionReq;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.SysPermissionService;
 import com.benjamin.vo.SysPermissionVo;
+import com.benjamin.vo.SysRolePermissionVo;
+import com.benjamin.vo.SysRoleVo;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +24,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
@@ -34,6 +39,9 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
 
     @Autowired
     private SysPermissionMapper sysPermissionMapper;
+
+    @Autowired
+    private SysRoleMapper sysRoleMapper;
 
     @Resource
     private RabbitTemplate rabbitTemplate;
@@ -81,6 +89,39 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
             first.setChildList(getChild(first.getId(), list));
 
         return new ResponseWithEntities<List<SysPermissionVo>>().setData(firstList);
+    }
+
+    /**
+     * 角色对应权限
+     *
+     * @param roleId    角色id
+     * @return
+     */
+    @Override
+    public ResponseWithEntities<SysRolePermissionVo> sysRolePermissions(Long roleId) {
+
+        SysRolePermissionVo sysRolePermissionVo = new SysRolePermissionVo();
+
+        SysRole sysRole = sysRoleMapper.selectById(roleId);
+        // SysRole => SysRoleVo
+        SysRoleVo sysRoleVo = sysConverter.sysRole2SysRoleVo(sysRole);
+
+        List<SysPermissionVo> list = Optional.ofNullable(sysPermissionMapper.sysRolePermissions(roleId)).orElse(new ArrayList<>());
+        // 找到所有一级目录
+        List<SysPermissionVo> firstList = new ArrayList<>();
+        for (SysPermissionVo vo : list) {
+            // 一级目录
+            if (vo.getParentId() == 0)
+                firstList.add(vo);
+        }
+        // 遍历一级目录，为一级目录设置子层级(调用下方定义的递归体getChild())
+        for (SysPermissionVo first : firstList)
+            first.setChildList(getChild(first.getId(), list));
+
+        // (SysRoleVo + List<SysPermissionVo>) => SysRolePermissionVo
+        sysConverter.combineSysRolePermissionVo(sysRolePermissionVo, sysRoleVo, firstList);
+
+        return new ResponseWithEntities<SysRolePermissionVo>().setData(sysRolePermissionVo);
     }
 
     /**

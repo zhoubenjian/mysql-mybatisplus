@@ -33,12 +33,21 @@
         ORDER BY sr.enable DESC, sr.sort ASC, sr.id ASC
     </select>
 
+    <!-- 获取权限Id -->
+    <select id="sysRoleByRoleName" resultType="java.lang.Long">
+        SELECT
+        sr.id
+        FROM sys_role sr
+        WHERE sr.enable = 1
+        LIMIT 1
+    </select>
+
     <!-- 角色名是否存在 -->
     <select id="roleNameExist" resultType="java.lang.Integer">
         SELECT EXISTS (
-        SELECT *
-        FROM sys_role sr
-        WHERE sr.role_name = #{roleName,jdbcType=VARCHAR}
+            SELECT *
+            FROM sys_role sr
+            WHERE sr.role_name = #{roleName,jdbcType=VARCHAR}
         )
     </select>
 

@@ -25,6 +25,14 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
     List<SysRole> sysRoleList(@Param("enable") Boolean enable);
 
     /**
+     * 获取权限Id
+     *
+     * @param roleName
+     * @return
+     */
+    Long sysRoleByRoleName(@Param("roleName") String roleName);
+
+    /**
      * 角色名是否存在
      *
      * @param roleName
@@ -40,5 +48,5 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
      * @return
      */
     int resetSysRolesByIds(@Param("ids") List<Long> ids,
-                            @Param("enable") Integer enable);
+                           @Param("enable") Integer enable);
 }

@@ -1,14 +1,15 @@
 package com.benjamin.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.benjamin.converter.SysConverter;
-import com.benjamin.entities.SysRole;
+import com.benjamin.dao.SysPermissionMapper;
 import com.benjamin.dao.SysRoleMapper;
+import com.benjamin.entities.SysRole;
 import com.benjamin.error.SystemErrors;
 import com.benjamin.exception.WebException;
 import com.benjamin.request.SysRoleReq;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.SysRoleService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.benjamin.vo.SysRoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,9 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     @Autowired
     private SysRoleMapper sysRoleMapper;
+
+    @Autowired
+    private SysPermissionMapper sysPermissionMapper;
 
     @Autowired
     private SysConverter sysConverter;

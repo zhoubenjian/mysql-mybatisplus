@@ -5,6 +5,7 @@ import com.benjamin.entities.SysPermission;
 import com.benjamin.request.SysPermissionReq;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.vo.SysPermissionVo;
+import com.benjamin.vo.SysRolePermissionVo;
 
 import java.util.List;
 
@@ -24,6 +25,14 @@ public interface SysPermissionService extends IService<SysPermission> {
      * @return
      */
     ResponseWithEntities<List<SysPermissionVo>> allPermissions();
+
+    /**
+     * 角色对应权限
+     *
+     * @param roleId    角色id
+     * @return
+     */
+    ResponseWithEntities<SysRolePermissionVo> sysRolePermissions(Long roleId);
 
     /**
      * 添加权限

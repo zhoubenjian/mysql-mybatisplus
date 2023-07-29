@@ -109,6 +109,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Transactional(rollbackFor = Exception.class)
     public ResponseWithEntities<String> updateSysRoleById(SysRoleVo sysRoleVo, List<Long> permissionIds) {
 
+        Long roleId = sysRoleVo.getId();
         String roleName = sysRoleVo.getRoleName();
 
         // 角色名是否已存在
@@ -121,7 +122,13 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         // 修改
         sysRoleMapper.updateById(sysRole);
 
-        // TODO: 2023-07-28 更新角色对应权限
+        // 删除原权限
+        sysRolePermissionMapper.deleteByRoleId(roleId);
+        // 新增新权限
+        for (Long permissionId : permissionIds) {
+            SysRolePermission sysRolePermission = new SysRolePermission().setRoleId(roleId).setPermissionId(permissionId);
+            sysRolePermissionMapper.insert(sysRolePermission);
+        }
 
         return new ResponseWithEntities<String>().setData("角色：" + roleName + "，修改成功！");
     }
@@ -129,14 +136,18 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     /**
      * 批量删除/恢复 角色（逻辑）
      *
-     * @param ids       主键
+     * @param roleIds   角色ids
      * @param enable    是否可用, 0:不可用；1:可用（默认）
      * @return
      */
     @Override
-    public ResponseWithEntities<String> resetSysRolesByIds(List<Long> ids, Integer enable) {
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseWithEntities<String> resetSysRolesByIds(List<Long> roleIds, Integer enable) {
 
-        int rows = sysRoleMapper.resetSysRolesByIds(ids, enable);
+        // 角色
+        int rows = sysRoleMapper.resetSysRolesByIds(roleIds, enable);
+        // 角色-权限
+        sysRolePermissionMapper.updateByRoleIds(roleIds, enable);
 
         if (enable == 0) {
             // 删除

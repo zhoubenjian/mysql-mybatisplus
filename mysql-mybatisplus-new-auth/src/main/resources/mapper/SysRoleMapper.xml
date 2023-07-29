@@ -56,7 +56,7 @@
         UPDATE sys_role
         SET enable = #{enable,jdbcType=NUMERIC}
         WHERE id IN
-        <foreach collection="ids" item="item" index="index" separator="," open="(" close=")">
+        <foreach collection="roleIds" item="item" index="index" separator="," open="(" close=")">
             #{item,jdbcType=NUMERIC}
         </foreach>
     </update>

@@ -43,10 +43,10 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
     /**
      * 批量删除/恢复 角色（逻辑）
      *
-     * @param ids       主键
+     * @param roleIds   主键
      * @param enable    是否可用, 0:不可用；1:可用（默认）
      * @return
      */
-    int resetSysRolesByIds(@Param("ids") List<Long> ids,
+    int resetSysRolesByIds(@Param("roleIds") List<Long> roleIds,
                            @Param("enable") Integer enable);
 }

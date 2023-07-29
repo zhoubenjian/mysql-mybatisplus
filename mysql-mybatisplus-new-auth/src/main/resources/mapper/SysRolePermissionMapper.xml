@@ -17,4 +17,21 @@
         id, role_id, permission_id, enable, create_time, update_time
     </sql>
 
+
+
+    <!-- 删除角色对应权限 -->
+    <delete id="deleteByRoleId">
+        DELETE FROM sys_role_permission
+        WHERE role_id = #{roleId,jdbcType=NUMERIC}
+    </delete>
+
+    <!-- 修改角色对应权限（逻辑删除） -->
+    <update id="updateByRoleIds">
+        UPDATE sys_role_permission
+        SET enable = #{enable,jdbcType=NUMERIC}
+        WHERE role_id IN
+        <foreach collection="roleIds" item="item" index="index" separator="," open="(" close=")">
+            #{item,jdbcType=NUMERIC}
+        </foreach>
+    </update>
 </mapper>

@@ -2,9 +2,8 @@ package com.benjamin.service;
 
 import com.benjamin.entities.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.benjamin.request.SysUserRequest;
+import com.benjamin.request.SysUserReq;
 import com.benjamin.response.BaseResponse;
-import com.benjamin.response.ResponseWithEntities;
 
 /**
  * <p>
@@ -16,7 +15,7 @@ import com.benjamin.response.ResponseWithEntities;
  */
 public interface SysUserService extends IService<SysUser> {
 
-    BaseResponse insertSysUer(SysUserRequest sysUserRequest);
+    BaseResponse insertSysUer(SysUserReq sysUserReq);
 
-    BaseResponse login(SysUserRequest sysUserRequest);
+    BaseResponse login(SysUserReq sysUserReq);
 }

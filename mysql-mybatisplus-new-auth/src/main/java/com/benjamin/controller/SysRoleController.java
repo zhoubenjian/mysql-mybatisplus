@@ -1,5 +1,6 @@
 package com.benjamin.controller;
 
+import com.benjamin.annotation.Logs;
 import com.benjamin.request.SysRoleReq;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.SysRoleService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -34,6 +36,7 @@ public class SysRoleController {
      * @param enable    可用（默认：true）
      * @return
      */
+    @Logs(module = "角色")
     @ApiOperation("角色列表（不分页）")
     @GetMapping("/all")
     public ResponseWithEntities<List<SysRoleVo>> sysRoleList(@RequestParam(name = "enable", defaultValue = "true", required = false) Boolean enable) {

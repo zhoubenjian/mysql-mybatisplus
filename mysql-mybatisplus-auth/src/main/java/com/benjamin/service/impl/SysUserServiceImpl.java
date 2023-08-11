@@ -1,16 +1,12 @@
 package com.benjamin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.benjamin.constant.EncryptionConstant;
 import com.benjamin.converter.AuthConverter;
 import com.benjamin.entities.SysUser;
 import com.benjamin.dao.SysUserMapper;
-import com.benjamin.error.SystemErrors;
-import com.benjamin.exception.WebException;
 import com.benjamin.random.Randoms;
-import com.benjamin.request.SysUserRequest;
+import com.benjamin.request.SysUserReq;
 import com.benjamin.response.BaseResponse;
-import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.SysUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.benjamin.utils.ShiroUtil;
@@ -37,8 +33,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
 
     @Override
-    public BaseResponse insertSysUer(SysUserRequest sysUserRequest) {
-        String userName = sysUserRequest.getUserName();
+    public BaseResponse insertSysUer(SysUserReq sysUserReq) {
+        String userName = sysUserReq.getUserName();
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", userName).eq("locked", 1);
         SysUser sysUser = sysUserMapper.selectOne(queryWrapper);
@@ -53,9 +49,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
         SysUser su = new SysUser();
         // SysUserRequest => SysUser
-        authConverter.sysUserRequest2SysUser(su, sysUserRequest);
+        authConverter.sysUserRequest2SysUser(su, sysUserReq);
 
-        String pwd = sysUserRequest.getPassword();
+        String pwd = sysUserReq.getPassword();
         // 随机盐值
         String salt  = Randoms.randomString(19);
         // 密码加密
@@ -69,8 +65,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public BaseResponse login(SysUserRequest sysUserRequest) {
-        String userName = sysUserRequest.getUserName();
+    public BaseResponse login(SysUserReq sysUserReq) {
+        String userName = sysUserReq.getUserName();
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", userName).eq("locked", 1);
         SysUser sysUser = sysUserMapper.selectOne(queryWrapper);
@@ -84,7 +80,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         }
 
         String salt = sysUser.getSalt();
-        String password = ShiroUtil.getEncryptionPassword(salt, sysUserRequest.getPassword());
+        String password = ShiroUtil.getEncryptionPassword(salt, sysUserReq.getPassword());
         if (!password.equals(sysUser.getPassword())) {
             return new BaseResponse()
                     .setCode(-3L)

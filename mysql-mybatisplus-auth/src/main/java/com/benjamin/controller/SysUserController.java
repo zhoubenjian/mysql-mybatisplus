@@ -1,11 +1,9 @@
 package com.benjamin.controller;
 
 
-import com.benjamin.request.SysUserRequest;
+import com.benjamin.request.SysUserReq;
 import com.benjamin.response.BaseResponse;
-import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.SysUserService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,24 +30,24 @@ public class SysUserController {
 
     /**
      * 新增用户
-     * @param sysUserRequest
+     * @param sysUserReq
      * @return
      */
     @PostMapping("/insert")
     @ApiOperation("新增用户")
-    public BaseResponse insertSysUer(SysUserRequest sysUserRequest) {
-        return sysUserService.insertSysUer(sysUserRequest);
+    public BaseResponse insertSysUer(SysUserReq sysUserReq) {
+        return sysUserService.insertSysUer(sysUserReq);
     }
 
     /**
      * 用户登录
-     * @param sysUserRequest
+     * @param sysUserReq
      * @return
      */
     @PostMapping("/login")
     @ApiOperation("用户登录")
-    public BaseResponse login(SysUserRequest sysUserRequest) {
-        return sysUserService.login(sysUserRequest);
+    public BaseResponse login(SysUserReq sysUserReq) {
+        return sysUserService.login(sysUserReq);
     }
 }
 

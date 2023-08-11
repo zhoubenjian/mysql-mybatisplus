@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @ApiModel("用户请求体")
-public class SysUserRequest {
+public class SysUserReq {
 
     @ApiModelProperty(value = "用户名")
     private String userName;

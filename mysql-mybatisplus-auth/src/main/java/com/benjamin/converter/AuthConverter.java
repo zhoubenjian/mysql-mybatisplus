@@ -1,7 +1,7 @@
 package com.benjamin.converter;
 
 import com.benjamin.entities.SysUser;
-import com.benjamin.request.SysUserRequest;
+import com.benjamin.request.SysUserReq;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
@@ -11,7 +11,7 @@ public interface AuthConverter {
     /**
      * SysUserRequest => SysUser
      * @param sysUser
-     * @param sysUserRequest
+     * @param sysUserReq
      */
-    void sysUserRequest2SysUser(@MappingTarget SysUser sysUser, SysUserRequest sysUserRequest);
+    void sysUserRequest2SysUser(@MappingTarget SysUser sysUser, SysUserReq sysUserReq);
 }

@@ -1,5 +1,6 @@
 package com.benjamin.controller;
 
+import com.benjamin.annotation.Logs;
 import com.benjamin.request.SysPermissionReq;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.SysPermissionService;
@@ -34,6 +35,7 @@ public class SysPermissionController {
      *
      * @return
      */
+    @Logs(module = "权限")
     @ApiOperation("所有权限")
     @GetMapping("/all")
     public ResponseWithEntities<List<SysPermissionVo>> allPermissions() {
@@ -46,6 +48,7 @@ public class SysPermissionController {
      * @param roleId    角色id
      * @return
      */
+    @Logs(module = "权限")
     @ApiOperation("角色对应权限")
     @GetMapping("/{roleId}")
     public ResponseWithEntities<SysRolePermissionVo> sysRolePermissions(@PathVariable("roleId") Long roleId) {

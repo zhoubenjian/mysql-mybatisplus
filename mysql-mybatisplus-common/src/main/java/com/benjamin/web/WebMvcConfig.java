@@ -13,7 +13,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        //添加映射路径
+        // 添加映射路径
         registry.addMapping("/**")
                 // 是否发送Cookie
                 .allowCredentials(true)

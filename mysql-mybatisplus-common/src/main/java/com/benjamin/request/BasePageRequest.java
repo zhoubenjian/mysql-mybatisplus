@@ -10,6 +10,8 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class BasePageRequest {
-    private long page = 1L;
-    private long pageSize = 20L;
+
+    private long page = 1;
+    private long pageSize = 20;
+
 }

@@ -10,10 +10,12 @@ import java.util.Collections;
 @Data
 @Accessors(chain = true)
 public class ResponseWithCollection<T> extends BaseResponse {
+
     private Long page;
     private Long size;
     private Long count;
     private Collection<T> list;
+
 
 
     public ResponseWithCollection() {
@@ -26,6 +28,7 @@ public class ResponseWithCollection<T> extends BaseResponse {
 
     /**
      * 构建分页响应
+     *
      * @param request
      * @param list
      * @param count
@@ -42,6 +45,7 @@ public class ResponseWithCollection<T> extends BaseResponse {
 
     /**
      * 构建分页响应
+     *
      * @param page
      * @param size
      * @param list

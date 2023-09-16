@@ -12,7 +12,6 @@
         <module>mysql-mybatisplus-cloud-order</module>
         <module>mysql-mybatisplus-cloud-user</module>
         <module>mysql-mybatisplus-cloud-eureka</module>
-        <module>mysql-mybatisplus-oss</module>
         <module>mysql-mybatisplus-new-auth</module>
     </modules>
 

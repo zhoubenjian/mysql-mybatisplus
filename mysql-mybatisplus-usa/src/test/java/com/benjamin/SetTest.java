@@ -46,6 +46,8 @@ public class SetTest {
         };
 
 
+
+        // 差集
         List<String> AB = A.stream().filter(item -> !B.contains(item)).collect(Collectors.toList());
         AB.forEach(System.out::println);
     }

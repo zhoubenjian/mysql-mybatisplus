@@ -14,6 +14,7 @@
         <module>mysql-mybatisplus-cloud-eureka</module>
         <module>mysql-mybatisplus-new-auth</module>
         <module>mysql-mybatis-encrypt-decrypt</module>
+        <module>mysql-mybatis-rabbitmq</module>
     </modules>
 
     <parent>

@@ -12,6 +12,7 @@ import lombok.experimental.Accessors;
 public class BasePageRequest {
 
     private long page = 1;
+
     private long pageSize = 20;
 
 }

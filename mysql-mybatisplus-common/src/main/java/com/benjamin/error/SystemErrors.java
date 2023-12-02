@@ -35,9 +35,15 @@ public enum SystemErrors {
     // 角色已存在
     ROLE_ALREADY_EXIST(30101L, 30101, "角色已存在", "角色已存在"),
 
-
     // 权限已存在
     PERMISSION_ALREADY_EXIST(30201L, 30201, "权限已存在", "权限已存在"),
+
+
+
+    /*** mysql-mybatisplus-handler ***/
+    NAME_ILLEGAL(80001L, 80001, "姓名非法", "姓名非法"),
+    ID_NUMBER_ILLEGAL(80002L, 80002, "身份证号非法", "身份证号非法"),
+    PHONE_ILLEGAL(80003L, 80003, "手机号非法", "手机号非法")
     ;
 
 

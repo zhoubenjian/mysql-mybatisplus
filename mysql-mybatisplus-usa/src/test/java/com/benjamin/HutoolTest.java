@@ -12,7 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class HutoolTest {
 
-    private final static String ID_NUMBER = "321083197812162119";
+    // 321083197812162119
+    private final static String ID_NUMBER = "220202202002020022";
 
     private final static String MOBILE_PHONE = "19999999999";
 

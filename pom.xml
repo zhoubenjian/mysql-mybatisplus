@@ -43,7 +43,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- 统一版本号 -->
-        <spring-boot-starter.version>2.7.3</spring-boot-starter.version>
+        <spring-boot-starter.version>2.7.18</spring-boot-starter.version>
         <spring-boot-starter-security.version>3.1.0</spring-boot-starter-security.version>
         <spring-context.version>6.0.9</spring-context.version>
         <spring-boot-starter-aop.version>3.1.0</spring-boot-starter-aop.version>

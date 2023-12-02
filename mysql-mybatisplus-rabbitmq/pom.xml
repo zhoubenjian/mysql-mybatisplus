@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.benjamin</groupId>
-    <artifactId>mysql-mybatis-rabbitmq</artifactId>
+    <artifactId>mysql-mybatisplus-rabbitmq</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

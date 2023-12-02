@@ -13,8 +13,8 @@
         <module>mysql-mybatisplus-cloud-user</module>
         <module>mysql-mybatisplus-cloud-eureka</module>
         <module>mysql-mybatisplus-new-auth</module>
-        <module>mysql-mybatis-encrypt-decrypt</module>
-        <module>mysql-mybatis-rabbitmq</module>
+        <module>mysql-mybatisplus-encrypt-decrypt</module>
+        <module>mysql-mybatisplus-rabbitmq</module>
         <module>mysql-mybatisplus-handler</module>
     </modules>
 

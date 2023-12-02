@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benjamin.dao.StudentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.benjamin.entities.Student">
+        <id column="id" property="id" />
+        <result column="student_no" property="studentNo" />
+        <result column="student_name" property="studentName" />
+        <result column="gender" property="gender" />
+        <result column="age" property="age" />
+        <result column="id_number" property="idNumber" typeHandler="com.benjamin.handler.AesTypeHandler" />
+        <result column="phone" property="phone" typeHandler="com.benjamin.handler.AesTypeHandler" />
+        <result column="grade_id" property="gradeId" />
+        <result column="class_id" property="classId" />
+        <result column="teacher_id" property="teacherId" />
+        <result column="enable" property="enable" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, student_no, student_name, gender, age, id_number, phone, grade_id, class_id, teacher_id, enable, create_time, update_time
+    </sql>
+
+
+
+    <!-- 关键字查询学生 -->
+    <select id="queryStudentsByKey" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM student s
+        <where>
+            <if test="key != null and key != ''">
+                s.student_name LIKE CONCAT('%', CONCAT(#{key, jdbcType=VARCHAR}), '%')
+                or s.id_number = #{key, jdbcType=VARCHAR, typeHandler=com.benjamin.handler.AesTypeHandler}
+                or s.phone = #{key, jdbcType=VARCHAR, typeHandler=com.benjamin.handler.AesTypeHandler}
+            </if>
+        </where>
+    </select>
+</mapper>

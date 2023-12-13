@@ -16,6 +16,7 @@
         <module>mysql-mybatisplus-encrypt-decrypt</module>
         <module>mysql-mybatisplus-rabbitmq</module>
         <module>mysql-mybatisplus-handler</module>
+        <module>mysql-mybatisplus-import-export</module>
     </modules>
 
     <parent>

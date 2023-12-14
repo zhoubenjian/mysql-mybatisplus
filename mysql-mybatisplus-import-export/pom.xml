@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.benjamin</groupId>
-    <artifactId>mysql-mybatis-rabbitmq</artifactId>
+    <artifactId>mysql-mybatisplus-import-export</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -22,16 +22,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.benjamin</groupId>
-            <artifactId>mysql-mybatisplus-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- 单元测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -43,16 +38,7 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
+        <!-- 单元测试 -->
 
         <!-- lombok必须放在mapstruct之前 -->
         <dependency>
@@ -61,16 +47,35 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- MapStruct：model -> dto （必须放在lombok之后） -->
+        <!-- 工具 -->
         <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
         </dependency>
-        <!-- MapStruct：model -> dto （必须放在lombok之后） -->
+        <!-- 工具 -->
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+
+        <!-- 读取excel -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.3</version>
+        </dependency>
+        <!-- 读取excel -->
     </dependencies>
 </project>

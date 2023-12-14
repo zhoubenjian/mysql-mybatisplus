@@ -1,0 +1,8 @@
+server:
+  port: 9009
+
+
+# 自定义文件上传路径
+files:
+  upload:
+    path: C:\Users\xxx\Desktop\upload

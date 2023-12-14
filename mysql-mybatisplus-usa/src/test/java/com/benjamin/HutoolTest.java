@@ -2,6 +2,7 @@ package com.benjamin;
 
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.DesensitizedUtil;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.IdcardUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,5 +50,18 @@ public class HutoolTest {
 
         // 脱敏
         System.out.println(DesensitizedUtil.mobilePhone(MOBILE_PHONE));
+    }
+
+    @Test
+    public void uuidTest() {
+
+        // fastUUID（-）
+        System.out.println("fastUUID：" + IdUtil.fastUUID());
+
+        // simpleUUID
+        System.out.println("simpleUUID：" + IdUtil.simpleUUID());
+
+        // fastSimpleUUID
+        System.out.println("fastSimpleUUID：" + IdUtil.fastSimpleUUID());
     }
 }

@@ -1,10 +1,9 @@
 package com.benjamin.service.impl;
 
-import cn.hutool.http.server.HttpServerResponse;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.benjamin.constant.RedisKeyConstant;
-import com.benjamin.converter.ApiConverter;
+import com.benjamin.converter.UsaConverter;
 import com.benjamin.dao.PresidentMapper;
 import com.benjamin.entities.President;
 import com.benjamin.entities.PresidentState;
@@ -20,8 +19,6 @@ import com.benjamin.vo.PresidentVo;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang3.time.DateUtils;
-import org.apache.ibatis.session.ResultContext;
-import org.apache.ibatis.session.ResultHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -53,7 +50,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
     private ExcelHeaderRegistry excelHeaderRegistry;
 
     @Autowired
-    private ApiConverter apiConverter;
+    private UsaConverter usaConverter;
 
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
@@ -89,7 +86,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
             // 数据库查询
             List<President> presidentList = Optional.ofNullable(presidentMapper.selectList(null)).orElse(new ArrayList<>());
             // President => PresidentVo
-            presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
+            presidentVoList = usaConverter.presidentList2PresidentVoList(presidentList);
 
             // 写入redis
             opsForValue.set(key, presidentList);
@@ -134,7 +131,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
             if (result != null) {
 
                 // President => PresidentVo
-                presidentVo = apiConverter.president2PresidentVo(result);
+                presidentVo = usaConverter.president2PresidentVo(result);
                 // 计算年龄
                 LocalDate now = LocalDate.now();
                 presidentVo.setAge(presidentVo.getBirthday().until(now).getYears());
@@ -162,7 +159,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
         List<President> presidentList = Optional.of(presidentMapper.queryAlivePresident()).orElse(Collections.EMPTY_LIST);
 
         // President => PresidentVo
-        List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
+        List<PresidentVo> presidentVoList = usaConverter.presidentList2PresidentVoList(presidentList);
         // 当前年份
         LocalDate now = LocalDate.now();
         // 计算年龄
@@ -182,7 +179,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
         List<President> presidentList = presidentMapper.queryPresidentByBirthDate(startTime, endTime);
 
         // President => PresidentVo
-        List<PresidentVo> presidentVoList = apiConverter.presidentList2PresidentVoList(presidentList);
+        List<PresidentVo> presidentVoList = usaConverter.presidentList2PresidentVoList(presidentList);
         // 当前年份
         LocalDate now = LocalDate.now();
         // 计算年龄
@@ -203,7 +200,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
                 .orElse(Collections.EMPTY_LIST);
 
         // PresidentState => PresidentStateVo
-        List<PresidentStateVo> presidentStateVoList = apiConverter.presidentState2PresidentStateVoList(presidentStateList);
+        List<PresidentStateVo> presidentStateVoList = usaConverter.presidentState2PresidentStateVoList(presidentStateList);
         return ResponseWithCollection.buildResponse(basePageRequest, presidentStateVoList, page.getTotal());
     }
 
@@ -227,7 +224,7 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
                 presidentMapper.exportPresidentBySteam(key, (resultContext) -> {
 
                     President president = resultContext.getResultObject();
-                    PresidentVo presidentVo = apiConverter.president2PresidentVo(president);
+                    PresidentVo presidentVo = usaConverter.president2PresidentVo(president);
                     // 导出
                     p.provide(presidentVo);
                 });

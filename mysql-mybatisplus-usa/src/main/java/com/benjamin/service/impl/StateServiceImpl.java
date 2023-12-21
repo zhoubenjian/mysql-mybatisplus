@@ -2,12 +2,10 @@ package com.benjamin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.benjamin.constant.RedisKeyConstant;
-import com.benjamin.converter.ApiConverter;
+import com.benjamin.converter.UsaConverter;
 import com.benjamin.entities.State;
 import com.benjamin.dao.StateMapper;
 import com.benjamin.entities.StatePresident;
-import com.benjamin.error.SystemErrors;
-import com.benjamin.exception.WebException;
 import com.benjamin.request.BasePageRequest;
 import com.benjamin.request.StateRequest;
 import com.benjamin.response.ResponseWithCollection;
@@ -42,7 +40,7 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
     private StateMapper stateMapper;
 
     @Autowired
-    private ApiConverter apiConverter;
+    private UsaConverter usaConverter;
 
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
@@ -87,7 +85,7 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
         }
 
         // State => StateVo
-        List<StateVo> stateVoList = apiConverter.stateListToStateVoList(stateList);
+        List<StateVo> stateVoList = usaConverter.stateListToStateVoList(stateList);
         return new ResponseWithEntities<List<StateVo>>().setData(stateVoList);
     }
 
@@ -106,7 +104,7 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
 
         Page page = PageHelper.startPage((int) stateRequest.getPage(), (int) stateRequest.getPageSize());
         List<State> stateList = stateMapper.queryStateByCondition(stateName, stateCapital, governor);
-        List<StateVo> stateVoList = apiConverter.stateListToStateVoList(stateList);
+        List<StateVo> stateVoList = usaConverter.stateListToStateVoList(stateList);
 
         return ResponseWithCollection.buildResponse(stateRequest, stateVoList, page.getTotal());
     }
@@ -124,7 +122,7 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
         List<State> stateList = Optional.of(stateMapper.selectList(null)).orElse(Collections.EMPTY_LIST);
 
         // State => StateVo
-        List<StateVo> stateVoList = apiConverter.stateListToStateVoList(stateList);
+        List<StateVo> stateVoList = usaConverter.stateListToStateVoList(stateList);
         return ResponseWithCollection.buildResponse(basePageRequest, stateVoList, page.getTotal());
     }
 
@@ -141,7 +139,7 @@ public class StateServiceImpl extends ServiceImpl<StateMapper, State> implements
                 .orElse(Collections.EMPTY_LIST);
 
         // StatePresident => StatePresidentVo
-        List<StatePresidentVo> statePresidentVoList = apiConverter.statePresidentList2StatePresidentVoList(statePresidentList);
+        List<StatePresidentVo> statePresidentVoList = usaConverter.statePresidentList2StatePresidentVoList(statePresidentList);
         return ResponseWithCollection.buildResponse(basePageRequest, statePresidentVoList, page.getTotal());
     }
 }

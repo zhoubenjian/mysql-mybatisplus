@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benjamin.dao.SysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.benjamin.entities.SysUser">
+        <id column="id" property="id" />
+        <result column="user_no" property="userNo" />
+        <result column="user_name" property="userName" />
+        <result column="id_number" property="idNumber" />
+        <result column="phone" property="phone" />
+        <result column="last_login_time" property="lastLoginTime" />
+        <result column="enable" property="enable" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_no, user_name, id_number, phone, last_login_time, `enable`, create_time, update_time
+    </sql>
+
+
+
+    <!-- 用户信息 -->
+    <select id="querySysUser" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_user su
+        WHERE su.id_number = #{idNumber,jdbcType=VARCHAR}
+        AND su.user_name = #{userName,jdbcType=VARCHAR}
+        LIMIT 1
+    </select>
+</mapper>

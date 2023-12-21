@@ -17,6 +17,7 @@
         <module>mysql-mybatisplus-rabbitmq</module>
         <module>mysql-mybatisplus-handler</module>
         <module>mysql-mybatisplus-import-export</module>
+        <module>mysql-mybatisplus-sa-token</module>
     </modules>
 
     <parent>
@@ -67,6 +68,7 @@
         <fastjson.version>2.0.12</fastjson.version>
         <aliyun-sdk-oss.version>3.15.2</aliyun-sdk-oss.version>
         <aliyun-oss-spring-boot-starter.version>1.0.0</aliyun-oss-spring-boot-starter.version>
+        <sa-token-spring-boot-starter.version>1.37.0</sa-token-spring-boot-starter.version>
     </properties>
 
 
@@ -303,6 +305,20 @@
                 <version>${aliyun-oss-spring-boot-starter.version}</version>
             </dependency>
             <!-- aliyun -->
+
+            <!-- Sa-Token -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <version>${sa-token-spring-boot-starter.version}</version>
+            </dependency>
+
+            <!-- Sa-Token 整合 Redis （使用 jackson 序列化方式） -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-redis-jackson</artifactId>
+                <version>${sa-token-spring-boot-starter.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

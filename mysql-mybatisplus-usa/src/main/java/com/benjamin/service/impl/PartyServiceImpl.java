@@ -1,7 +1,7 @@
 package com.benjamin.service.impl;
 
 import com.benjamin.constant.RedisKeyConstant;
-import com.benjamin.converter.ApiConverter;
+import com.benjamin.converter.UsaConverter;
 import com.benjamin.entities.Party;
 import com.benjamin.dao.PartyMapper;
 import com.benjamin.model.pp.PartyPresident;
@@ -37,7 +37,7 @@ public class PartyServiceImpl extends ServiceImpl<PartyMapper, Party> implements
     private PartyMapper partyMapper;
 
     @Autowired
-    private ApiConverter apiConverter;
+    private UsaConverter usaConverter;
 
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
@@ -81,7 +81,7 @@ public class PartyServiceImpl extends ServiceImpl<PartyMapper, Party> implements
         }
 
         // Party => PartyVo
-        List<PartyVo> partyVoList = apiConverter.partyListToPartyVoList(partyList);
+        List<PartyVo> partyVoList = usaConverter.partyListToPartyVoList(partyList);
         return new ResponseWithEntities<List<PartyVo>>().setData(partyVoList);
     }
 

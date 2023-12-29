@@ -1,8 +1,6 @@
 package com.benjamin.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
-import cn.dev33.satoken.annotation.SaIgnore;
-import cn.dev33.satoken.util.SaResult;
 import com.benjamin.dto.SysUserDto;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.SysUserService;

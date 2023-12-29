@@ -1,9 +1,8 @@
 package com.benjamin.service;
 
-import cn.dev33.satoken.util.SaResult;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.benjamin.dto.SysUserDto;
 import com.benjamin.entities.SysUser;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.vo.SysUserVo;
 

@@ -73,6 +73,23 @@
         <!-- MapStruct：model -> dto （必须放在lombok之后） -->
 
         <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.redisson</groupId>
+                    <!-- 默认是 Spring Data Redis v.2.3.x ,所以排除掉-->
+                    <artifactId>redisson-spring-data-23</artifactId>
+                </exclusion>
+                <!-- 避免与springfox（swagger）冲突 -->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-actuator</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
             <groupId>com.bj.web</groupId>
             <artifactId>bj-office-starter</artifactId>
             <version>1.0-SNAPSHOT</version>

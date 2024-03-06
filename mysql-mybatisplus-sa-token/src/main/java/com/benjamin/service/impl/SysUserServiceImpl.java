@@ -1,21 +1,20 @@
 package com.benjamin.service.impl;
 
 import cn.dev33.satoken.stp.StpUtil;
-import cn.dev33.satoken.util.SaResult;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Validator;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.IdcardUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.benjamin.converter.SaTokenConverter;
+import com.benjamin.dao.SysUserMapper;
 import com.benjamin.dto.SysUserDto;
 import com.benjamin.entities.SysUser;
-import com.benjamin.dao.SysUserMapper;
 import com.benjamin.error.SystemErrors;
 import com.benjamin.exception.WebException;
 import com.benjamin.response.ResponseWithEntities;
 import com.benjamin.service.SysUserService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.benjamin.vo.SysUserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

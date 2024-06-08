@@ -86,6 +86,11 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-actuator</artifactId>
                 </exclusion>
+
+<!--                <exclusion>-->
+<!--                    <artifactId>redisson-spring-data-31</artifactId>-->
+<!--                    <groupId>org.redisson</groupId>-->
+<!--                </exclusion>-->
             </exclusions>
         </dependency>
 
@@ -104,16 +109,25 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.7.3</version>
                 <configuration>
+                    <!-- 指定主类 -->
+                    <mainClass>com.benjamin.UsaApplication</mainClass>
+                    <layout>ZIP</layout>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                    <executable>true</executable>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!-- 可以把依赖的包都打包到生成的jar包中 -->
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

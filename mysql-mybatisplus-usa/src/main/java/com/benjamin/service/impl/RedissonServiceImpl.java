@@ -20,8 +20,8 @@ public class RedissonServiceImpl implements RedissonService {
     @Override
     public void ticketSell() {
 
-        Boolean locked = false;
-        boolean tryLock = redissonUtil.tryLock("TICKET", 120, 10);
+        Boolean tryLock = false;
+        tryLock = redissonUtil.tryLock("TICKET", 120, 10);
 
         try {
             if (!tryLock)

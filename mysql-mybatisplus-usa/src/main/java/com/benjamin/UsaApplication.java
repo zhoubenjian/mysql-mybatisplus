@@ -11,5 +11,6 @@ public class UsaApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(UsaApplication.class, args);
+        System.out.println("UsaApplication启动成功！！！");
     }
 }

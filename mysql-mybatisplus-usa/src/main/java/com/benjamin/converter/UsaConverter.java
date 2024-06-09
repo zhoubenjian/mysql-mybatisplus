@@ -12,6 +12,7 @@ public interface UsaConverter {
 
     /**
      * State => StateVo
+     *
      * @param state
      * @return
      */
@@ -20,6 +21,7 @@ public interface UsaConverter {
 
     /**
      * StatePresident => StatePresidentVo
+     *
      * @param statePresident
      * @return
      */
@@ -31,6 +33,7 @@ public interface UsaConverter {
 
     /**
      * Party => PartyVo
+     *
      * @param party
      * @return
      */
@@ -41,6 +44,7 @@ public interface UsaConverter {
 
     /**
      * President => PresidentVo
+     *
      * @param president
      * @return
      */
@@ -50,6 +54,7 @@ public interface UsaConverter {
 
     /**
      * PresidentState => PresidentStateVo
+     *
      * @param presidentState
      * @return
      */

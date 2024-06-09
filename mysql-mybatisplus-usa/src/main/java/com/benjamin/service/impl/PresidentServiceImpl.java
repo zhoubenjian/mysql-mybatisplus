@@ -71,37 +71,33 @@ public class PresidentServiceImpl extends ServiceImpl<PresidentMapper, President
     @Override
     public ResponseWithEntities<List<PresidentVo>> queryAllPresident() {
 
-//        String key = RedisKeyConstant.getAllPresidentInfo(allPresidentKey);
-//        Boolean hasKey = redisTemplate.hasKey(key);
-//        ValueOperations<String, Object> opsForValue = redisTemplate.opsForValue();
-//
-//        List<PresidentVo> presidentVoList = new ArrayList<>();
-//        if (hasKey != null && hasKey) {
-//
-//            // redis读取
-//            presidentVoList = (List<PresidentVo>) opsForValue.get(key);
-//
-//        } else {
-//
-//            // 数据库查询
-//            List<President> presidentList = Optional.ofNullable(presidentMapper.selectList(null)).orElse(new ArrayList<>());
-//            // President => PresidentVo
-//            presidentVoList = usaConverter.presidentList2PresidentVoList(presidentList);
-//
-//            // 写入redis
-//            opsForValue.set(key, presidentVoList);
-//            // 一天后过期
-//            redisTemplate.expireAt(key, DateUtils.addDays(new Date(), 1));
-//        }
+        String key = RedisKeyConstant.getAllPresidentInfo(allPresidentKey);
+        Boolean hasKey = redisTemplate.hasKey(key);
+        ValueOperations<String, Object> opsForValue = redisTemplate.opsForValue();
 
-        // 数据库查询
-        List<President> presidentList = Optional.ofNullable(presidentMapper.selectList(null)).orElse(new ArrayList<>());
-        // President => PresidentVo
-        List<PresidentVo> presidentVoList = usaConverter.presidentList2PresidentVoList(presidentList);
+        List<PresidentVo> presidentVoList = new ArrayList<>();
+        if (hasKey != null && hasKey) {
 
-        LocalDate now = LocalDate.now();
-        // 计算年龄
-        presidentVoList.stream().forEach(p -> p.setAge(p.getBirthday().until(now).getYears()));
+            // redis读取
+            presidentVoList = (List<PresidentVo>) opsForValue.get(key);
+
+        } else {
+
+            // 数据库查询
+            List<President> presidentList = Optional.ofNullable(presidentMapper.selectList(null)).orElse(new ArrayList<>());
+            // President => PresidentVo
+            presidentVoList = usaConverter.presidentList2PresidentVoList(presidentList);
+
+            // 计算年龄
+            LocalDate now = LocalDate.now();
+            presidentVoList.stream().forEach(p -> p.setAge(p.getBirthday().until(now).getYears()));
+
+            // 写入redis
+            opsForValue.set(key, presidentVoList);
+            // 一天后过期
+            redisTemplate.expireAt(key, DateUtils.addDays(new Date(), 1));
+        }
+
         return new ResponseWithEntities<List<PresidentVo>>().setData(presidentVoList);
     }
 

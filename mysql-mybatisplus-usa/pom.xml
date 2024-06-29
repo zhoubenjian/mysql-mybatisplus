@@ -86,11 +86,6 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-actuator</artifactId>
                 </exclusion>
-
-<!--                <exclusion>-->
-<!--                    <artifactId>redisson-spring-data-31</artifactId>-->
-<!--                    <groupId>org.redisson</groupId>-->
-<!--                </exclusion>-->
             </exclusions>
         </dependency>
 

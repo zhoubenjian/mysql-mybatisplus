@@ -60,28 +60,30 @@ public class PartyServiceImpl extends ServiceImpl<PartyMapper, Party> implements
         Boolean hasKey = redisTemplate.hasKey(key);
         ValueOperations<String, Object> opsForValue = redisTemplate.opsForValue();
 
-        List<Party> partyList = new ArrayList<>();
+        List<PartyVo> partyVoList = new ArrayList<>();
         if (hasKey != null && hasKey) {
 
             // redis读取
-            partyList = (List<Party>) opsForValue.get(key);
+            partyVoList = (List<PartyVo>) opsForValue.get(key);
 
         } else {
 
             // 数据库查询
-            partyList = partyMapper.queryExistParty();
+            List<Party> partyList = Optional.ofNullable(partyMapper.queryExistParty()).orElse(new ArrayList<>());
 
-            if (partyList.size() > 0) {
+            if (!partyList.isEmpty()) {
+
+                // Party => PartyVo
+                partyVoList = usaConverter.partyListToPartyVoList(partyList);
 
                 // 写入redis
-                opsForValue.set(key, partyList);
+                opsForValue.set(key, partyVoList);
                 // 过期时间
-                redisTemplate.expireAt(key, DateUtils.addDays(new Date(),1));
+                redisTemplate.expireAt(key, DateUtils.addDays(new Date(), 1));
             }
         }
 
-        // Party => PartyVo
-        List<PartyVo> partyVoList = usaConverter.partyListToPartyVoList(partyList);
+
         return new ResponseWithEntities<List<PartyVo>>().setData(partyVoList);
     }
 

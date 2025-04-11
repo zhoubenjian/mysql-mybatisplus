@@ -79,13 +79,13 @@
             <version>1.76</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.wondersgroup</groupId>
-            <artifactId>com.wondersgroup</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/mzt-data-utils-security-1.jar</systemPath>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.wondersgroup</groupId>-->
+<!--            <artifactId>com.wondersgroup</artifactId>-->
+<!--            <version>1.0</version>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${project.basedir}/lib/mzt-data-utils-security-1.jar</systemPath>-->
+<!--        </dependency>-->
 
         <!-- lombok必须放在mapstruct之前 -->
         <dependency>

@@ -1,3 +1,11 @@
+server:
+  port: 9000
+
 spring:
   profiles:
-    active: dev   # dev:开发；prod:生产；test:测试
+    active: prod   # dev:开发；prod:生产；test:测试
+
+#spring:
+#  config:
+#    activate:
+#      on-profile: prod
